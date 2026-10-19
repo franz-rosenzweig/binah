@@ -1,0 +1,722 @@
+[
+ {
+  "id": "tt001",
+  "prompt": "Tell us about a meal from your childhood that you still think about.",
+  "follow_up": "Why do you think that meal stuck in your memory more than others?",
+  "level": "easy"
+ },
+ {
+  "id": "tt002",
+  "prompt": "What's a small habit you picked up in the last year that you've kept?",
+  "follow_up": "Why did this one stick when other habits didn't?",
+  "level": "easy"
+ },
+ {
+  "id": "tt003",
+  "prompt": "Tell us about the first job you ever had.",
+  "follow_up": "What's one thing from that job that you still do today?",
+  "level": "easy"
+ },
+ {
+  "id": "tt004",
+  "prompt": "What's a question you asked a lot as a child?",
+  "follow_up": "Do you know the answer now, and was it as interesting as you hoped?",
+  "level": "easy"
+ },
+ {
+  "id": "tt005",
+  "prompt": "Tell us about a skill you learned from a relative or an older neighbor.",
+  "follow_up": "How has the way you use that skill changed since they taught you?",
+  "level": "easy"
+ },
+ {
+  "id": "tt006",
+  "prompt": "What's a book or story you've read more than once?",
+  "follow_up": "What did you notice on a later reading that you missed the first time?",
+  "level": "easy"
+ },
+ {
+  "id": "tt007",
+  "prompt": "Describe a walk you take often.",
+  "follow_up": "What's something on that walk that you only noticed after doing it many times?",
+  "level": "easy"
+ },
+ {
+  "id": "tt008",
+  "prompt": "Tell us about a game you loved playing as a child.",
+  "follow_up": "What do you think that game taught you without you realizing it?",
+  "level": "easy"
+ },
+ {
+  "id": "tt009",
+  "prompt": "What's the most useful thing in your kitchen?",
+  "follow_up": "What would you use instead if it disappeared tomorrow?",
+  "level": "easy"
+ },
+ {
+  "id": "tt010",
+  "prompt": "Tell us about a trip where something didn't go to plan.",
+  "follow_up": "Looking back, which part of that trip do you remember most fondly?",
+  "level": "easy"
+ },
+ {
+  "id": "tt011",
+  "prompt": "What's a sound that instantly makes you feel at home?",
+  "follow_up": "When did you first realize that sound meant home to you?",
+  "level": "easy"
+ },
+ {
+  "id": "tt012",
+  "prompt": "Tell us about a teacher who made a subject come alive for you.",
+  "follow_up": "What exactly did they do that other teachers didn't?",
+  "level": "easy"
+ },
+ {
+  "id": "tt013",
+  "prompt": "What's your favorite time of day, and why?",
+  "follow_up": "How do you keep that time from being taken over by other things?",
+  "level": "easy"
+ },
+ {
+  "id": "tt014",
+  "prompt": "Tell us about something you built or made with your hands.",
+  "follow_up": "What would you do differently if you made it again?",
+  "level": "easy"
+ },
+ {
+  "id": "tt015",
+  "prompt": "What's a city you'd like to visit for the first time?",
+  "follow_up": "What's one thing you'd do there that a typical tourist wouldn't?",
+  "level": "easy"
+ },
+ {
+  "id": "tt016",
+  "prompt": "Describe your ideal weekend morning.",
+  "follow_up": "How close is your actual weekend morning to that, and what gets in the way?",
+  "level": "easy"
+ },
+ {
+  "id": "tt017",
+  "prompt": "Tell us about a plant, tree or garden you've looked after.",
+  "follow_up": "What surprised you most about looking after it?",
+  "level": "easy"
+ },
+ {
+  "id": "tt018",
+  "prompt": "What's a word or phrase your family or friends use that outsiders wouldn't understand?",
+  "follow_up": "How did that phrase come about, or how do you imagine it did?",
+  "level": "easy"
+ },
+ {
+  "id": "tt019",
+  "prompt": "Tell us about a time you got lost.",
+  "follow_up": "What did you do first once you realized you were lost, and would you do the same now?",
+  "level": "easy"
+ },
+ {
+  "id": "tt020",
+  "prompt": "What's a food you disliked as a child but enjoy now?",
+  "follow_up": "What do you think changed: the food, the way it was cooked, or you?",
+  "level": "easy"
+ },
+ {
+  "id": "tt021",
+  "prompt": "Tell us about a piece of technology you use every day.",
+  "follow_up": "What's one small thing about it you'd redesign?",
+  "level": "easy"
+ },
+ {
+  "id": "tt022",
+  "prompt": "What's a hobby you'd love to try but haven't yet?",
+  "follow_up": "What's the smallest first step you could take toward it this month?",
+  "level": "easy"
+ },
+ {
+  "id": "tt023",
+  "prompt": "Tell us about a festival, fair or market you've enjoyed.",
+  "follow_up": "Which detail would you describe to someone who has never been to one?",
+  "level": "easy"
+ },
+ {
+  "id": "tt024",
+  "prompt": "What's the best piece of advice you've been given at work?",
+  "follow_up": "Can you give an example of a time you actually used it?",
+  "level": "easy"
+ },
+ {
+  "id": "tt025",
+  "prompt": "Tell us about a view you'll never forget.",
+  "follow_up": "What were you doing or feeling just before you saw it?",
+  "level": "easy"
+ },
+ {
+  "id": "tt026",
+  "prompt": "What did you want to be when you grew up, back when you were small?",
+  "follow_up": "What part of that childhood dream still shows up in your life today?",
+  "level": "easy"
+ },
+ {
+  "id": "tt027",
+  "prompt": "Tell us about an animal you've watched in your neighborhood, in a park or in the wild.",
+  "follow_up": "What do you imagine that animal's day is like from its point of view?",
+  "level": "easy"
+ },
+ {
+  "id": "tt028",
+  "prompt": "What's a chore you secretly enjoy?",
+  "follow_up": "What is it about that chore that other people might be missing?",
+  "level": "easy"
+ },
+ {
+  "id": "tt029",
+  "prompt": "Tell us about the room or spot where you do your best work.",
+  "follow_up": "If you could change one thing about that space, what would it be?",
+  "level": "easy"
+ },
+ {
+  "id": "tt030",
+  "prompt": "What's a song or piece of music tied to a particular memory?",
+  "follow_up": "Does hearing it now bring back the memory, or has the music taken on a new meaning?",
+  "level": "easy"
+ },
+ {
+  "id": "tt031",
+  "prompt": "What's a dish you can cook well enough to serve to guests?",
+  "follow_up": "Which step in that dish do most people get wrong?",
+  "level": "easy"
+ },
+ {
+  "id": "tt032",
+  "prompt": "Tell us about your favorite season where you live.",
+  "follow_up": "What does that season look like in a way a visitor would miss?",
+  "level": "easy"
+ },
+ {
+  "id": "tt033",
+  "prompt": "Describe a neighbor or local shopkeeper who made your street feel friendly.",
+  "follow_up": "What small thing did they do that you could copy?",
+  "level": "easy"
+ },
+ {
+  "id": "tt034",
+  "prompt": "What's the oldest object you own?",
+  "follow_up": "What story would that object tell if it could talk?",
+  "level": "easy"
+ },
+ {
+  "id": "tt035",
+  "prompt": "Tell us about a rainy day you enjoyed.",
+  "follow_up": "What made it a good day rather than a wasted one?",
+  "level": "easy"
+ },
+ {
+  "id": "tt036",
+  "prompt": "What's a skill you're proud of that few people know you have?",
+  "follow_up": "How did you end up practicing it enough to get good?",
+  "level": "easy"
+ },
+ {
+  "id": "tt037",
+  "prompt": "Tell us about a journey by train, bus or boat that stayed with you.",
+  "follow_up": "Who or what did you notice along the way?",
+  "level": "easy"
+ },
+ {
+  "id": "tt038",
+  "prompt": "What's your go-to snack when you need energy?",
+  "follow_up": "When did it become your go-to, and has it ever changed?",
+  "level": "easy"
+ },
+ {
+  "id": "tt039",
+  "prompt": "Tell us about a mistake you made at work that turned out fine.",
+  "follow_up": "What did you do in the first hour after you noticed it?",
+  "level": "easy"
+ },
+ {
+  "id": "tt040",
+  "prompt": "What's something you collected as a child?",
+  "follow_up": "Why did you collect that rather than something else?",
+  "level": "easy"
+ },
+ {
+  "id": "tt041",
+  "prompt": "Tell us about a library, bookshop or reading spot you've loved.",
+  "follow_up": "What did that place give you that reading at home doesn't?",
+  "level": "easy"
+ },
+ {
+  "id": "tt042",
+  "prompt": "Tell us about a tool, gadget or piece of equipment you inherited or borrowed and kept using.",
+  "follow_up": "What does it do better than a newer version would?",
+  "level": "easy"
+ },
+ {
+  "id": "tt043",
+  "prompt": "Tell us about the best picnic or outdoor meal you've had.",
+  "follow_up": "Why did the setting matter as much as the food?",
+  "level": "easy"
+ },
+ {
+  "id": "tt044",
+  "prompt": "What's one part of your morning routine you'd never give up?",
+  "follow_up": "What happens to your day on the mornings you skip it?",
+  "level": "easy"
+ },
+ {
+  "id": "tt045",
+  "prompt": "What's your favorite way to spend a free hour?",
+  "follow_up": "How do you choose between that and something more 'productive'?",
+  "level": "easy"
+ },
+ {
+  "id": "tt046",
+  "prompt": "Tell us about a bridge, building or street you find beautiful.",
+  "follow_up": "What do you think the people who built it were trying to achieve?",
+  "level": "easy"
+ },
+ {
+  "id": "tt047",
+  "prompt": "Is it better to be a specialist or a generalist at work?",
+  "follow_up": "Can you name a situation where your answer would flip?",
+  "level": "medium"
+ },
+ {
+  "id": "tt048",
+  "prompt": "Should cooking be a required subject in schools?",
+  "follow_up": "What would you take out of the timetable to make room for it?",
+  "level": "medium"
+ },
+ {
+  "id": "tt049",
+  "prompt": "Paper books or screens for reading: which wins?",
+  "follow_up": "What's the strongest argument for the side you didn't pick?",
+  "level": "medium"
+ },
+ {
+  "id": "tt050",
+  "prompt": "Is it better to travel slowly to a few places or quickly to many?",
+  "follow_up": "Tell us about a trip that supports your view.",
+  "level": "medium"
+ },
+ {
+  "id": "tt051",
+  "prompt": "Should everyone learn a second language?",
+  "follow_up": "Based on what you've seen work, what's the best way to learn one?",
+  "level": "medium"
+ },
+ {
+  "id": "tt052",
+  "prompt": "Are early mornings overrated?",
+  "follow_up": "What would convince someone on the other side to change their mind?",
+  "level": "medium"
+ },
+ {
+  "id": "tt053",
+  "prompt": "Which matters more in a team: talent or attitude?",
+  "follow_up": "How would you spot the one you value in a job interview?",
+  "level": "medium"
+ },
+ {
+  "id": "tt054",
+  "prompt": "Would you rather live in the center of a city or on its edge?",
+  "follow_up": "What would you miss most about the option you didn't choose?",
+  "level": "medium"
+ },
+ {
+  "id": "tt055",
+  "prompt": "When you go on holiday, is it better to plan every detail or leave room for surprises?",
+  "follow_up": "Where's the line? What must always be planned?",
+  "level": "medium"
+ },
+ {
+  "id": "tt056",
+  "prompt": "Should schools give homework?",
+  "follow_up": "If homework disappeared, what should replace it?",
+  "level": "medium"
+ },
+ {
+  "id": "tt057",
+  "prompt": "Which is the more useful skill: writing well or speaking well?",
+  "follow_up": "Which one have you worked harder to develop, and how?",
+  "level": "medium"
+ },
+ {
+  "id": "tt058",
+  "prompt": "Is it rude to check your phone during a meal with friends?",
+  "follow_up": "Is there any exception you'd accept?",
+  "level": "medium"
+ },
+ {
+  "id": "tt059",
+  "prompt": "Is it better to work from home or in an office?",
+  "follow_up": "What one change would improve the option you didn't choose?",
+  "level": "medium"
+ },
+ {
+  "id": "tt060",
+  "prompt": "Should you finish a book you're not enjoying?",
+  "follow_up": "How many pages do you give a book before you decide?",
+  "level": "medium"
+ },
+ {
+  "id": "tt061",
+  "prompt": "Which make better gifts: experiences or objects?",
+  "follow_up": "Tell us about a gift that proved or challenged your view.",
+  "level": "medium"
+ },
+ {
+  "id": "tt062",
+  "prompt": "Is boredom good for us?",
+  "follow_up": "What did you do the last time you felt truly bored?",
+  "level": "medium"
+ },
+ {
+  "id": "tt063",
+  "prompt": "Should museums let visitors touch more of the exhibits?",
+  "follow_up": "Which object would you most like to touch, and why?",
+  "level": "medium"
+ },
+ {
+  "id": "tt064",
+  "prompt": "Is it better to learn a skill from a teacher or to teach yourself?",
+  "follow_up": "What's a skill where the other approach would clearly work better?",
+  "level": "medium"
+ },
+ {
+  "id": "tt065",
+  "prompt": "Should every workplace have a quiet room for naps?",
+  "follow_up": "What rule would you set so it isn't misused?",
+  "level": "medium"
+ },
+ {
+  "id": "tt066",
+  "prompt": "Is it worth repairing things rather than replacing them?",
+  "follow_up": "How do you decide when a repair isn't worth the effort?",
+  "level": "medium"
+ },
+ {
+  "id": "tt067",
+  "prompt": "Which is the most underrated meal of the day?",
+  "follow_up": "What would you serve to change people's minds about it?",
+  "level": "medium"
+ },
+ {
+  "id": "tt068",
+  "prompt": "Should towns plant fruit trees in parks and along streets?",
+  "follow_up": "What practical problems would need solving first?",
+  "level": "medium"
+ },
+ {
+  "id": "tt069",
+  "prompt": "Is it better to have a few close friends or a wide circle of acquaintances?",
+  "follow_up": "How has your view on this changed since you were younger?",
+  "level": "medium"
+ },
+ {
+  "id": "tt070",
+  "prompt": "Is a messy desk a sign of a creative mind?",
+  "follow_up": "What does your own desk say about you?",
+  "level": "medium"
+ },
+ {
+  "id": "tt071",
+  "prompt": "Should young people take a gap year before further study or work?",
+  "follow_up": "What would make a gap year wasted rather than worthwhile?",
+  "level": "medium"
+ },
+ {
+  "id": "tt072",
+  "prompt": "Are printed travel guidebooks still useful now that we have the internet?",
+  "follow_up": "What can a well-written guidebook do that a web search can't?",
+  "level": "medium"
+ },
+ {
+  "id": "tt073",
+  "prompt": "Should meetings have a strict time limit?",
+  "follow_up": "What's the right length, and what should happen when a meeting runs over?",
+  "level": "medium"
+ },
+ {
+  "id": "tt074",
+  "prompt": "Is it better to be first or to be best?",
+  "follow_up": "Can you give an example where being first was a disadvantage?",
+  "level": "medium"
+ },
+ {
+  "id": "tt075",
+  "prompt": "Which everyday skill should every adult have mastered by age twenty-five?",
+  "follow_up": "How would you teach it to someone who has been avoiding it?",
+  "level": "medium"
+ },
+ {
+  "id": "tt076",
+  "prompt": "Do handwritten notes still matter?",
+  "follow_up": "When did you last receive one, and how did it affect you?",
+  "level": "medium"
+ },
+ {
+  "id": "tt077",
+  "prompt": "Is it better to stay in one job for a long time or to move often?",
+  "follow_up": "What sign tells you it's time to move on?",
+  "level": "medium"
+ },
+ {
+  "id": "tt078",
+  "prompt": "Is a tasting menu a better way to eat out than ordering a single dish?",
+  "follow_up": "What's lost when the chef chooses for you?",
+  "level": "medium"
+ },
+ {
+  "id": "tt079",
+  "prompt": "If you could keep only one invention from the last hundred years, which would you keep?",
+  "follow_up": "What would your daily life look like without your second choice?",
+  "level": "medium"
+ },
+ {
+  "id": "tt080",
+  "prompt": "Should you read the book before watching the film version?",
+  "follow_up": "Tell us about an adaptation that changed how you felt about the story.",
+  "level": "medium"
+ },
+ {
+  "id": "tt081",
+  "prompt": "Should people be allowed to bring their dogs to the office?",
+  "follow_up": "How would you handle colleagues who disagree with you?",
+  "level": "medium"
+ },
+ {
+  "id": "tt082",
+  "prompt": "Do we rely too much on the maps on our phones?",
+  "follow_up": "When did you last find your way without one, and how did it go?",
+  "level": "medium"
+ },
+ {
+  "id": "tt083",
+  "prompt": "Do we learn more through competition or through cooperation?",
+  "follow_up": "What age or setting would change your answer?",
+  "level": "medium"
+ },
+ {
+  "id": "tt084",
+  "prompt": "Should public spaces have more benches?",
+  "follow_up": "Where in your town would you put the first new one, and why there?",
+  "level": "medium"
+ },
+ {
+  "id": "tt085",
+  "prompt": "Is it better to do your hardest task first thing or to warm up with easy ones?",
+  "follow_up": "What happens on the days you break your own rule?",
+  "level": "medium"
+ },
+ {
+  "id": "tt086",
+  "prompt": "Should children be allowed to choose their own after-school activities, even if they keep quitting?",
+  "follow_up": "When, if ever, should an adult insist they stick with something?",
+  "level": "medium"
+ },
+ {
+  "id": "tt087",
+  "prompt": "When traveling, is it more worthwhile to see famous sights or to explore ordinary neighborhoods?",
+  "follow_up": "What's the best ordinary place you've ever stumbled on?",
+  "level": "medium"
+ },
+ {
+  "id": "tt088",
+  "prompt": "Should feedback at work always be given in private?",
+  "follow_up": "When is public feedback actually more helpful?",
+  "level": "medium"
+ },
+ {
+  "id": "tt089",
+  "prompt": "Would you rather be an excellent cook or an excellent gardener?",
+  "follow_up": "What would the other skill add to your life that you'd be sorry to miss?",
+  "level": "medium"
+ },
+ {
+  "id": "tt090",
+  "prompt": "Are traditions worth keeping if nobody remembers why they started?",
+  "follow_up": "Which tradition in your own life would you keep, and which would you drop?",
+  "level": "medium"
+ },
+ {
+  "id": "tt091",
+  "prompt": "Should towns preserve their old buildings or replace them with new ones?",
+  "follow_up": "Which building near you would you protect first, and why?",
+  "level": "medium"
+ },
+ {
+  "id": "tt092",
+  "prompt": "Is it better to say yes to most invitations or to protect your free time?",
+  "follow_up": "How do you say no without causing offense?",
+  "level": "medium"
+ },
+ {
+  "id": "tt093",
+  "prompt": "Should video games be considered an art form?",
+  "follow_up": "What would a game need for you to call it art?",
+  "level": "medium"
+ },
+ {
+  "id": "tt094",
+  "prompt": "If you could add one subject to every school in the world, what would it be, and how would you teach it?",
+  "follow_up": "What would you remove to make space, and who would object most?",
+  "level": "hard"
+ },
+ {
+  "id": "tt095",
+  "prompt": "Is a skill you never use still worth having?",
+  "follow_up": "Can you name a specific skill that proves your point?",
+  "level": "hard"
+ },
+ {
+  "id": "tt096",
+  "prompt": "If your town could keep only one public building, which should it be?",
+  "follow_up": "What would be lost that people don't currently notice?",
+  "level": "hard"
+ },
+ {
+  "id": "tt097",
+  "prompt": "Imagine you could learn the true answer to any one question, but only one. What would you ask?",
+  "follow_up": "What would you do in the first week after learning the answer?",
+  "level": "hard"
+ },
+ {
+  "id": "tt098",
+  "prompt": "Is it possible to be too organized?",
+  "follow_up": "Where's the tipping point, and how would you notice you'd crossed it?",
+  "level": "hard"
+ },
+ {
+  "id": "tt099",
+  "prompt": "A friend proudly shows you something they made, and you honestly don't think it's very good. What do you say?",
+  "follow_up": "Would your answer change if they were about to show it to a large audience?",
+  "level": "hard"
+ },
+ {
+  "id": "tt100",
+  "prompt": "If every adult had to spend one year in a job chosen at random, would society be better or worse for it?",
+  "follow_up": "Which job would you least want to draw, and what might it teach you?",
+  "level": "hard"
+ },
+ {
+  "id": "tt101",
+  "prompt": "Is it more important to be understood or to be agreed with?",
+  "follow_up": "Describe a situation where you'd choose the other one.",
+  "level": "hard"
+ },
+ {
+  "id": "tt102",
+  "prompt": "If animals could talk for one day a year, which animal's opinions would you most want to hear?",
+  "follow_up": "What might it say about us that we wouldn't like to hear?",
+  "level": "hard"
+ },
+ {
+  "id": "tt103",
+  "prompt": "Does a story need a happy ending to be satisfying?",
+  "follow_up": "What makes an unhappy ending feel earned rather than cheap?",
+  "level": "hard"
+ },
+ {
+  "id": "tt104",
+  "prompt": "If you could spend one year living in any period of the past, which would you choose?",
+  "follow_up": "Which modern habit would be hardest to give up there?",
+  "level": "hard"
+ },
+ {
+  "id": "tt105",
+  "prompt": "Is originality overrated?",
+  "follow_up": "Can you think of something great that was mostly borrowed from earlier work?",
+  "level": "hard"
+ },
+ {
+  "id": "tt106",
+  "prompt": "If machines could do all of your current work, how would you spend your days?",
+  "follow_up": "What would give you a sense of purpose that you don't get now?",
+  "level": "hard"
+ },
+ {
+  "id": "tt107",
+  "prompt": "What makes a place feel like home: the location, the people or the routines?",
+  "follow_up": "Could you recreate that feeling somewhere completely new? How?",
+  "level": "hard"
+ },
+ {
+  "id": "tt108",
+  "prompt": "Is it more important to be consistent or to be willing to change your mind?",
+  "follow_up": "Tell us about a time when changing your mind turned out to be the right call.",
+  "level": "hard"
+ },
+ {
+  "id": "tt109",
+  "prompt": "If you could create a new public holiday, what would it celebrate and how would people mark it?",
+  "follow_up": "What would stop it from becoming just another day off?",
+  "level": "hard"
+ },
+ {
+  "id": "tt110",
+  "prompt": "Does the internet make us more curious or less?",
+  "follow_up": "What's something you learned recently purely because you were curious?",
+  "level": "hard"
+ },
+ {
+  "id": "tt111",
+  "prompt": "If your town had to choose one smell, one color and one sound to represent it, what would you pick, and why?",
+  "follow_up": "Would locals and visitors agree with your choices?",
+  "level": "hard"
+ },
+ {
+  "id": "tt112",
+  "prompt": "Is it fair to judge a book by its cover?",
+  "follow_up": "When has a first impression of something turned out to be right?",
+  "level": "hard"
+ },
+ {
+  "id": "tt113",
+  "prompt": "If you could persuade everyone on Earth to adopt one habit, what would it be?",
+  "follow_up": "What would stop most people from keeping it, and how would you get around that?",
+  "level": "hard"
+ },
+ {
+  "id": "tt114",
+  "prompt": "Can something be both useful and beautiful, or does one always come at the cost of the other?",
+  "follow_up": "Name an everyday object that gets the balance right or wrong.",
+  "level": "hard"
+ },
+ {
+  "id": "tt115",
+  "prompt": "When choosing what to learn next, is it wiser to follow your curiosity or your strengths?",
+  "follow_up": "What would you learn next under each approach?",
+  "level": "hard"
+ },
+ {
+  "id": "tt116",
+  "prompt": "If you could send one short message to yourself ten years ago, and it had to be advice rather than a prediction, what would it say?",
+  "follow_up": "Would your younger self have listened? Why or why not?",
+  "level": "hard"
+ },
+ {
+  "id": "tt117",
+  "prompt": "Is it better to be a big fish in a small pond or a small fish in a big pond?",
+  "follow_up": "Which pond are you in now, and did you choose it?",
+  "level": "hard"
+ },
+ {
+  "id": "tt118",
+  "prompt": "If a library had to choose between more books and more space for people to gather, which should it pick?",
+  "follow_up": "Beyond lending books, what does a library owe its community?",
+  "level": "hard"
+ },
+ {
+  "id": "tt119",
+  "prompt": "Does convenience make life better, or just faster?",
+  "follow_up": "What's one inconvenience you would deliberately bring back?",
+  "level": "hard"
+ },
+ {
+  "id": "tt120",
+  "prompt": "If you could swap places for a day with someone in your town, chosen only by their job, whose job would you pick?",
+  "follow_up": "What do you think they'd find hardest about a day in your life?",
+  "level": "hard"
+ }
+]

@@ -1,0 +1,1442 @@
+[
+ {
+  "id": "t001",
+  "text": "Every night your dog sleeps on an ordinary bed is a night of silent pain he can't tell you about. Do you really love him? Prove it with the CloudPaw Orthopedic Mattress.",
+  "context": "A pet product ad",
+  "kind": "technique",
+  "technique": "emotional manipulation",
+  "tell": "Do you really love him? Prove it",
+  "why": "Guilt and invented suffering replace any evidence that ordinary beds hurt dogs, and loving your pet is tied to buying the product."
+ },
+ {
+  "id": "t002",
+  "text": "Our ward has had no working heating for 19 days, and three elderly patients have been moved after hypothermia warnings. This is shameful, and it must be fixed this week.",
+  "context": "A post by a hospital nurse",
+  "kind": "fair",
+  "technique": "emotional manipulation",
+  "tell": "no working heating for 19 days",
+  "why": "The anger fits the facts given: 19 days without heat and three patients moved after hypothermia warnings."
+ },
+ {
+  "id": "t003",
+  "text": "Imagine telling your grandchildren you saw this coming and did nothing. While others sleep, the smart few are moving their savings into Veltra Gold Notes. Will you be one of them?",
+  "context": "An investment newsletter",
+  "kind": "technique",
+  "technique": "emotional manipulation",
+  "tell": "Imagine telling your grandchildren you saw this coming and did nothing",
+  "why": "It uses dread and flattery ('the smart few') in place of any facts about the investment's risks, fees or returns."
+ },
+ {
+  "id": "t004",
+  "text": "The Brindle Lane shelter is holding 64 dogs in space built for 40, and our kennel heaters failed on Monday. Please foster for even one week. It truly makes a difference.",
+  "context": "An animal shelter's social post",
+  "kind": "fair",
+  "technique": "emotional manipulation",
+  "tell": "64 dogs in space built for 40",
+  "why": "The urgent plea rests on specific facts, overcrowding and broken heaters, so the concern matches the situation."
+ },
+ {
+  "id": "t005",
+  "text": "When I picture the families on Hollis Street opening their water bills, I can't sleep at night. Anyone who votes against this rate freeze is voting to watch children suffer.",
+  "context": "From a city council speech",
+  "kind": "technique",
+  "technique": "emotional manipulation",
+  "tell": "voting to watch children suffer",
+  "why": "It accuses opponents of wanting children to suffer and offers feelings instead of any facts about bill sizes or what the freeze would cost."
+ },
+ {
+  "id": "t006",
+  "text": "I'm furious. Our credit union charged 4,100 members a $35 'inactivity fee' that its own terms, section 8.2, never mention.",
+  "context": "A comment under a news article",
+  "kind": "fair",
+  "technique": "emotional manipulation",
+  "tell": "its own terms, section 8.2, never mention",
+  "why": "The outrage is tied to concrete facts: how many members were charged, how much, and the section of the terms that doesn't allow the fee."
+ },
+ {
+  "id": "t007",
+  "text": "My heart breaks for every parent still microwaving food in plastic containers. Please, for your babies' sake, throw them out tonight. You'll never forgive yourself if you wait.",
+  "context": "A social media post",
+  "kind": "technique",
+  "technique": "emotional manipulation",
+  "tell": "You'll never forgive yourself if you wait",
+  "why": "It stirs guilt and fear but gives no facts about which containers carry what risk, if any."
+ },
+ {
+  "id": "t008",
+  "text": "Holloway Property raised Elm Court rents by 22% this spring, while the council's inspection found mould in 31 of its 48 flats. We're angry, and we're meeting Thursday at 7.",
+  "context": "A tenants' association flyer",
+  "kind": "fair",
+  "technique": "emotional manipulation",
+  "tell": "inspection found mould in 31 of its 48 flats",
+  "why": "The anger rests on a stated rent rise and the findings of an official inspection, so the feeling fits the facts."
+ },
+ {
+  "id": "t009",
+  "text": "Your photos. Your memories. Your children's first steps. Gone forever in a single crash, unless you upgrade to MemoryVault Premium today.",
+  "context": "A marketing email",
+  "kind": "technique",
+  "technique": "emotional manipulation",
+  "tell": "Gone forever in a single crash",
+  "why": "Fear of losing precious memories is the whole pitch. It gives no facts on how likely data loss is or why the free plan isn't enough."
+ },
+ {
+  "id": "t010",
+  "text": "The council spent $2.3 million on new logos and signage this year while cutting Westbrook Library to five days a week to save $180,000. Residents have every right to be furious.",
+  "context": "A local newsletter",
+  "kind": "fair",
+  "technique": "emotional manipulation",
+  "tell": "$2.3 million on new logos and signage",
+  "why": "The outrage matches the figures given: an expensive rebrand set beside a far smaller saving that cost residents library hours."
+ },
+ {
+  "id": "t011",
+  "text": "These wind-farm planners want to turn the hills our grandfathers farmed into a forest of humming steel. If you have any love left for this valley, you'll fight them with everything you've got.",
+  "context": "An op-ed in a rural weekly",
+  "kind": "technique",
+  "technique": "emotional manipulation",
+  "tell": "If you have any love left for this valley",
+  "why": "Nostalgia and loyalty stand in for facts about the project's size, noise or real effects on the land."
+ },
+ {
+  "id": "t012",
+  "text": "I'm genuinely upset. I told the server twice about my peanut allergy, it was written on the order slip, and my curry still arrived topped with crushed peanuts.",
+  "context": "A restaurant review",
+  "kind": "fair",
+  "technique": "emotional manipulation",
+  "tell": "it was written on the order slip",
+  "why": "The reviewer's distress matches what happened: a serious allergy was mentioned twice and written down, then ignored."
+ },
+ {
+  "id": "t013",
+  "text": "A good parent doesn't let their child be the only one without a Book Fair bag. Don't make your kid sit alone on Friday.",
+  "context": "A school fundraiser flyer",
+  "kind": "technique",
+  "technique": "emotional manipulation",
+  "tell": "Don't make your kid sit alone on Friday",
+  "why": "It plays on parents' guilt and fear that their child will be embarrassed, and gives no actual reason to buy."
+ },
+ {
+  "id": "t014",
+  "text": "The 7:40 Ridgeline train has been cancelled 23 times since September, according to the operator's own performance page. I've been late to work eleven times this term, and I'm fed up.",
+  "context": "A commuter's social post",
+  "kind": "fair",
+  "technique": "emotional manipulation",
+  "tell": "cancelled 23 times since September",
+  "why": "The frustration rests on a specific number that anyone can check, taken from the operator's own data."
+ },
+ {
+  "id": "t015",
+  "text": "Honestly, if you're still feeding your family supermarket bread, you're poisoning the people you love. I switched to Hearthcroft Sourdough and finally feel like I'm doing right by them.",
+  "context": "A product review",
+  "kind": "technique",
+  "technique": "emotional manipulation",
+  "tell": "you're poisoning the people you love",
+  "why": "It accuses readers of harming their family without any evidence, using guilt to sell a brand of bread."
+ },
+ {
+  "id": "t016",
+  "text": "Kestrel Primary's teachers are buying printer paper with their own money. The district cut classroom supply budgets by 40% this year, per its published budget. It's heartbreaking.",
+  "context": "A parent's op-ed",
+  "kind": "fair",
+  "technique": "emotional manipulation",
+  "tell": "cut classroom supply budgets by 40% this year, per its published budget",
+  "why": "The strong feeling rests on a specific budget cut that the district itself published, so the emotion is proportionate."
+ },
+ {
+  "id": "t017",
+  "text": "I'm deeply hurt that only 60% of you have signed up for the weekend volunteer drive. After everything this company has done for you, I expected more loyalty.",
+  "context": "A company memo",
+  "kind": "technique",
+  "technique": "emotional manipulation",
+  "tell": "After everything this company has done for you",
+  "why": "It guilt-trips staff over a voluntary activity instead of giving them any reason to take part."
+ },
+ {
+  "id": "t018",
+  "text": "I'm sorry, and I'm angry at myself. Our payroll error delayed 212 staff paychecks by six days; every affected person will receive $150 to cover late fees on Friday.",
+  "context": "A CEO's memo to staff",
+  "kind": "fair",
+  "technique": "emotional manipulation",
+  "tell": "delayed 212 staff paychecks by six days",
+  "why": "The emotion matches an admitted error with a stated scope, and the memo names a specific remedy."
+ },
+ {
+  "id": "t019",
+  "text": "This little theatre gave your children their first standing ovation. Will you really stand by and let its lights go dark forever?",
+  "context": "A fundraising email",
+  "kind": "technique",
+  "technique": "emotional manipulation",
+  "tell": "let its lights go dark forever",
+  "why": "It tugs at nostalgia and guilt but never says how much is needed, what is actually at risk, or where donations go."
+ },
+ {
+  "id": "t020",
+  "text": "Fish are floating belly-up along a two-mile stretch of Wren Creek, and the state lab confirmed oxygen levels below 2 mg/L on Tuesday. This is an emergency.",
+  "context": "A local news headline and lede",
+  "kind": "fair",
+  "technique": "emotional manipulation",
+  "tell": "state lab confirmed oxygen levels below 2 mg/L on Tuesday",
+  "why": "The alarm is justified by visible fish deaths and a lab reading that shows dangerously low oxygen."
+ },
+ {
+  "id": "t021",
+  "text": "Either we cut the business tax or we watch every shop on Main Street board up its windows. There's no middle ground.",
+  "context": "From a town council candidate's speech",
+  "kind": "technique",
+  "technique": "false choice",
+  "tell": "Either we cut the business tax or we watch",
+  "why": "It leaves out other options, such as rent relief, parking changes, marketing or a smaller tax change, and offers only two outcomes."
+ },
+ {
+  "id": "t022",
+  "text": "Measure 4 asks one question: should the city raise the minimum wage for municipal contractors to $18? On 5 November it's yes or no, and there's no third box on the ballot.",
+  "context": "A campaign mailer",
+  "kind": "fair",
+  "technique": "false choice",
+  "tell": "there's no third box on the ballot",
+  "why": "A ballot measure really does allow only two answers, so describing it as yes or no is accurate."
+ },
+ {
+  "id": "t023",
+  "text": "We can either build the light rail line or keep choking on traffic forever. Which future do you want for your kids?",
+  "context": "A transit campaign flyer",
+  "kind": "technique",
+  "technique": "false choice",
+  "tell": "either build the light rail line or keep choking",
+  "why": "It treats rail as the only alternative to gridlock and ignores buses, bike lanes, road redesigns and other fixes."
+ },
+ {
+  "id": "t024",
+  "text": "The school levy renewal is a straight yes or no on the 12 March ballot: renew the 1.2% property tax for five more years, or let it expire on 30 June. Vote no if you want it gone.",
+  "context": "A taxpayers' group flyer",
+  "kind": "fair",
+  "technique": "false choice",
+  "tell": "a straight yes or no on the 12 March ballot",
+  "why": "A levy renewal on the ballot has only two real outcomes: it is renewed or it expires on the date given."
+ },
+ {
+  "id": "t025",
+  "text": "Either you book the all-inclusive package or you spend your whole holiday stressing over bills.",
+  "context": "A travel agency ad",
+  "kind": "technique",
+  "technique": "false choice",
+  "tell": "book the all-inclusive package or you spend your whole holiday stressing",
+  "why": "It ignores half-board, self-catering, setting a budget and many other ways to travel without stress."
+ },
+ {
+  "id": "t026",
+  "text": "The offer expires at 5 p.m. Friday: members either ratify the contract as written or reject it and send us back to the table. Amendments aren't allowed in a ratification vote.",
+  "context": "A union newsletter",
+  "kind": "fair",
+  "technique": "false choice",
+  "tell": "Amendments aren't allowed in a ratification vote",
+  "why": "A ratification vote really has two outcomes, accept or reject, and the text explains why there's no third option."
+ },
+ {
+  "id": "t027",
+  "text": "You either commit to the full 12-week Peakform program, or you keep paying for a gym you never use.",
+  "context": "A fitness ad",
+  "kind": "technique",
+  "technique": "false choice",
+  "tell": "either commit to the full 12-week Peakform program, or",
+  "why": "It ignores many other options, such as shorter plans, walking, other classes or cancelling the membership, and offers only the product or failure."
+ },
+ {
+  "id": "t028",
+  "text": "From 1 March, the Orlendo app requires you to accept its new terms of service to log in. Accept them, or your account closes; the company confirms there's no opt-out.",
+  "context": "A tech news brief",
+  "kind": "fair",
+  "technique": "false choice",
+  "tell": "the company confirms there's no opt-out",
+  "why": "The company's rules leave only two real outcomes, and the text says the company has confirmed there is no third."
+ },
+ {
+  "id": "t029",
+  "text": "Either we move everything to the cloud this quarter or we accept that we'll be hacked. Those are our options.",
+  "context": "A memo from an IT director",
+  "kind": "technique",
+  "technique": "false choice",
+  "tell": "Those are our options.",
+  "why": "There are many routes to better security, such as patching, training, a partial move and better backups. It isn't a rushed full move or certain hacking."
+ },
+ {
+  "id": "t030",
+  "text": "The last ferry off Gull Island leaves at 6:15 p.m., and there's no bridge or night service. Be on that boat, or book a room on the island.",
+  "context": "A tourist information sign",
+  "kind": "fair",
+  "technique": "false choice",
+  "tell": "there's no bridge or night service",
+  "why": "With no bridge and no later boats, visitors really can only catch the ferry or stay the night."
+ },
+ {
+  "id": "t031",
+  "text": "Either your child learns to code by age ten, or they'll be left behind in tomorrow's economy.",
+  "context": "A coding camp ad",
+  "kind": "technique",
+  "technique": "false choice",
+  "tell": "learns to code by age ten, or they'll be left behind",
+  "why": "Children can do well through many skills and paths. Coding by ten isn't the only way to avoid being left behind."
+ },
+ {
+  "id": "t032",
+  "text": "It's simple now: Corrin City must beat Dunmere on Saturday to stay up. With the final table as it stands, a draw or a loss sends them down.",
+  "context": "A sports headline and lede",
+  "kind": "fair",
+  "technique": "false choice",
+  "tell": "a draw or a loss sends them down",
+  "why": "Because of the league table, the outcomes really do come down to two: win and survive, or fail to win and go down."
+ },
+ {
+  "id": "t033",
+  "text": "Either you're answering emails on weekends, or you're not serious about this job.",
+  "context": "A manager's message to a team",
+  "kind": "technique",
+  "technique": "false choice",
+  "tell": "Either you're answering emails on weekends, or you're not serious",
+  "why": "Commitment can show in many ways. Answering emails at the weekend isn't the only proof that someone takes the job seriously."
+ },
+ {
+  "id": "t034",
+  "text": "Your pre-surgery bloodwork must be done by Thursday. If the results aren't in by then, hospital policy is that Monday's operation is postponed, with no exceptions.",
+  "context": "A clinic reminder text",
+  "kind": "fair",
+  "technique": "false choice",
+  "tell": "hospital policy is that Monday's operation is postponed, with no exceptions",
+  "why": "The policy leaves exactly two outcomes: the tests are done in time or the surgery is postponed. So the either/or is real."
+ },
+ {
+  "id": "t035",
+  "text": "You can either buy a house before 30 or throw your money away on rent for the rest of your life.",
+  "context": "A social media post",
+  "kind": "technique",
+  "technique": "false choice",
+  "tell": "buy a house before 30 or throw your money away",
+  "why": "It ignores buying later, or renting while investing. Paying rent isn't automatically money thrown away for life."
+ },
+ {
+  "id": "t036",
+  "text": "Your 0% balance transfer ends on 31 May. Pay off the remaining $1,240 by then, or what's left starts accruing 24.9% interest. Those are the card terms.",
+  "context": "A credit card statement notice",
+  "kind": "fair",
+  "technique": "false choice",
+  "tell": "Those are the card terms.",
+  "why": "The card terms really set two outcomes: clear the balance by the deadline or pay interest on what remains."
+ },
+ {
+  "id": "t037",
+  "text": "Either we keep the old menu exactly as it is, or we lose every regular who's been coming here for twenty years.",
+  "context": "From a café owners' meeting",
+  "kind": "technique",
+  "technique": "false choice",
+  "tell": "keep the old menu exactly as it is, or we lose",
+  "why": "It ignores middle options, such as adding a few dishes or keeping the favourites while changing the rest."
+ },
+ {
+  "id": "t038",
+  "text": "Your lease renewal notice is due by 15 August. Under clause 12, you either sign for another year or move out by 30 September; month-to-month isn't offered.",
+  "context": "A letter from a landlord",
+  "kind": "fair",
+  "technique": "false choice",
+  "tell": "Under clause 12",
+  "why": "The lease clause leaves only two choices, and the letter names the clause that rules out a third."
+ },
+ {
+  "id": "t039",
+  "text": "Either you crate-train your puppy from day one, or you'll have a destructive dog for life.",
+  "context": "A pet blog",
+  "kind": "technique",
+  "technique": "false choice",
+  "tell": "crate-train your puppy from day one, or",
+  "why": "Many training methods work, as do later starts. Crate-training from day one isn't the only way to avoid problems."
+ },
+ {
+  "id": "t040",
+  "text": "Rabies vaccine records are required for boarding at Pawstead Kennels: no record, no stay. Bring the certificate, or make other arrangements for Rufus.",
+  "context": "A booking confirmation email",
+  "kind": "fair",
+  "technique": "false choice",
+  "tell": "no record, no stay",
+  "why": "The kennel's rule really leaves two options: show the certificate or find other care."
+ },
+ {
+  "id": "t041",
+  "text": "Why is your weekly shop up 30%? Look no further than the climate bureaucrats at the Regional Environment Office and their endless permits. Cut them loose and prices fall.",
+  "context": "A social media post from a campaign account",
+  "kind": "technique",
+  "technique": "scapegoating",
+  "tell": "Look no further than the climate bureaucrats",
+  "why": "Food prices rise for many reasons, like harvests, fuel and wages. The post blames one permits office without showing any link between its paperwork and shop prices."
+ },
+ {
+  "id": "t042",
+  "text": "Ashcombe Council's budget hole is no mystery. The external audit published in March found £4.2m in consultancy contracts signed without tender by the council's own planning department.",
+  "context": "An opposition councillor's press release",
+  "kind": "fair",
+  "technique": "scapegoating",
+  "tell": "external audit published in March found £4.2m in consultancy contracts",
+  "why": "A named department is blamed, and a published audit ties it to a specific sum. Readers can check the audit for themselves."
+ },
+ {
+  "id": "t043",
+  "text": "Wondering why the 14 bus is always late? It's the SUV drivers clogging Corran Road, every one of them stealing your morning.",
+  "context": "A comment on a local news site",
+  "kind": "technique",
+  "technique": "scapegoating",
+  "tell": "It's the SUV drivers clogging Corran Road",
+  "why": "No evidence is offered. Late buses can come from timetabling, staff shortages, breakdowns or traffic in general. One disliked group of drivers takes all the blame."
+ },
+ {
+  "id": "t044",
+  "text": "The Arden River fish kill traces straight to Holtby Chemicals. State regulator sampling found the solvent at its outflow pipe, and the firm has admitted a valve failure on 3 June.",
+  "context": "An environmental group's newsletter",
+  "kind": "fair",
+  "technique": "scapegoating",
+  "tell": "sampling found the solvent at its outflow pipe",
+  "why": "Two pieces of evidence point at the firm: official tests at its own pipe and its own admission of a valve failure."
+ },
+ {
+  "id": "t045",
+  "text": "Millbrook's rent spike has one cause: the two property firms that bought on Dace Street last spring. Before they arrived, this was an affordable town.",
+  "context": "A tenants' group flyer",
+  "kind": "technique",
+  "technique": "scapegoating",
+  "tell": "has one cause: the two property firms",
+  "why": "Two firms owning one street can't explain a town-wide rise by themselves. No figures show their share of homes, and other causes such as demand and interest rates are ignored."
+ },
+ {
+  "id": "t046",
+  "text": "Line 3's miserable month is down to the signalling contractor, Veltrek. The operator's incident log attributes 41 of 52 delays to Veltrek's new software.",
+  "context": "A commuter newsletter",
+  "kind": "fair",
+  "technique": "scapegoating",
+  "tell": "incident log attributes 41 of 52 delays to Veltrek's new software",
+  "why": "The blame rests on the operator's own records. They tie most delays to the contractor's software and give the count, so the scale is clear."
+ },
+ {
+  "id": "t047",
+  "text": "Six straight losses, and every one since the club brought in a new fitness coach from abroad. Coincidence? Time for him to go.",
+  "context": "A fan forum post",
+  "kind": "technique",
+  "technique": "scapegoating",
+  "tell": "every one since the club brought in a new fitness coach",
+  "why": "Timing alone is treated as proof. Form, injuries and fixtures go unmentioned, and an outsider is blamed for results nothing links him to."
+ },
+ {
+  "id": "t048",
+  "text": "The payroll errors on 28 September came from our provider, Tallymere, not from your managers. Tallymere's incident report confirms a file-mapping bug that swapped tax codes for 212 staff.",
+  "context": "An internal HR email",
+  "kind": "fair",
+  "technique": "scapegoating",
+  "tell": "incident report confirms a file-mapping bug",
+  "why": "The provider is blamed on the basis of its own incident report, which names the exact fault and how many staff it hit."
+ },
+ {
+  "id": "t049",
+  "text": "Q3 sales missed target because the interns keep mishandling the CRM. From Monday, all customer entries go through team leads.",
+  "context": "A company memo",
+  "kind": "technique",
+  "technique": "scapegoating",
+  "tell": "missed target because the interns keep mishandling the CRM",
+  "why": "The most junior staff are blamed for a company-wide sales miss, with no figures showing that data-entry slips cost any sales."
+ },
+ {
+  "id": "t050",
+  "text": "The Harriers have nobody to blame but themselves for the docked points. The league's ruling shows they fielded a player whose registration cleared two days after the match.",
+  "context": "A sports column",
+  "kind": "fair",
+  "technique": "scapegoating",
+  "tell": "The league's ruling shows they fielded a player",
+  "why": "The club is blamed for its own mistake, and the official ruling, with dates, shows the player wasn't registered in time."
+ },
+ {
+  "id": "t051",
+  "text": "Fleas everywhere this summer? Thank the dog walkers from Burnside who march their mutts through our streets every morning.",
+  "context": "A neighbourhood group post",
+  "kind": "technique",
+  "technique": "scapegoating",
+  "tell": "Thank the dog walkers from Burnside",
+  "why": "Flea booms follow warm, humid weather and untreated pets everywhere. Walkers from the next district are blamed with no evidence they brought any fleas."
+ },
+ {
+  "id": "t052",
+  "text": "My cat got ill from Purrbite batch 0817, and I'm not guessing. The maker recalled that exact batch on 12 May after lab tests found excess vitamin D.",
+  "context": "A pet food review",
+  "kind": "fair",
+  "technique": "scapegoating",
+  "tell": "recalled that exact batch on 12 May after lab tests",
+  "why": "The reviewer links the illness to a specific batch that the maker itself recalled after lab tests. The blame rests on documented evidence."
+ },
+ {
+  "id": "t053",
+  "text": "The crashes since update 4.2 are entirely the fault of people running cheap budget phones. Upgrade your device and the problem disappears.",
+  "context": "A moderator's reply on an app's support forum",
+  "kind": "technique",
+  "technique": "scapegoating",
+  "tell": "entirely the fault of people running cheap budget phones",
+  "why": "The crashes started with the update, which points at the app. Users get the blame without any crash data showing which phones are affected."
+ },
+ {
+  "id": "t054",
+  "text": "Tuesday's outage was our fault, not our hosting provider's. The post-incident review shows one of our engineers pushed an untested config at 02:14, and service returned the moment we rolled it back.",
+  "context": "A software company's status blog",
+  "kind": "fair",
+  "technique": "scapegoating",
+  "tell": "pushed an untested config at 02:14",
+  "why": "The company blames itself and gives a timeline: the faulty change went in, and rolling it back ended the outage."
+ },
+ {
+  "id": "t055",
+  "text": "Lake Tarrin's green water? Blame the weekend kayakers churning up the shallows. Ban them and the lake will heal.",
+  "context": "A letter to a local paper",
+  "kind": "technique",
+  "technique": "scapegoating",
+  "tell": "Blame the weekend kayakers churning up the shallows",
+  "why": "Algae blooms are mainly fed by nutrient runoff and warm water. Kayakers, a visible group, are blamed with no testing or data behind the claim."
+ },
+ {
+  "id": "t056",
+  "text": "The Keswold salmonella outbreak has been traced to Greenvale Eggs. Health inspectors matched the strain in 19 patients to samples taken at its packing plant.",
+  "context": "A local news report",
+  "kind": "fair",
+  "technique": "scapegoating",
+  "tell": "matched the strain in 19 patients to samples",
+  "why": "Lab matching links the patients' infections to the company's plant. This is the standard evidence for tracing an outbreak to its source."
+ },
+ {
+  "id": "t057",
+  "text": "Every single delay at Corvane Airport comes down to tourists who can't pack a bag properly and clog up security.",
+  "context": "A travel blog post",
+  "kind": "technique",
+  "technique": "scapegoating",
+  "tell": "comes down to tourists who can't pack a bag properly",
+  "why": "Delays have many causes, including staffing, weather and air traffic control. The post blames one irritating group for every delay without any figures."
+ },
+ {
+  "id": "t058",
+  "text": "Our heating died because Brightway Management skipped the boiler service. The building's maintenance log shows no visit since March 2024, despite the annual contract we pay for.",
+  "context": "A residents' association letter",
+  "kind": "fair",
+  "technique": "scapegoating",
+  "tell": "maintenance log shows no visit since March 2024",
+  "why": "The firm is blamed with a record showing it missed the service it was paid to carry out."
+ },
+ {
+  "id": "t059",
+  "text": "Saturday market footfall has collapsed since that new food truck started parking by the gate. It's driving the regulars away.",
+  "context": "A comment at a market traders' meeting",
+  "kind": "technique",
+  "technique": "scapegoating",
+  "tell": "collapsed since that new food truck started parking by the gate",
+  "why": "A newcomer is blamed because the timing fits. Weather, prices, parking and rival shops are never considered, and nothing shows regulars are avoiding the truck."
+ },
+ {
+  "id": "t060",
+  "text": "Results were late this summer because the exam board's scanning contractor missed its deadline. The board's own statement apologises and names the firm.",
+  "context": "A school newsletter",
+  "kind": "fair",
+  "technique": "scapegoating",
+  "tell": "The board's own statement apologises and names the firm",
+  "why": "The school points to the exam board's own public statement, which admits the delay and names who caused it."
+ },
+ {
+  "id": "t061",
+  "text": "Award-winning actor Lena Marsh says the Harrow gas pipeline will poison our drinking water. Tell the council to vote no on Thursday.",
+  "context": "A campaign email",
+  "kind": "technique",
+  "technique": "fake or irrelevant expert",
+  "tell": "Award-winning actor Lena Marsh says",
+  "why": "An actor has no expertise in geology or water safety. Her fame stands in for evidence about what the pipeline would actually do."
+ },
+ {
+  "id": "t062",
+  "text": "Dr. Priya Nand, the respiratory physician who led Calder General's two-year asthma study, says child admissions were 22% higher on days the Fenwick incinerator ran than on days it was off.",
+  "context": "A clean-air campaign leaflet",
+  "kind": "fair",
+  "technique": "fake or irrelevant expert",
+  "tell": "respiratory physician who led Calder General's two-year asthma study",
+  "why": "A lung specialist reports findings from her own study, giving both the figure and what it is compared with."
+ },
+ {
+  "id": "t063",
+  "text": "Retired heart surgeon Dr. Victor Hale warns the minimum wage rise will bankrupt half the small businesses in Calder County.",
+  "context": "A business lobby's advert",
+  "kind": "technique",
+  "technique": "fake or irrelevant expert",
+  "tell": "Retired heart surgeon Dr. Victor Hale warns",
+  "why": "A heart surgeon is not an economist. The 'Dr.' title makes a prediction about wages and businesses, outside his field, sound authoritative."
+ },
+ {
+  "id": "t064",
+  "text": "Brenton's own chief auditor, Mark Eston, testified that the tram project now costs $310m, triple the original $104m estimate, citing the audited accounts in Appendix C.",
+  "context": "A taxpayers' group bulletin",
+  "kind": "fair",
+  "technique": "fake or irrelevant expert",
+  "tell": "citing the audited accounts in Appendix C",
+  "why": "The city's auditor is speaking about his own job. He gives the original estimate for comparison and points to the audited documents."
+ },
+ {
+  "id": "t065",
+  "text": "Scientists say Zestrel gummies boost your immune system by 40%. Try a month's supply today.",
+  "context": "A supplement advert",
+  "kind": "technique",
+  "technique": "fake or irrelevant expert",
+  "tell": "Scientists say",
+  "why": "No scientist, study or institution is named, so nobody can check the 40% claim."
+ },
+ {
+  "id": "t066",
+  "text": "Tax lawyer Ellen Ward, who has handled payroll compliance for small firms for 15 years, says the new quarterly filing rule will cost a 10-person business about 30 hours a year, using the regulator's own impact estimate.",
+  "context": "A small-business association newsletter",
+  "kind": "fair",
+  "technique": "fake or irrelevant expert",
+  "tell": "using the regulator's own impact estimate",
+  "why": "A payroll-compliance lawyer is talking about compliance costs, and her figure comes from the regulator's own published estimate."
+ },
+ {
+  "id": "t067",
+  "text": "Gut-health guru Marco Reyes, followed by two million people, says cooking with butter heals your gut lining in a week.",
+  "context": "A social media post",
+  "kind": "technique",
+  "technique": "fake or irrelevant expert",
+  "tell": "Gut-health guru Marco Reyes, followed by two million people",
+  "why": "A self-styled guru with a big following isn't a qualified gastroenterologist or dietitian. Popularity is offered in place of evidence."
+ },
+ {
+  "id": "t068",
+  "text": "Seismologist Dr. Hana Ito of the Pellmore Geological Survey says last night's tremor measured magnitude 3.1, recorded by 14 of the survey's stations.",
+  "context": "A local radio news bulletin",
+  "kind": "fair",
+  "technique": "fake or irrelevant expert",
+  "tell": "recorded by 14 of the survey's stations",
+  "why": "A seismologist at the geological survey reports on an earthquake, which is exactly her field, and says how it was measured."
+ },
+ {
+  "id": "t069",
+  "text": "Olympic sprinter Dana Holt trusts Hushwire to keep her data private. Shouldn't you?",
+  "context": "A VPN advert",
+  "kind": "technique",
+  "technique": "fake or irrelevant expert",
+  "tell": "Olympic sprinter Dana Holt trusts Hushwire",
+  "why": "A sprinter has no expertise in cybersecurity. Her sporting fame says nothing about whether the service protects anyone's data."
+ },
+ {
+  "id": "t070",
+  "text": "Our vet, Dr. Ruth Calloway, a board-certified veterinary dermatologist, says Biscuit's itching is a food allergy. An eight-week elimination diet confirmed it.",
+  "context": "A pet owner's blog",
+  "kind": "fair",
+  "technique": "fake or irrelevant expert",
+  "tell": "a board-certified veterinary dermatologist",
+  "why": "A specialist in animal skin conditions diagnoses an itchy dog, and the diagnosis rests on a standard test."
+ },
+ {
+  "id": "t071",
+  "text": "A dog trainer with 20 years' experience swears by Pawzen herbal drops: kennel cough gone in three days.",
+  "context": "A pet shop shelf label",
+  "kind": "technique",
+  "technique": "fake or irrelevant expert",
+  "tell": "A dog trainer with 20 years' experience swears by",
+  "why": "Training dogs isn't veterinary medicine. Treating kennel cough is a question for a vet, and no trial is cited."
+ },
+ {
+  "id": "t072",
+  "text": "Food microbiologist Dr. Owen Hart, whose lab ran the tests, says the recalled Brookfield cheese was safe after all: no listeria in any of 40 samples.",
+  "context": "A food safety news report",
+  "kind": "fair",
+  "technique": "fake or irrelevant expert",
+  "tell": "whose lab ran the tests",
+  "why": "A microbiologist reports his own lab's bacteria results, which is his field, and says how many samples were tested."
+ },
+ {
+  "id": "t073",
+  "text": "Recommended by sleep experts, the Drowsbury mattress is the last one you'll ever buy.",
+  "context": "A mattress advert",
+  "kind": "technique",
+  "technique": "fake or irrelevant expert",
+  "tell": "Recommended by sleep experts",
+  "why": "Which experts? None are named, and no qualifications or tests are given, so the endorsement can't be checked."
+ },
+ {
+  "id": "t074",
+  "text": "Security researcher Mei Lund, who discovered the flaw and published her proof-of-concept code, says Hallcam doorbells leak home Wi-Fi passwords.",
+  "context": "A tech news headline",
+  "kind": "fair",
+  "technique": "fake or irrelevant expert",
+  "tell": "who discovered the flaw and published her proof-of-concept code",
+  "why": "A security researcher is describing her own discovery, and her published code lets others check it."
+ },
+ {
+  "id": "t075",
+  "text": "This week: tech investor Saul Brenner explains why the asteroid theory of dinosaur extinction is outdated science.",
+  "context": "A podcast blurb",
+  "kind": "technique",
+  "technique": "fake or irrelevant expert",
+  "tell": "tech investor Saul Brenner explains",
+  "why": "Investing in tech gives no expertise in palaeontology or geology. His wealth and profile stand in for evidence."
+ },
+ {
+  "id": "t076",
+  "text": "Club physio Dr. Ana Fuller says Monday's MRI shows a grade 2 hamstring tear, so Okoro will miss about six weeks.",
+  "context": "A club injury update",
+  "kind": "fair",
+  "technique": "fake or irrelevant expert",
+  "tell": "Monday's MRI shows a grade 2 hamstring tear",
+  "why": "The club's medical lead reports on a scan she has seen, which is squarely within her field."
+ },
+ {
+  "id": "t077",
+  "text": "Productivity guru Jax Holloway, author of 'Hustle Harder', says open-plan offices boost output by 50%. We're knocking down the walls in January.",
+  "context": "A company memo",
+  "kind": "technique",
+  "technique": "fake or irrelevant expert",
+  "tell": "Productivity guru Jax Holloway, author of 'Hustle Harder', says",
+  "why": "A bestselling self-help author isn't a workplace researcher, and no study is given for the 50% figure."
+ },
+ {
+  "id": "t078",
+  "text": "Chartered surveyor Liam Brook, who inspected the flat, says the damp is rising through a bridged damp-proof course. His report lists moisture readings room by room.",
+  "context": "A letter from a tenant's solicitor",
+  "kind": "fair",
+  "technique": "fake or irrelevant expert",
+  "tell": "His report lists moisture readings room by room",
+  "why": "A qualified surveyor who inspected the flat gives a diagnosis in his own field and backs it with recorded measurements."
+ },
+ {
+  "id": "t079",
+  "text": "Travel influencer Jade Moss says AltiCalm altitude pills are totally safe to take with blood-pressure medication.",
+  "context": "A sponsored social media post",
+  "kind": "technique",
+  "technique": "fake or irrelevant expert",
+  "tell": "Travel influencer Jade Moss says",
+  "why": "Drug interactions are a question for a doctor or pharmacist. A travel influencer has no qualification to judge whether medicines are safe together."
+ },
+ {
+  "id": "t080",
+  "text": "Travel-medicine specialist Dr. Ken Oduya says the Tallon Highlands trip needs a hepatitis A jab, in line with the health ministry's guidance for the region.",
+  "context": "A tour company's pre-departure email",
+  "kind": "fair",
+  "technique": "fake or irrelevant expert",
+  "tell": "Travel-medicine specialist Dr. Ken Oduya",
+  "why": "A doctor who specialises in travel health gives vaccine advice, and it matches official government guidance."
+ },
+ {
+  "id": "t081",
+  "text": "Councillor Dana Ferrow wants a bike lane on Holt Street. Of course she does: she's spent her whole career in a university office and has never done a day of deliveries.",
+  "context": "A comment under a local news article",
+  "kind": "technique",
+  "technique": "attack on the person",
+  "tell": "spent her whole career in a university office",
+  "why": "It mocks her career and never asks whether the Holt Street lane would actually hurt deliveries. Her background doesn't make the plan right or wrong."
+ },
+ {
+  "id": "t082",
+  "text": "Councillor Brent Hollis wants to chair the ethics committee. In 2024 the county auditor found he billed $8,400 in meals that his own calendar shows never happened.",
+  "context": "An op-ed in the local paper",
+  "kind": "fair",
+  "technique": "attack on the person",
+  "tell": "the county auditor found he billed $8,400 in meals",
+  "why": "His documented misuse of expenses is exactly what an ethics chair has to police, and the source is a named auditor's finding."
+ },
+ {
+  "id": "t083",
+  "text": "Don't lose sleep over the letter complaining about the new recycling sort rules. It's from Ted at number 14, who's been feuding with half the street for years.",
+  "context": "A residents' association newsletter",
+  "kind": "technique",
+  "technique": "attack on the person",
+  "tell": "who's been feuding with half the street for years",
+  "why": "It brushes off the complaint by pointing to the writer's fights with neighbours. It never says what, if anything, is wrong with the recycling rules."
+ },
+ {
+  "id": "t084",
+  "text": "Principal Joan Avelard wants to run the district's exam office. At her last school, the exam board voided 40 results in 2025 after papers were opened early under her supervision.",
+  "context": "A letter to the editor",
+  "kind": "fair",
+  "technique": "attack on the person",
+  "tell": "the exam board voided 40 results in 2025",
+  "why": "A past exam breach is directly relevant to a job running exams, and the record comes from a named exam board decision."
+ },
+ {
+  "id": "t085",
+  "text": "This week we pick apart Coach Lena Varsk's case for a back four. Spoiler: it's hard to take tactics seriously from someone who never played above amateur level.",
+  "context": "A sports podcast blurb",
+  "kind": "technique",
+  "technique": "attack on the person",
+  "tell": "never played above amateur level",
+  "why": "Her playing career doesn't decide whether a back four suits the team. The blurb talks about her CV in place of her argument."
+ },
+ {
+  "id": "t086",
+  "text": "Owen Pryce's free seminar promises 'safe retirement income.' The financial regulator barred him for five years in 2019 for selling unsuitable high-risk bonds to retirees.",
+  "context": "A consumer advice newsletter",
+  "kind": "fair",
+  "technique": "attack on the person",
+  "tell": "barred him for five years in 2019",
+  "why": "He was banned for mis-selling to retirees, and he's now pitching retirement products to retirees. That documented record is the point at issue."
+ },
+ {
+  "id": "t087",
+  "text": "The critic who panned our sourdough is a twenty-something blogger with a ring light. Enough said.",
+  "context": "A bakery's reply on social media",
+  "kind": "technique",
+  "technique": "attack on the person",
+  "tell": "twenty-something blogger with a ring light. Enough said.",
+  "why": "It sneers at the critic's age and setup and answers nothing she actually said about the bread."
+ },
+ {
+  "id": "t088",
+  "text": "Before backing Ray Dunmore as league integrity officer, remember the league fined him in 2023 for fielding an ineligible player, and he admitted it in the hearing transcript.",
+  "context": "A post on a fan forum",
+  "kind": "fair",
+  "technique": "attack on the person",
+  "tell": "the league fined him in 2023 for fielding an ineligible player",
+  "why": "He broke the rules, it's documented, and he admitted it on record. That bears directly on a job enforcing those rules."
+ },
+ {
+  "id": "t089",
+  "text": "Dr. Imani Okonta claims the Pelicast app leaks users' locations. Worth noting she only started digging after Pelicast turned down her job application.",
+  "context": "A company press statement",
+  "kind": "technique",
+  "technique": "attack on the person",
+  "tell": "after Pelicast turned down her job application",
+  "why": "It questions her motives instead of answering her findings. Whether the app leaks location data can be tested, and her job history doesn't change the result."
+ },
+ {
+  "id": "t090",
+  "text": "Chef Paolo Castrell is selling his new place on 'spotless kitchens.' His last restaurant scored 58 out of 100 on the city's published health inspection in June.",
+  "context": "A food blog",
+  "kind": "fair",
+  "technique": "attack on the person",
+  "tell": "scored 58 out of 100 on the city's published health inspection",
+  "why": "He made cleanliness his selling point, so his last kitchen's public inspection score is exactly the thing at issue."
+ },
+ {
+  "id": "t091",
+  "text": "The nurse pushing for later school start times can't even get her own kids to the gate on time, from what I hear.",
+  "context": "A comment on a parents' forum",
+  "kind": "technique",
+  "technique": "attack on the person",
+  "tell": "can't even get her own kids to the gate on time",
+  "why": "Gossip about her family's punctuality says nothing about the sleep evidence behind later start times."
+ },
+ {
+  "id": "t092",
+  "text": "Nimbrel's new CEO promises to 'put user privacy first.' The 2023 settlement at her last firm names her as approving a six-month delay in telling users about a breach.",
+  "context": "A tech industry newsletter",
+  "kind": "fair",
+  "technique": "attack on the person",
+  "tell": "names her as approving a six-month delay",
+  "why": "Her documented part in delaying news of a breach directly tests her privacy promise, and the source is a named legal settlement."
+ },
+ {
+  "id": "t093",
+  "text": "Residents: please disregard Josh Amari's letter about the broken lift. Mr. Amari has been late on his rent before.",
+  "context": "A landlord's notice to tenants",
+  "kind": "technique",
+  "technique": "attack on the person",
+  "tell": "has been late on his rent before",
+  "why": "Whether he paid rent late has nothing to do with whether the lift works. The notice smears the messenger to dodge the repair."
+ },
+ {
+  "id": "t094",
+  "text": "I can't back Dev Kalwani for health-and-safety lead. The incident log shows his site skipped the required monthly fire drills for all of last year.",
+  "context": "A staff email about a nomination",
+  "kind": "fair",
+  "technique": "attack on the person",
+  "tell": "skipped the required monthly fire drills for all of last year",
+  "why": "Missed safety drills, recorded in the site's own log, are exactly the record that matters for a safety role."
+ },
+ {
+  "id": "t095",
+  "text": "Ignore the one-star reviews of the Kettlewick kettle. They're from the kind of people who complain about everything.",
+  "context": "A product review",
+  "kind": "technique",
+  "technique": "attack on the person",
+  "tell": "the kind of people who complain about everything",
+  "why": "It writes off other reviewers as people who always complain and ignores the problems they reported with the kettle."
+ },
+ {
+  "id": "t096",
+  "text": "Wellness influencer Skye Merrow now calls her sleep gummies 'clinically proven.' Last year the consumer regulator ordered her to withdraw the same claim from an earlier product.",
+  "context": "A health watchdog's blog",
+  "kind": "fair",
+  "technique": "attack on the person",
+  "tell": "ordered her to withdraw the same claim from an earlier product",
+  "why": "It points to her documented history of making this exact unsupported claim, citing a regulator's order. Her looks and personality never come up."
+ },
+ {
+  "id": "t097",
+  "text": "Before we vote on Marcus's four-day-week proposal, I'd just remind everyone that he's always the first one out the door at five.",
+  "context": "A manager's email to the team",
+  "kind": "technique",
+  "technique": "attack on the person",
+  "tell": "always the first one out the door at five",
+  "why": "It hints that Marcus is lazy instead of weighing what his plan would cost and gain. When he leaves work says nothing about whether a four-day week works."
+ },
+ {
+  "id": "t098",
+  "text": "Rod Whitcombe says he'll protect the Marlow River. His fertiliser company paid a $300,000 state penalty in 2022 for runoff into that very river.",
+  "context": "A campaign mailer",
+  "kind": "fair",
+  "technique": "attack on the person",
+  "tell": "paid a $300,000 state penalty in 2022 for runoff",
+  "why": "His firm was penalised for polluting the same river he now promises to protect. That documented conduct is exactly what's at stake."
+ },
+ {
+  "id": "t099",
+  "text": "Why would anyone listen to Dr. Graham Tull on reactor safety? Look at him: a man who still thinks a bow tie counts as a personality.",
+  "context": "A social media post",
+  "kind": "technique",
+  "technique": "attack on the person",
+  "tell": "still thinks a bow tie counts as a personality",
+  "why": "It mocks how he looks and dresses and never deals with anything he said about reactor safety."
+ },
+ {
+  "id": "t100",
+  "text": "The transit board chair wants another $40 million for the Northline. She also ran the Southline, which opened three years late and $90 million over budget, per the board's final report.",
+  "context": "From a city council speech",
+  "kind": "fair",
+  "technique": "attack on the person",
+  "tell": "three years late and $90 million over budget",
+  "why": "She's asking for money for a new project, so her record on the last one is the issue. The source is the board's own report."
+ },
+ {
+  "id": "t101",
+  "text": "Governor Hask's tax cuts are paying for themselves: state revenue jumped 9% in April alone.",
+  "context": "A campaign social media post",
+  "kind": "technique",
+  "technique": "cherry-picking",
+  "tell": "jumped 9% in April alone",
+  "why": "One month says little, especially April, when taxes come due. Without the full-year total or last April's figure, the claim can't be checked."
+ },
+ {
+  "id": "t102",
+  "text": "Flu admissions at Northgate Hospital hit 212 this January, against an average of 140 for January over the previous five years.",
+  "context": "A local news report",
+  "kind": "fair",
+  "technique": "cherry-picking",
+  "tell": "an average of 140 for January over the previous five years",
+  "why": "It compares with the same month across five years, so readers can see the rise is real and not just the usual winter peak."
+ },
+ {
+  "id": "t103",
+  "text": "Climate scientists, explain this: Brennick County just had its coldest February in 30 years.",
+  "context": "A social media post",
+  "kind": "technique",
+  "technique": "cherry-picking",
+  "tell": "coldest February in 30 years",
+  "why": "It picks one cold month in one county and ignores decades of temperature records. Climate is about long-term trends, not single months."
+ },
+ {
+  "id": "t104",
+  "text": "Since 2015, Dalmore's top 1% saw incomes rise 38% after inflation, while the median household's rose 4%, per the state revenue office.",
+  "context": "An op-ed",
+  "kind": "fair",
+  "technique": "cherry-picking",
+  "tell": "while the median household's rose 4%",
+  "why": "It sets the headline figure next to the median household's, for the same period and from a named source, so the gap can be judged."
+ },
+ {
+  "id": "t105",
+  "text": "Rent caps work. In the first year after Linden City capped rents, tenants on the Elm Street block saved an average of $2,100.",
+  "context": "A housing campaign flyer",
+  "kind": "technique",
+  "technique": "cherry-picking",
+  "tell": "tenants on the Elm Street block",
+  "why": "One block is offered as proof for a whole city. We aren't told how rents, housing supply or other neighbourhoods did."
+ },
+ {
+  "id": "t106",
+  "text": "Since the Ashby plant expanded in 2021, nitrate levels in the Tarn River have averaged 9.1 mg/L, against 3.2 mg/L in the five years before, per monthly state testing.",
+  "context": "An environmental group's newsletter",
+  "kind": "fair",
+  "technique": "cherry-picking",
+  "tell": "against 3.2 mg/L in the five years before",
+  "why": "It uses years of monthly state readings with a before-and-after baseline, not one bad sample."
+ },
+ {
+  "id": "t107",
+  "text": "At our best-performing clinic, patients drinking Calmora tea saw their blood pressure fall by 12 points.",
+  "context": "An advertisement",
+  "kind": "technique",
+  "technique": "cherry-picking",
+  "tell": "At our best-performing clinic",
+  "why": "It picks the best result from several clinics, hides the rest, and gives no comparison group."
+ },
+ {
+  "id": "t108",
+  "text": "Under Mayor Ostrander, city payroll grew 22% from 2020 to 2025 while the population grew 3%, according to the city's own annual reports.",
+  "context": "A campaign flyer",
+  "kind": "fair",
+  "technique": "cherry-picking",
+  "tell": "while the population grew 3%",
+  "why": "It covers the whole period and compares payroll growth with population growth, using the city's own reports, so the number has context."
+ },
+ {
+  "id": "t109",
+  "text": "Renew Joel Ambrin's contract now. Four goals in his last two games — the man is unstoppable!",
+  "context": "A fan site post",
+  "kind": "technique",
+  "technique": "cherry-picking",
+  "tell": "Four goals in his last two games",
+  "why": "Two games are a tiny slice of a season. Without his full-season record, a hot streak tells us little about his real form."
+ },
+ {
+  "id": "t110",
+  "text": "Average home attendance this season is 8,200, up from 6,900 last season and 7,100 the season before.",
+  "context": "A football club newsletter",
+  "kind": "fair",
+  "technique": "cherry-picking",
+  "tell": "up from 6,900 last season and 7,100 the season before",
+  "why": "It gives a full-season average with two earlier seasons to compare, not one sold-out match."
+ },
+ {
+  "id": "t111",
+  "text": "Don't believe the old complaints — the Driftly app is rated 4.9 stars over the last 30 days!",
+  "context": "An app promotion",
+  "kind": "technique",
+  "technique": "cherry-picking",
+  "tell": "rated 4.9 stars over the last 30 days",
+  "why": "It picks a short, flattering time window and hides both the overall rating and what the old complaints were about."
+ },
+ {
+  "id": "t112",
+  "text": "The Tessel X5 averaged 19 hours of mixed use across five reviewers' phones, against 15 hours for last year's model on the same test.",
+  "context": "A product review",
+  "kind": "fair",
+  "technique": "cherry-picking",
+  "tell": "against 15 hours for last year's model on the same test",
+  "why": "It's an average of everyday use across several phones, compared with the old model on the same test. That isn't a best-case lab number."
+ },
+ {
+  "id": "t113",
+  "text": "Our Crunchwell oat bars have 40% less sugar than the leading brand's double-chocolate bar!",
+  "context": "Text on a snack wrapper",
+  "kind": "technique",
+  "technique": "cherry-picking",
+  "tell": "the leading brand's double-chocolate bar",
+  "why": "It compares itself with the sweetest product it could find instead of typical oat bars, so the 40% sounds better than it is."
+ },
+ {
+  "id": "t114",
+  "text": "After the menu change, school lunch uptake at Corran Primary rose from 52% to 68% of pupils; at the district's other primaries it went from 54% to 55%.",
+  "context": "A school newsletter",
+  "kind": "fair",
+  "technique": "cherry-picking",
+  "tell": "at the district's other primaries it went from 54% to 55%",
+  "why": "It gives a before-and-after figure and compares it with similar schools, which shows the rise wasn't just a district-wide trend."
+ },
+ {
+  "id": "t115",
+  "text": "Pinecrest Academy: 100% of students who sat the advanced maths exam passed!",
+  "context": "A school brochure",
+  "kind": "technique",
+  "technique": "cherry-picking",
+  "tell": "100% of students who sat the advanced maths exam",
+  "why": "It doesn't say how many students were allowed to sit the exam. A perfect score among a hand-picked few can hide weak results overall."
+ },
+ {
+  "id": "t116",
+  "text": "Library loans at Fenwick Middle rose from 3,100 to 4,900 in the year after the reading scheme began, while enrolment stayed at about 600.",
+  "context": "A school board report",
+  "kind": "fair",
+  "technique": "cherry-picking",
+  "tell": "while enrolment stayed at about 600",
+  "why": "It gives the starting figure and shows the number of pupils didn't change, so the rise can't be explained by a bigger school."
+ },
+ {
+  "id": "t117",
+  "text": "Since the bus lane opened, the Route 7 morning express has been on time 98% of days.",
+  "context": "A council press release",
+  "kind": "technique",
+  "technique": "cherry-picking",
+  "tell": "the Route 7 morning express",
+  "why": "It shows one service at its best time of day. It says nothing about other routes or how Route 7 did before the lane."
+ },
+ {
+  "id": "t118",
+  "text": "Ridership on the Quay ferry rose 18% this year, while total city transit ridership rose 2%.",
+  "context": "A transit authority update",
+  "kind": "fair",
+  "technique": "cherry-picking",
+  "tell": "while total city transit ridership rose 2%",
+  "why": "Comparing with the whole network shows the ferry's growth isn't just the general trend."
+ },
+ {
+  "id": "t119",
+  "text": "Morale is thriving: 92% of the leadership team rated the office move positively in our survey.",
+  "context": "A company memo",
+  "kind": "technique",
+  "technique": "cherry-picking",
+  "tell": "92% of the leadership team",
+  "why": "It reports only the managers, who made the decision and are most likely to like it, and leaves out everyone else's views."
+ },
+ {
+  "id": "t120",
+  "text": "Since we moved to flexible hours in 2024, staff turnover has fallen to 9% a year, from 16% over the three years before, per HR's exit records.",
+  "context": "An HR memo",
+  "kind": "fair",
+  "technique": "cherry-picking",
+  "tell": "from 16% over the three years before",
+  "why": "It covers all staff, gives a three-year baseline and names where the data comes from."
+ },
+ {
+  "id": "t121",
+  "text": "First it's a 'trial' bike lane on Harlow Street. Then it's parking bans, then car-free weekends, and before long you'll need a permit to drive to your own front door.",
+  "context": "A flyer pushed through letterboxes",
+  "kind": "technique",
+  "technique": "slippery slope",
+  "tell": "before long you'll need a permit to drive",
+  "why": "Jumps from one trial bike lane to driving permits through steps with no evidence that any of them would follow."
+ },
+ {
+  "id": "t122",
+  "text": "When Ashby raised its parking charges by 40% in 2023, the town's own audit found weekday shop takings fell 12% within a year. Kelvale is copying that rise, so its high street should brace for a similar dip.",
+  "context": "A chamber of commerce bulletin",
+  "kind": "fair",
+  "technique": "slippery slope",
+  "tell": "the town's own audit found weekday shop takings fell 12%",
+  "why": "Uses an audited precedent from a near-identical policy and predicts a similar, modest dip, not ruin."
+ },
+ {
+  "id": "t123",
+  "text": "Let one academy open in Hollin and the district's money walks out with it. Next come closures, then layoffs, and within ten years there won't be a public school left in town.",
+  "context": "From a local op-ed",
+  "kind": "technique",
+  "technique": "slippery slope",
+  "tell": "within ten years there won't be a public school left",
+  "why": "One new academy is said to lead inevitably to the end of all public schools, with no figures or precedent for any step."
+ },
+ {
+  "id": "t124",
+  "text": "After Corran Logistics brought in app-based rotas in 2022, its own records show shift notice shrank from 14 days to 3. The same app arrives here in March, so we're asking for a written notice guarantee first.",
+  "context": "A union bulletin",
+  "kind": "fair",
+  "technique": "slippery slope",
+  "tell": "its own records show shift notice shrank from 14 days to 3",
+  "why": "The predicted effect is backed by records from a real precedent, and the response asked for is proportionate."
+ },
+ {
+  "id": "t125",
+  "text": "Approve one test well in Cardle Valley and the drillers will never leave. The river goes next, then the farms, then the whole valley.",
+  "context": "A protest flyer",
+  "kind": "technique",
+  "technique": "slippery slope",
+  "tell": "The river goes next, then the farms, then the whole valley",
+  "why": "A single test well is chained to losing the entire valley, and no evidence is given for any link in the chain."
+ },
+ {
+  "id": "t126",
+  "text": "Kestro 5.0 ships in June and, per the developer's changelog, requires the security module added in 4.2. If your phone can't install 4.2 now, it won't run 5.0 either.",
+  "context": "An office IT newsletter",
+  "kind": "fair",
+  "technique": "slippery slope",
+  "tell": "per the developer's changelog, requires the security module added in 4.2",
+  "why": "Each link in the chain comes from the developer's published changelog, and the conclusion is narrow and checkable."
+ },
+ {
+  "id": "t127",
+  "text": "A smartwatch at nine becomes a phone at ten, social media at eleven, and by thirteen you won't recognise your own child. Hold the line on the watch.",
+  "context": "A comment on a parenting forum",
+  "kind": "technique",
+  "technique": "slippery slope",
+  "tell": "by thirteen you won't recognise your own child",
+  "why": "Presents a fixed, unavoidable path from one gadget to a changed child, with nothing showing that each step causes the next."
+ },
+ {
+  "id": "t128",
+  "text": "Untreated gum inflammation can progress to periodontitis, which tripled the rate of tooth loss in the Northfield Dental Institute's 10-year study of 4,000 adults. A cleaning now is the cheap end of that chain.",
+  "context": "A poster in a dental clinic",
+  "kind": "fair",
+  "technique": "slippery slope",
+  "tell": "Northfield Dental Institute's 10-year study of 4,000 adults",
+  "why": "A large long-term study backs the progression, and the advice, a routine cleaning, matches the risk."
+ },
+ {
+  "id": "t129",
+  "text": "Swap one family dinner for takeaway and it becomes a habit. Soon you're ordering every night, and your kids grow up never having learned to cook.",
+  "context": "From a food blog",
+  "kind": "technique",
+  "technique": "slippery slope",
+  "tell": "your kids grow up never having learned to cook",
+  "why": "One takeaway meal is treated as the start of an unstoppable slide, and nothing supports the claim that each step follows."
+ },
+ {
+  "id": "t130",
+  "text": "When Kelp Bay's otters declined in the 1990s, fishery records show sea urchins boomed and the kelp beds halved within five years. Our otter count is falling now, so a kelp survey this summer is money well spent.",
+  "context": "A conservation group newsletter",
+  "kind": "fair",
+  "technique": "slippery slope",
+  "tell": "fishery records show sea urchins boomed and the kelp beds halved",
+  "why": "Records from an earlier case back the chain, and the conclusion is only that a survey is worth doing."
+ },
+ {
+  "id": "t131",
+  "text": "This week: why putting even one streaming subscription on a credit card starts you on the road to a revolving balance, a second card, and eventually bankruptcy.",
+  "context": "A personal finance podcast blurb",
+  "kind": "technique",
+  "technique": "slippery slope",
+  "tell": "a second card, and eventually bankruptcy",
+  "why": "A small monthly charge is linked to bankruptcy through a series of steps that are simply asserted, not shown."
+ },
+ {
+  "id": "t132",
+  "text": "Our flour supplier raised prices 22% in July. The last time that happened, in 2022, we had to raise loaf prices within two months, so expect bread to go up about 30p this autumn.",
+  "context": "A bakery's customer newsletter",
+  "kind": "fair",
+  "technique": "slippery slope",
+  "tell": "The last time that happened, in 2022",
+  "why": "The forecast rests on the bakery's own past experience, and it predicts a specific, small price rise."
+ },
+ {
+  "id": "t133",
+  "text": "Let him on the sofa once and he'll decide he runs the house. Next he ignores commands, then he growls at guests, and you end up rehoming him. Book our 6-week course today.",
+  "context": "An ad for a dog-training course",
+  "kind": "technique",
+  "technique": "slippery slope",
+  "tell": "Let him on the sofa once",
+  "why": "One time on the sofa is said to lead inevitably to rehoming the dog. The chain is invented to sell a course."
+ },
+ {
+  "id": "t134",
+  "text": "When Grafton cut its off-lead hours to mornings only, the park's logs showed morning crowds doubled and reported dog scuffles rose from 4 to 11 a month. Westmere is copying the plan, so expect busy mornings.",
+  "context": "A post in a local dog walkers' group",
+  "kind": "fair",
+  "technique": "slippery slope",
+  "tell": "the park's logs showed morning crowds doubled",
+  "why": "Logged figures from the same policy elsewhere back each step, and the warning is just about busier mornings."
+ },
+ {
+  "id": "t135",
+  "text": "Allow video review for offside and it'll be every throw-in next, then every tackle. Give it five years and matches will last four hours and the stands will be empty.",
+  "context": "From a sports column",
+  "kind": "technique",
+  "technique": "slippery slope",
+  "tell": "Give it five years and matches will last four hours",
+  "why": "A narrow rule change is pushed through unsupported steps to an extreme result: four-hour matches and empty stadiums."
+ },
+ {
+  "id": "t136",
+  "text": "Gravelton sold its academy in 2018; its accounts show homegrown first-team players fell from six to none by 2023, and transfer spending rose £2m a year. Sell ours and we should expect the same bill.",
+  "context": "A supporters' trust statement",
+  "kind": "fair",
+  "technique": "slippery slope",
+  "tell": "its accounts show homegrown first-team players fell from six to none",
+  "why": "A documented precedent from club accounts supports the chain, and the conclusion is a measured cost, not collapse."
+ },
+ {
+  "id": "t137",
+  "text": "Once the museum allows phone photos, people will start touching the paintings, the guards will give up, and in a decade there'll be nothing left worth seeing.",
+  "context": "A comment under a museum news story",
+  "kind": "technique",
+  "technique": "slippery slope",
+  "tell": "in a decade there'll be nothing left worth seeing",
+  "why": "Allowing photos is chained to the collection being destroyed, with no evidence that one thing leads to the next."
+ },
+ {
+  "id": "t138",
+  "text": "After Larkfield Theatre lost its council grant in 2021, it cut youth workshops, and its annual reports show youth ticket sales fell by a third by 2023. Mossgate's grant is now under review, and the same chain could play out here.",
+  "context": "A theatre's members' newsletter",
+  "kind": "fair",
+  "technique": "slippery slope",
+  "tell": "its annual reports show youth ticket sales fell by a third",
+  "why": "Every step is shown in a comparable theatre's published reports, and the claim says 'could', not 'will'."
+ },
+ {
+  "id": "t139",
+  "text": "One granny flat on Pell Road is all a developer needs. Tower blocks will follow, and Pell Road will be unrecognisable within ten years.",
+  "context": "A residents' association letter",
+  "kind": "technique",
+  "technique": "slippery slope",
+  "tell": "One granny flat on Pell Road is all a developer needs",
+  "why": "Claims a single small extension will inevitably bring tower blocks, without any planning rule or precedent to show how."
+ },
+ {
+  "id": "t140",
+  "text": "Skip the autumn gutter clean and rainwater backs up under the roof edge; the Home Surveyors' Guild's 2024 claims data names that as the top cause of fascia rot, a £1,200 repair. A £90 clean is the cheaper option.",
+  "context": "A home insurer's newsletter",
+  "kind": "fair",
+  "technique": "slippery slope",
+  "tell": "Home Surveyors' Guild's 2024 claims data names that as the top cause",
+  "why": "Claims data supports the chain from blocked gutters to rot, and the conclusion is a simple cost comparison."
+ },
+ {
+  "id": "t141",
+  "text": "Ever wonder why every rent cap bill dies quietly in committee? The landlord lobby and their friends in the statehouse settle it over private dinners, and they make sure you never hear about it.",
+  "context": "A social media post",
+  "kind": "technique",
+  "technique": "conspiracy framing",
+  "tell": "they make sure you never hear about it",
+  "why": "Claims secret dinners decide the outcome but offers no records. The lack of evidence is explained away as part of the plot."
+ },
+ {
+  "id": "t142",
+  "text": "The Competition Board has fined four Fenmoor estate agents a combined £2.1 million after finding they agreed in a group chat to keep sales commission at 3%. The ruling quotes the messages.",
+  "context": "A local news report",
+  "kind": "fair",
+  "technique": "conspiracy framing",
+  "tell": "The ruling quotes the messages",
+  "why": "The coordination was established by a regulator's ruling that quotes the actual messages and imposes fines."
+ },
+ {
+  "id": "t143",
+  "text": "Every school in the county switched to the same reading curriculum in the same year. Someone high up decided what our kids would think, and funny how no minutes of those meetings exist.",
+  "context": "A post in a parents' group",
+  "kind": "technique",
+  "technique": "conspiracy framing",
+  "tell": "funny how no minutes of those meetings exist",
+  "why": "Treats a shared decision as a hidden plot, and the missing minutes are counted as proof instead of a gap in the evidence."
+ },
+ {
+  "id": "t144",
+  "text": "Emails released under a public records request show the state's new home-baking licence rules were drafted with the two largest catering firms on the panel. No home bakers were invited.",
+  "context": "A small-business association newsletter",
+  "kind": "fair",
+  "technique": "conspiracy framing",
+  "tell": "Emails released under a public records request",
+  "why": "The insider influence is documented in released emails, so readers can check the claim for themselves."
+ },
+ {
+  "id": "t145",
+  "text": "Why hasn't your doctor mentioned the Ostrom cleanse? Because the big clinic chains would lose billions, and they've quietly agreed to keep it out of the journals.",
+  "context": "An ad for a health supplement",
+  "kind": "technique",
+  "technique": "conspiracy framing",
+  "tell": "they've quietly agreed to keep it out of the journals",
+  "why": "Explains the lack of evidence for a product by claiming a secret agreement among clinics, with nothing to show that one exists."
+ },
+ {
+  "id": "t146",
+  "text": "Halden University's investigation, published in June, found that four 'independent' studies of the Recallix memory supplement were drafted by writers on the manufacturer's payroll. All four papers have been retracted.",
+  "context": "A science news story",
+  "kind": "fair",
+  "technique": "conspiracy framing",
+  "tell": "All four papers have been retracted",
+  "why": "A published investigation and formal retractions confirm the hidden industry involvement."
+ },
+ {
+  "id": "t147",
+  "text": "Ever notice Findle search buries independent reviews? The big platforms have a private arrangement to steer you to their partners, and anyone who digs too deep gets quietly de-ranked.",
+  "context": "A blog post",
+  "kind": "technique",
+  "technique": "conspiracy framing",
+  "tell": "anyone who digs too deep gets quietly de-ranked",
+  "why": "Claims a hidden deal between platforms with no documents, and says anyone who investigates is silenced, so it can't be checked."
+ },
+ {
+  "id": "t148",
+  "text": "Bought paint lately? The Competition Board fined Brightcoat and Huelane £18 million last week after finding they agreed price rises in a shared spreadsheet from 2021 to 2023.",
+  "context": "A consumer magazine article",
+  "kind": "fair",
+  "technique": "conspiracy framing",
+  "tell": "agreed price rises in a shared spreadsheet",
+  "why": "The price-fixing is a formal finding backed by a named document, with dates and a fine."
+ },
+ {
+  "id": "t149",
+  "text": "Funny how every supermarket 'ran out' of oat flour the same week. The big grocers obviously agreed to squeeze supply before a price rise; they just don't put that kind of thing in writing.",
+  "context": "A comment under a news article",
+  "kind": "technique",
+  "technique": "conspiracy framing",
+  "tell": "they just don't put that kind of thing in writing",
+  "why": "A shared shortage is read as a secret pact, and the missing evidence is explained away in advance."
+ },
+ {
+  "id": "t150",
+  "text": "Telecom Authority ruling lists the dates the three mobile networks' bosses met to drop unlimited data plans together; each fined £9 million.",
+  "context": "A tech news headline",
+  "kind": "fair",
+  "technique": "conspiracy framing",
+  "tell": "ruling lists the dates the three mobile networks' bosses met",
+  "why": "The coordination rests on an official ruling that records specific meetings and penalties."
+ },
+ {
+  "id": "t151",
+  "text": "Rovers' relegation wasn't bad luck. League bosses wanted a bigger-market club up top, and the refereeing in the last ten games tells you all you need to know.",
+  "context": "A fan podcast blurb",
+  "kind": "technique",
+  "technique": "conspiracy framing",
+  "tell": "League bosses wanted a bigger-market club up top",
+  "why": "Claims league bosses plotted the relegation and offers only disputed refereeing calls as proof."
+ },
+ {
+  "id": "t152",
+  "text": "The Federation's disciplinary panel found that Eastfield's and Tannick Vale's coaches texted each other to arrange a draw that kept both clubs up. Citing the messages, it docked each club six points.",
+  "context": "A sports news report",
+  "kind": "fair",
+  "technique": "conspiracy framing",
+  "tell": "Citing the messages, it docked each club six points",
+  "why": "The fix was proven by a disciplinary panel using the coaches' own texts, and a penalty followed."
+ },
+ {
+  "id": "t153",
+  "text": "Why is every garden centre suddenly pushing the same 'drought-proof' lawn seed? The seed firms and the water board are working together on this one. Follow the money.",
+  "context": "A social media post",
+  "kind": "technique",
+  "technique": "conspiracy framing",
+  "tell": "The seed firms and the water board are working together",
+  "why": "Turns an ordinary retail trend into a secret deal between companies and a regulator, with no record of any deal."
+ },
+ {
+  "id": "t154",
+  "text": "Board minutes published with the annual report show the three founders agreed in 2023 to vote as a bloc on every hire above manager level. That's why the 'open' interview panel never overruled them.",
+  "context": "A staff newsletter column",
+  "kind": "fair",
+  "technique": "conspiracy framing",
+  "tell": "Board minutes published with the annual report",
+  "why": "The coordinated voting is recorded in published minutes, not inferred from coincidence."
+ },
+ {
+  "id": "t155",
+  "text": "Banks don't want you to know about the Rule of Seven savings method. They've quietly agreed to bury it, which is exactly why you've never heard of it.",
+  "context": "An ad in a finance newsletter",
+  "kind": "technique",
+  "technique": "conspiracy framing",
+  "tell": "which is exactly why you've never heard of it",
+  "why": "Uses the method being unknown as proof that banks are hiding it, a circular claim that can't be disproved."
+ },
+ {
+  "id": "t156",
+  "text": "Internal memos disclosed in the Corrin River lawsuit show Halvex Chemicals and its consultant agreed in 2019 to leave solvent readings out of public reports. The court has ordered a full cleanup.",
+  "context": "A news report",
+  "kind": "fair",
+  "technique": "conspiracy framing",
+  "tell": "Internal memos disclosed in the Corrin River lawsuit",
+  "why": "The cover-up is documented in memos disclosed in court, and the court acted on them."
+ },
+ {
+  "id": "t157",
+  "text": "The 'restructure' memo landed the same week three directors were seen lunching together. Coincidence? This was planned months ago, and HR's silence tells you who's in on it.",
+  "context": "An anonymous post on a staff forum",
+  "kind": "technique",
+  "technique": "conspiracy framing",
+  "tell": "HR's silence tells you who's in on it",
+  "why": "A lunch and an unanswered question are treated as proof of a long-planned plot. Silence is read as guilt."
+ },
+ {
+  "id": "t158",
+  "text": "The Veterinary Standards Council ruled that four Barrow Group clinics agreed to send all dental work to one partner practice in return for referral fees. The ruling cites the signed agreement; each clinic was fined.",
+  "context": "A local news report",
+  "kind": "fair",
+  "technique": "conspiracy framing",
+  "tell": "The ruling cites the signed agreement",
+  "why": "A professional regulator's ruling, based on a signed agreement, confirms the arrangement."
+ },
+ {
+  "id": "t159",
+  "text": "Route 14 keeps getting later and emptier with every timetable change. Almost as if someone at the transit authority wants it to fail so they can sell the depot, and they've covered their tracks well.",
+  "context": "A post in a community group",
+  "kind": "technique",
+  "technique": "conspiracy framing",
+  "tell": "they've covered their tracks well",
+  "why": "Suggests insiders are secretly sabotaging the route and treats the lack of evidence as proof the cover-up worked."
+ },
+ {
+  "id": "t160",
+  "text": "The Medicines Board fined three makers of children's fever syrup after minutes seized in a 2024 inspection showed they agreed to delay launching a cheaper version.",
+  "context": "A health news story",
+  "kind": "fair",
+  "technique": "conspiracy framing",
+  "tell": "minutes seized in a 2024 inspection",
+  "why": "The collusion is backed by seized meeting minutes and an official fine, not by suspicion."
+ }
+]

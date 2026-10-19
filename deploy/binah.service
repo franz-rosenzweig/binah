@@ -1,0 +1,20 @@
+[Unit]
+Description=Binah: daily training for reading, reasoning and speaking (web app and grading queue, :8470)
+After=network-online.target
+
+[Service]
+# The live worktree is pinned to a commit (docs/OPERATIONS.md); the virtualenv is the source checkout's.
+WorkingDirectory=/srv/dev/binah-live
+ExecStart=/srv/dev/binah/.venv/bin/python -m binah.server
+Restart=on-failure
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+Environment=BINAH_STATE=/srv/docker/binah
+Environment=BINAH_PORT=8470
+# Add your Tailscale address to reach it over the tailnet, e.g. 127.0.0.1,100.x.y.z
+Environment=BINAH_HOSTS=127.0.0.1
+# ~/.local/bin holds the claude CLI
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=default.target

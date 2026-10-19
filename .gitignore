@@ -1,0 +1,19 @@
+# Private: never in this public repo
+data/
+state/
+*.db
+*.db-wal
+*.db-shm
+auth.json
+settings.json
+research_notes/
+reports/
+explorer.json
+# Local
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+local.properties
+*.keystore
+*.jks

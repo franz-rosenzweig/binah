@@ -1,0 +1,16 @@
+{
+  "name": "Binah",
+  "short_name": "Binah",
+  "description": "Daily training for understanding what you read, weighing what you hear, and saying what you mean.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ece3d7",
+  "theme_color": "#ece3d7",
+  "icons": [
+    {"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
+    {"src": "/icon.svg", "sizes": "any", "type": "image/svg+xml"}
+  ]
+}

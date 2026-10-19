@@ -1,0 +1,12 @@
+# The server
+fastapi==0.150.0
+uvicorn==0.54.0
+python-multipart==0.0.32
+# Speech: transcription and voice detection on the CPU (brings its own audio decoding)
+faster-whisper==1.2.1
+# The passage engine: word rarity
+wordfreq==3.1.1
+# Only for tools/make_icons.py
+# fonttools==4.67.0
+# brotli==1.2.0
+# pillow==13.0.0

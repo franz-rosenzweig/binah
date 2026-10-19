@@ -1,0 +1,10 @@
+[Unit]
+Description=Binah nightly item run (03:15)
+
+[Timer]
+OnCalendar=*-*-* 03:15
+Persistent=true
+RandomizedDelaySec=600
+
+[Install]
+WantedBy=timers.target

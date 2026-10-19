@@ -1,0 +1,10 @@
+[Unit]
+Description=Binah nightly: draft fresh items from the passage engine, check them blind, load them
+
+[Service]
+Type=oneshot
+WorkingDirectory=/srv/dev/binah-live
+ExecStart=/srv/dev/binah/.venv/bin/python engine/rate.py nightly
+Environment=PYTHONUNBUFFERED=1
+Environment=BINAH_STATE=/srv/docker/binah
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
