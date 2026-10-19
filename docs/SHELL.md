@@ -84,6 +84,7 @@ Poll it gently: once when the widget is shown, at most every 15 minutes in the b
 
 ## 9. What the shell does on its own
 
+- The Mac shell runs the page under a transparent title bar, so the traffic lights sit over the top of the rail. It puts `shell-fullscreen` on `<html>` while the window is in full screen (no lights then), and the page pads the rail only when that class is absent: `.shell-mac:not(.shell-fullscreen) .rail{padding-top:52px}`. The window is never narrower than 900px, so the rail always shows. Pressing empty ground (`html`, `body`, `#app`, `#main`, `.rail`) or the top 28px strip drags the window, unless the press is on a control.
 - Only Binah's origin opens in the window. Any other address, including `target=_blank`, goes to the browser.
 - The default base URL is `https://binah.tiresia.xyz`; a setting (or build flag) can point it at a sandbox, for example `http://<host>:8471`.
 - Keep signing identities, team IDs, keystores and tokens out of the repo. It's public.

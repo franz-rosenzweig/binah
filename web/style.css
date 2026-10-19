@@ -49,6 +49,7 @@ h1,h2,h3{margin:0;text-wrap:balance}
   #main{padding-bottom:48px;max-width:700px}
 }
 .rail{display:none;position:sticky;top:0;height:100vh;flex-direction:column;gap:18px;padding:22px 14px;border-right:1px solid var(--rule);background:var(--surface)}
+.shell-mac:not(.shell-fullscreen) .rail{padding-top:52px}   /* room for the traffic lights under the Mac shell's transparent title bar */
 .brand{display:flex;align-items:baseline;gap:8px;padding:0 8px}
 .brand b{font:italic 500 26px/1 var(--serif)}
 .brand .he,.mark .he{font:700 20px/1 var(--he);color:var(--accent)}
