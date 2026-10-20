@@ -76,7 +76,9 @@ def get_edition(c, day=None):
     if not row:
         slots = plan(c, day)
         recall = _recall_for(c, day)
-        c.execute('insert into editions(day, plan, recall) values(?,?,?)',
+        # Two requests can plan the same day at once (Today and the sidebar's counts load together):
+        # the first insert wins and the other reads the row it wrote.
+        c.execute('insert or ignore into editions(day, plan, recall) values(?,?,?)',
                   (day, json.dumps(slots), json.dumps(recall) if recall else None))
         row = c.execute('select * from editions where day=?', (day,)).fetchone()
     slots = json.loads(row['plan'])

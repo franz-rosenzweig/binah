@@ -78,7 +78,7 @@ Poll it gently: once when the widget is shown, at most every 15 minutes in the b
 
 ## 7. Train on this (share target)
 
-`POST /api/save` with either `{"url": "https://…", "title": "…"}` or `{"text": "a paragraph or more", "title": "…"}` → `{"ok": true, "id": 12, "open": "today", "message": "Saved. It becomes practice items in the next nightly run."}`. Show the message, and open `#today` if the user taps it. Text under 20 words without a URL is refused with a 400 and a plain message.
+`POST /api/save` with either `{"url": "https://…", "title": "…"}` or `{"text": "a paragraph or more", "title": "…"}` → `{"ok": true, "id": 12, "open": "today", "message": "Saved for later. Binah doesn't turn saved passages into practice yet."}`. Show the message, and open `#today` if the user taps it. Text under 20 words without a URL is refused with a 400 and a plain message.
 
 ## 8. Deep links
 

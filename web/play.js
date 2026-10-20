@@ -114,8 +114,9 @@ async function openFlow({ a, out, field, onReference, reviseWith }) {
     reviseWith(async answer => {
       out.innerHTML = waiting('Claude is reading the revision…');
       await api(`/api/attempts/${a.id}/revise`, { body: { answer } });
-      const r = await waitFor(a.id, x => x.grade2 || x.status === 'later');
-      out.innerHTML = r.grade2 ? verdictHTML(r, r.grade2, true) + delta(r) : '';
+      const r = await waitFor(a.id, x => x.grade2 || x.status === 'later' || x.grading_later);
+      out.innerHTML = r.grade2 ? verdictHTML(r, r.grade2, true) + delta(r)
+        : `<div class="verdict"><span class="band">Revision grading later</span><span class="muted">Claude has hit today's grading limit. The revision gets graded tomorrow.</span></div>`;
       onReference(r, out, true);
     });
   };
@@ -135,7 +136,7 @@ function playGist(it) {
       <p class="ask">${esc(it.inference_q)}</p><textarea class="ta" id="gI" style="min-height:70px" aria-label="Your answer"></textarea>
       ${selfRate('gR')}<button class="btn" id="send" type="button" disabled>Send to the grader</button><div id="out"></div>`;
     bindX();
-    const upd = () => { const n = words($('#gT').value); $('#gW').textContent = `${n} / 20`; $('#gW').className = n > 20 ? 'bad' : ''; $('#send').disabled = !n || n > 20 || self === null; };
+    const upd = () => { const n = words($('#gT').value); $('#gW').textContent = `${n} / 20`; $('#gW').className = n > 20 ? 'bad' : ''; const sb = $('#send'); if (sb) sb.disabled = !n || n > 20 || self === null; };
     $('#gT').oninput = upd;
     bindRate('gR', n => { self = n; upd(); });
     $('#send').onclick = async () => {
@@ -158,7 +159,7 @@ function playSubtext(it) {
   main.innerHTML = head(NAMES.subtext) + `<div class="gm"><div class="pane">${srcLine(it)}<div class="passage">${paras(it.passage)}</div></div><aside class="insp" aria-label="Your answer"><p class="ask">${esc(it.question)}</p>
     <textarea class="ta" id="sT" style="min-height:80px" aria-label="Your answer"></textarea>${selfRate('sR')}<button class="btn" id="send" type="button" disabled>Send to the grader</button><div id="out"></div></aside></div>`;
   bindX();
-  const upd = () => { $('#send').disabled = !$('#sT').value.trim() || self === null; };
+  const upd = () => { const sb = $('#send'); if (sb) sb.disabled = !$('#sT').value.trim() || self === null; };
   $('#sT').oninput = upd; bindRate('sR', n => { self = n; upd(); });
   $('#send').onclick = async () => {
     $('#send').remove(); $('#sT').readOnly = true;
@@ -177,7 +178,7 @@ function playBloat(it) {
     ${selfRate('bR')}<button class="btn" id="send" type="button" disabled>Putt</button><div id="out"></div>`;
   bindX();
   const golf = d => d <= -2 ? 'Eagle' : d === -1 ? 'Birdie' : d === 0 ? 'Par' : d === 1 ? 'Bogey' : d === 2 ? 'Double bogey' : '+' + d;
-  const upd = () => { const n = words($('#bT').value), d = n - it.par; $('#bN').textContent = `${n} words · par ${it.par}`; $('#bL').textContent = golf(d); $('#bL').className = d <= 0 ? 'good' : d > 2 ? 'bad' : ''; $('#send').disabled = !n || self === null; };
+  const upd = () => { const n = words($('#bT').value), d = n - it.par; $('#bN').textContent = `${n} words · par ${it.par}`; $('#bL').textContent = golf(d); $('#bL').className = d <= 0 ? 'good' : d > 2 ? 'bad' : ''; const sb = $('#send'); if (sb) sb.disabled = !n || self === null; };
   $('#bT').oninput = upd; upd(); bindRate('bR', n => { self = n; upd(); });
   $('#send').onclick = async () => {
     $('#send').remove(); $('#bT').readOnly = true;
@@ -197,7 +198,7 @@ function playWeak(it) {
     <p class="ask">Why, in one line? (optional; Claude reads it)</p><textarea class="ta" id="why" style="min-height:60px" aria-label="Why"></textarea>
     <button class="btn" id="send" type="button" disabled>Check Answer</button><div id="out"></div></aside></div>`;
   bindX();
-  const upd = () => { $('#send').disabled = flaw === null || (pick === null && flaw !== 'none (sound)'); };
+  const upd = () => { const sb = $('#send'); if (sb) sb.disabled = flaw === null || (pick === null && flaw !== 'none (sound)'); };
   main.querySelectorAll('.sent').forEach(s => { const f = () => { if ($('#wp').classList.contains('locked')) return; pick = +s.dataset.i; main.querySelectorAll('.sent').forEach(x => x.classList.toggle('picked', x === s)); haptic('tick'); upd(); }; s.onclick = f; s.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); f(); } }; });
   $('#wf').onclick = e => { const b = e.target.closest('button'); if (!b || b.disabled) return; flaw = b.dataset.f; [...$('#wf').children].forEach(x => x.classList.toggle('on', x === b)); upd(); };
   $('#send').onclick = async () => {
@@ -213,9 +214,10 @@ function playWeak(it) {
     bindEnd($('#out'), a);
     if ($('#why').value.trim()) {
       $('#whyOut').innerHTML = waiting('Claude is reading your reason…');
-      a = await waitFor(a.id, x => x.grade);
+      a = await waitFor(a.id, x => x.grade || x.grading_later);
       const g = a.grade || {};
-      $('#whyOut').innerHTML = g.work_on ? `<span><b>Your reason:</b> ${g.reason ?? '?'}/4. ${esc(g.work_on)}</span>` : '';
+      $('#whyOut').innerHTML = g.work_on ? `<span><b>Your reason:</b> ${g.reason ?? '?'}/4. ${esc(g.work_on)}</span>`
+        : a.grading_later ? '<span class="small">Claude reads your reason tomorrow; today\'s grading limit is reached.</span>' : '';
     }
   };
 }

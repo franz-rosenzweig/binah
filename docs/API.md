@@ -68,13 +68,14 @@ Any `401` means "sign in again". Errors are `{"detail": "a sentence a person can
 ```
 
 - **Instant games** (`weak`, `word`, `tech`) come back `"status": "done"` with the score, the rating change and the `key`, all at once. `instant` holds what code scored:
-  - weak: `{"score", "spot_ok", "flaw_ok", "key_index"}`, where `key_index` is the sentence the key points at (`null` when the argument is sound). If you sent a `why`, Claude reads it afterwards: poll until `grade` is set, which gives `{"reason": 0–4, "work_on"}`. That doesn't change the score.
+  - weak: `{"score", "spot_ok", "flaw_ok", "key_index"}`, where `key_index` is the sentence the key points at (`null` when the argument is sound). If you sent a `why`, Claude reads it afterwards: poll until `grade` is set (or `grading_later` is true), which gives `{"reason": 0–4, "work_on"}`. That doesn't change the score.
   - word: `{"score"}`.
   - tech: `{"score", "kind_ok", "label_ok", "brier"}`.
-- **Graded games** (`gist`, `subtext`, `bloat`, `jam`) come back `"status": "grading"`. Poll `GET /api/attempts/{id}` (every 1.5 s, then every 3 s) until the status is `done` or `later`. `later` means Claude couldn't grade it now (the daily cap or an error): say so, don't invent a score, and offer the reference.
+- **Graded games** (`gist`, `subtext`, `bloat`, `jam`) come back `"status": "grading"`. Poll `GET /api/attempts/{id}` (every 1.5 s, then every 3 s) until the status is `done` or `later`. `later` means Claude couldn't grade it now: say so, don't invent a score, and offer the reference. Past the day's grading cap it turns `later` within a second or two, and the grade arrives the next day (the status then becomes `done`).
+- **`grading_later`** (true or false) is on every attempt: a grade, a revision's grade or the feedback on a reason is waiting for tomorrow because of the cap. Stop polling when you see it.
   - The `grade` for gist has `main_idea`, `accuracy`, `concision`, `inference` (each 0–4), `covered` (which key points it got, counting from 1), `strength`, `work_on` and `hint`. Subtext has `inference`, `precision`, `strength`, `work_on` and `hint`. Bloat has `meaning`, `strength` and `work_on`, and its `instant` has `{"words", "par", "diff", "golf", "par_factor"}`. Every grade also carries `evidence`, which is Claude's own working, not for display.
   - Show `strength` and `work_on`. Show the criteria as chips (every integer field except `covered`). Show `hint` only before the revision.
-- **One revision:** `POST /api/attempts/{id}/revise` `{"answer": {same shape}}`, allowed once and only when the status is `done`. Poll until `grade2` is set (or the status is `later`). `score2` is the revised score. The rating moves only on the first answer.
+- **One revision:** `POST /api/attempts/{id}/revise` `{"answer": {same shape}}`, allowed once and only when the status is `done`. Poll until `grade2` is set, or `grading_later` is true. `score2` is the revised score. The rating moves only on the first answer.
 - **The reference:** the `key` appears on the attempt once it has been revised. To skip the revision, `POST /api/attempts/{id}/reveal` `{}` (status `done` or `later`) returns the attempt with its `key`. Keys by game:
   - gist `{"gist", "key_points", "inference_a"}`
   - subtext `{"answer", "evidence_quote"}`

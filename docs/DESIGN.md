@@ -2,7 +2,7 @@
 
 Binah is my training app for understanding what I read, weighing what I hear, and saying what I mean. It's phone first (my Android), with a proper Mac app for the longer work, and it lives at a public address with a sign-in, the same way Daf does. The name is the Hebrew word for understanding, which is basically the whole point.
 
-This document is the plan. The research behind it is in [`reports/Binah games and learning science.md`](../reports/Binah%20games%20and%20learning%20science.md) (about 7,000 words, 183 sources), and the passage engine that mines my own books is described in [`ENGINE.md`](ENGINE.md).
+This document is the plan. The research behind it is in a private research report, *Binah games and learning science* (about 7,000 words, 183 sources), and the passage engine that mines my own books is described in [`ENGINE.md`](ENGINE.md).
 
 ## What the research changed
 

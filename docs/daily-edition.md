@@ -41,7 +41,7 @@ Your rating only counts the first try, because a rating should measure what you 
 ![The one revision, and the revised verdict with the reference](images/gist-revision.png)
 *One revision, a second verdict, and then the reference.*
 
-The other games are scored by code the moment you answer, so they show the result and the key straight away. If Claude can't grade an answer right now, the answer says "Grading later" instead of making up a score, and **Show the reference** is still there.
+The other games are scored by code the moment you answer, so they show the result and the key straight away. If Claude can't grade an answer right now, the answer says "Grading later" instead of making up a score, and **Show the reference** is still there. Once the day's grading cap is reached that happens at once, and the answer, a revision or the note on your reason gets graded the next day.
 
 Under every result there's **I think this grade is wrong**. It notes the answer, and the grades you dispute are listed on the Golden set page, where you can compare them with your own scoring.
 

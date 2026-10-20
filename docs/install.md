@@ -70,7 +70,7 @@ More in [android/README.md](../android/README.md), including the check that runs
 
 ## Devices and their tokens
 
-The widget, the menu bar and Train on this don't use your browser's sign-in. Each device gets its own token instead, which the server stores only as a hash, and posting the same device name again replaces its old token. Changing your password signs out every browser but leaves device tokens alone, so if you lose a phone, forget its token on the device if you can, or remove it with `DELETE /api/devices/<name>` (see [SHELL.md](SHELL.md)).
+The widget, the menu bar and Train on this don't use your browser's sign-in. Each device gets its own token instead, which the server stores only as a hash, and posting the same device name again replaces its old token. Changing your password signs out every browser but leaves device tokens alone, so if you lose a phone, disconnect it under **Settings → Connected devices**, which lists every app with when it connected and when it was last seen (or use `DELETE /api/devices/<name>`, see [SHELL.md](SHELL.md)).
 
 If you get stuck on any of this, feel free to open an issue with what you tried and what happened.
 

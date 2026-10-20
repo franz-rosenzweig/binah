@@ -32,7 +32,7 @@ This is the page for working on Binah's code: how it's laid out, how the pieces 
 | `mac/`, `android/` | the two native shells, each with its own README |
 | `deploy/` | systemd user units for the server and the nightly run |
 | `demo/` | the public taste: Technique or Fair Move? played entirely in the browser (`index.html`, `demo.js`, `demo.css`, `shots/`) |
-| `tools/` | content and icon tools, the demo builder, and a speech smoke test |
+| `tools/` | content and icon tools, the demo builder, a speech smoke test, and a race check |
 
 ## Running it from source
 
@@ -79,6 +79,7 @@ A fresh folder starts empty: set a password in it with `BINAH_STATE=... python -
 - `tools/content_stats.py` prints counts and field spreads for `content/` and, for the sealed forms, only counts, types and answer positions, never an item.
 - `tools/make_icons.py` draws the icons (the letter ב in Frank Ruhl Libre on a parchment tile). It needs fontTools, Brotli and Pillow, which are commented in `requirements.txt`.
 - `tools/build_demo.py OUT_DIR` puts the public taste together: `demo/`, the app's `style.css` with its font paths made relative, the fonts, the icon and `content/technique.json`. Every file comes from the repo, with no server and nothing from the state folder, so the folder can be served as plain static files. Its screenshots live in `demo/shots/`.
+- `tools/check_races.py BASE STATE_DIR USER PASSWORD` hammers a sandbox (it refuses the live app) for two races that once broke the first load of a day and the read right after an answer: it should print zero failures for both.
 - `tools/test_speech.py` cuts a 60-second clip from any spoken-word file you have, re-encodes it the way browsers record, runs `transcribe()` on it, and checks that silent, empty and broken files behave.
 
 ## The shells

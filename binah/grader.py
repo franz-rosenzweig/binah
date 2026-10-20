@@ -35,6 +35,9 @@ def _claim(c):
     cap = int(config.settings().get('daily_grading_cap') or 60)
     if _used_today(c) >= cap:
         c.execute("update jobs set status='later' where status='queued'")
+        # Say so at once: the answer shows "grading later" instead of waiting on a grade that comes tomorrow.
+        c.execute("update attempts set status='later' where status='grading' and id in "
+                  "(select ref from jobs where status='later' and kind in ('grade', 'jam'))")
         return None
     c.execute("update jobs set status='queued' where status='later' and date(created) < date('now')")
     row = c.execute("select * from jobs where status='queued' order by id limit 1").fetchone()

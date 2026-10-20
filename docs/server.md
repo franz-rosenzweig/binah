@@ -57,7 +57,7 @@ None of it goes into git, and none of it is ever served publicly. Basically, the
 | `export_dir` | a folder for one dated Markdown file a day of what you write |
 | `notify_cmd` | a command called as `notify TITLE TEXT` when someone keeps getting the password wrong |
 | `public_url` | your public address, which the widget and the menu bar link to |
-| `weekly_goal_days`, `rest_weekday`, `grading_tone` | the three things the app's own Settings page changes |
+| `weekly_goal_days`, `rest_weekday`, `grading_tone` | the three things the app's own Settings page changes (it also changes the password and lists connected devices) |
 
 The address comes from the environment: `BINAH_HOSTS` (comma-separated, default `127.0.0.1`) and `BINAH_PORT` (default `8470`).
 

@@ -89,6 +89,8 @@ def _failed(ip):
 
 
 def conn():
+    """One connection per request, committed when the endpoint returns and before the response
+    goes out (every use is Depends(conn, scope='function')), so a read right after a write sees it."""
     c = db.connect()
     try:
         yield c
@@ -170,13 +172,13 @@ async def account(request: Request):
 # ── today ──
 
 @app.get('/api/today', dependencies=[Depends(user)])
-def today(c=Depends(conn)):
+def today(c=Depends(conn, scope='function')):
     return {'edition': edition.get_edition(c), 'week': edition.week(c), 'counts': edition.counts(c),
             'ratings': ratings.all_ratings(c), 'skills': games.SKILLS, 'games': games.GAMES}
 
 
 @app.post('/api/today/recall', dependencies=[Depends(user)])
-async def recall(request: Request, c=Depends(conn)):
+async def recall(request: Request, c=Depends(conn, scope='function')):
     b = await body(request)
     if b.get('mark') not in ('yes', 'partly', 'no'):
         raise HTTPException(400, 'mark must be yes, partly or no')
@@ -184,7 +186,7 @@ async def recall(request: Request, c=Depends(conn)):
 
 
 @app.get('/api/item/{item_id}', dependencies=[Depends(user)])
-def get_item(item_id: str, c=Depends(conn)):
+def get_item(item_id: str, c=Depends(conn, scope='function')):
     it = c.execute("select * from items where id=? and status != 'retired'", (item_id,)).fetchone()
     if not it:
         raise HTTPException(404, 'No such item')
@@ -202,7 +204,10 @@ def _attempt_out(c, a):
            'rating_before': round(a['rating_before']) if a['rating_before'] is not None else None,
            'rating_after': round(a['rating_after']) if a['rating_after'] is not None else None,
            'skill': item['skill'] if item else None,
-           'revising': bool(a['revision']) and a['grade2'] is None, 'disputed': a['disputed']}
+           'revising': bool(a['revision']) and a['grade2'] is None, 'disputed': a['disputed'],
+           # a grade (or the revision's, or the feedback on a reason) waits for tomorrow's grading
+           'grading_later': c.execute("select 1 from jobs where ref=? and kind in ('grade', 'revise', 'jam') and status='later'",
+                                      (a['id'],)).fetchone() is not None}
     instant_game = games.GAMES.get(a['game'], {}).get('lane') == 'instant'
     if item and (instant_game or a['grade2'] or db.kv_get(c, f'revealed:{a["id"]}')):
         out['key'] = games.reveal(item)
@@ -212,7 +217,7 @@ def _attempt_out(c, a):
 
 
 @app.post('/api/attempts', dependencies=[Depends(user)])
-async def new_attempt(request: Request, c=Depends(conn)):
+async def new_attempt(request: Request, c=Depends(conn, scope='function')):
     b = await body(request)
     item = c.execute("select * from items where id=? and status != 'retired'", (b.get('item_id'),)).fetchone()
     if not item:
@@ -243,7 +248,7 @@ async def new_attempt(request: Request, c=Depends(conn)):
 
 
 @app.get('/api/attempts/{aid}', dependencies=[Depends(user)])
-def get_attempt(aid: int, c=Depends(conn)):
+def get_attempt(aid: int, c=Depends(conn, scope='function')):
     a = c.execute('select * from attempts where id=?', (aid,)).fetchone()
     if not a:
         raise HTTPException(404, 'No such answer')
@@ -251,7 +256,7 @@ def get_attempt(aid: int, c=Depends(conn)):
 
 
 @app.post('/api/attempts/{aid}/revise', dependencies=[Depends(user)])
-async def revise(aid: int, request: Request, c=Depends(conn)):
+async def revise(aid: int, request: Request, c=Depends(conn, scope='function')):
     a = c.execute('select * from attempts where id=?', (aid,)).fetchone()
     if not a or a['status'] != 'done' or a['revision']:
         raise HTTPException(400, 'One revision, after the verdict')
@@ -265,7 +270,7 @@ async def revise(aid: int, request: Request, c=Depends(conn)):
 
 
 @app.post('/api/attempts/{aid}/reveal', dependencies=[Depends(user)])
-def reveal(aid: int, c=Depends(conn)):
+def reveal(aid: int, c=Depends(conn, scope='function')):
     a = c.execute('select * from attempts where id=?', (aid,)).fetchone()
     if not a or a['status'] not in ('done', 'later'):
         raise HTTPException(400, 'Answer first')
@@ -274,7 +279,7 @@ def reveal(aid: int, c=Depends(conn)):
 
 
 @app.post('/api/attempts/{aid}/dispute', dependencies=[Depends(user)])
-async def dispute(aid: int, request: Request, c=Depends(conn)):
+async def dispute(aid: int, request: Request, c=Depends(conn, scope='function')):
     b = await body(request)
     c.execute('update attempts set disputed=? where id=?', (str(b.get('note') or 'disputed')[:500], aid))
     return {'ok': True}
@@ -282,7 +287,7 @@ async def dispute(aid: int, request: Request, c=Depends(conn)):
 
 @app.post('/api/audio', dependencies=[Depends(user)])
 async def audio(item_id: str = Form(...), day: str = Form(''), slot: int = Form(-1), ms: int = Form(0),
-                file: UploadFile = File(...), c=Depends(conn)):
+                file: UploadFile = File(...), c=Depends(conn, scope='function')):
     item = c.execute("select * from items where id=? and game='jam'", (item_id,)).fetchone()
     if not item:
         raise HTTPException(404, 'No such topic')
@@ -305,13 +310,13 @@ async def audio(item_id: str = Form(...), day: str = Form(''), slot: int = Form(
 # ── practice, skills ──
 
 @app.get('/api/practice', dependencies=[Depends(user)])
-def practice(c=Depends(conn)):
+def practice(c=Depends(conn, scope='function')):
     live = dict(c.execute("select game, count(*) from items where status='live' group by game").fetchall())
     return [{'game': g, **meta, 'live': live.get(g, 0)} for g, meta in games.GAMES.items()]
 
 
 @app.get('/api/practice/{game}', dependencies=[Depends(user)])
-def practice_next(game: str, c=Depends(conn)):
+def practice_next(game: str, c=Depends(conn, scope='function')):
     if game not in games.GAMES:
         raise HTTPException(404, 'No such game')
     if game == 'tech':
@@ -351,7 +356,7 @@ def _dprime(c):
 
 
 @app.get('/api/skills', dependencies=[Depends(user)])
-def skills(c=Depends(conn)):
+def skills(c=Depends(conn, scope='function')):
     hist = {}
     for r in c.execute("select a.created, a.score, i.skill from attempts a join items i on i.id=a.item_id "
                        "where a.score is not null order by a.id desc limit 400"):
@@ -377,7 +382,7 @@ def _bench_due(c):
 # ── golden set ──
 
 @app.get('/api/golden', dependencies=[Depends(user)])
-def golden_status(c=Depends(conn)):
+def golden_status(c=Depends(conn, scope='function')):
     done = {r['item_id'] for r in c.execute('select item_id from golden')}
     nxt = []
     for g in golden.GOLDEN_GAMES:
@@ -391,7 +396,7 @@ def golden_status(c=Depends(conn)):
 
 
 @app.get('/api/golden/key/{item_id}', dependencies=[Depends(user)])
-def golden_key(item_id: str, c=Depends(conn)):
+def golden_key(item_id: str, c=Depends(conn, scope='function')):
     """The key, for scoring your own golden answer. Golden items never appear in editions."""
     item = c.execute('select * from items where id=?', (item_id,)).fetchone()
     if not item or item['game'] not in golden.GOLDEN_GAMES:
@@ -400,7 +405,7 @@ def golden_key(item_id: str, c=Depends(conn)):
 
 
 @app.post('/api/golden', dependencies=[Depends(user)])
-async def golden_add(request: Request, c=Depends(conn)):
+async def golden_add(request: Request, c=Depends(conn, scope='function')):
     b = await body(request)
     item = c.execute('select * from items where id=?', (b.get('item_id'),)).fetchone()
     if not item or item['game'] not in golden.GOLDEN_GAMES:
@@ -413,7 +418,7 @@ async def golden_add(request: Request, c=Depends(conn)):
 # ── devices, widget, "train on this" (docs/SHELL.md) ──
 
 @app.post('/api/devices')
-async def add_device(request: Request, c=Depends(conn)):
+async def add_device(request: Request, c=Depends(conn, scope='function')):
     """A shell's "Connect this device": needs the browser cookie, answers a bearer token once."""
     if not auth.check_cookie(request.cookies.get(auth.COOKIE)):
         raise HTTPException(401, 'Sign in first')
@@ -424,18 +429,18 @@ async def add_device(request: Request, c=Depends(conn)):
 
 
 @app.get('/api/devices', dependencies=[Depends(user)])
-def list_devices(c=Depends(conn)):
+def list_devices(c=Depends(conn, scope='function')):
     return [dict(r) for r in c.execute('select name, created, last_seen from devices order by created')]
 
 
 @app.delete('/api/devices/{name}', dependencies=[Depends(user)])
-def drop_device(name: str, c=Depends(conn)):
+def drop_device(name: str, c=Depends(conn, scope='function')):
     c.execute('delete from devices where name=?', (name,))
     return {'ok': True}
 
 
 @app.get('/api/widget', dependencies=[Depends(user)])
-def widget(c=Depends(conn)):
+def widget(c=Depends(conn, scope='function')):
     """What a home-screen widget or the Mac's menu bar shows: today's edition at a glance."""
     ed = edition.get_edition(c)
     nxt = next((s for s in ed['slots'] if not s['done']), None)
@@ -449,7 +454,7 @@ def widget(c=Depends(conn)):
 
 
 @app.get('/api/nav', dependencies=[Depends(user)])
-def nav(c=Depends(conn)):
+def nav(c=Depends(conn, scope='function')):
     """The counts beside the sidebar's sections: today's edition, the golden set, the benchmark, the week."""
     ed = edition.get_edition(c)
     wk = edition.week(c)
@@ -460,7 +465,7 @@ def nav(c=Depends(conn)):
 
 
 @app.post('/api/save', dependencies=[Depends(user)])
-async def save(request: Request, c=Depends(conn)):
+async def save(request: Request, c=Depends(conn, scope='function')):
     """Train on this: a link or a passage sent from the share sheet. It waits for the next
     nightly item run, which turns a good passage into items (private pool)."""
     b = await body(request)
@@ -469,18 +474,18 @@ async def save(request: Request, c=Depends(conn)):
         raise HTTPException(400, 'Send a link, or at least a paragraph of text')
     cur = c.execute('insert into saved(url, title, text) values(?,?,?)', (url or None, title or None, text or None))
     return {'ok': True, 'id': cur.lastrowid, 'open': 'today',
-            'message': 'Saved. It becomes practice items in the next nightly run.'}
+            'message': "Saved for later. Binah doesn't turn saved passages into practice yet."}
 
 
 # ── the monthly benchmark (sealed forms, separate track) ──
 
 @app.get('/api/benchmark', dependencies=[Depends(user)])
-def bench_status(c=Depends(conn)):
+def bench_status(c=Depends(conn, scope='function')):
     return {'forms': benchmark.forms(), 'runs': benchmark.runs(c)}
 
 
 @app.post('/api/benchmark/start', dependencies=[Depends(user)])
-async def bench_start(request: Request, c=Depends(conn)):
+async def bench_start(request: Request, c=Depends(conn, scope='function')):
     open_run = c.execute('select * from bench_runs where finished is null order by id desc limit 1').fetchone()
     if open_run:
         return {'run': open_run['id'], 'form': benchmark.strip(benchmark.load(open_run['form'])),
@@ -496,7 +501,7 @@ async def bench_start(request: Request, c=Depends(conn)):
 
 
 @app.get('/api/benchmark/{run_id}', dependencies=[Depends(user)])
-def bench_review(run_id: int, c=Depends(conn)):
+def bench_review(run_id: int, c=Depends(conn, scope='function')):
     """A finished sitting with its key, so I can see what I missed. A form is never sat twice."""
     r = c.execute('select * from bench_runs where id=?', (run_id,)).fetchone()
     if not r:
@@ -514,7 +519,7 @@ def bench_review(run_id: int, c=Depends(conn)):
 
 
 @app.post('/api/benchmark/{run_id}/answer', dependencies=[Depends(user)])
-async def bench_answer(run_id: int, request: Request, c=Depends(conn)):
+async def bench_answer(run_id: int, request: Request, c=Depends(conn, scope='function')):
     b = await body(request)
     if not benchmark.save_answer(c, run_id, str(b.get('key', ''))[:80], b.get('value')):
         raise HTTPException(400, 'That sitting is closed')
@@ -522,7 +527,7 @@ async def bench_answer(run_id: int, request: Request, c=Depends(conn)):
 
 
 @app.post('/api/benchmark/{run_id}/talk', dependencies=[Depends(user)])
-async def bench_talk(run_id: int, file: UploadFile = File(...), c=Depends(conn)):
+async def bench_talk(run_id: int, file: UploadFile = File(...), c=Depends(conn, scope='function')):
     data = await file.read()
     if len(data) < 1000:
         raise HTTPException(400, 'That recording is empty')
@@ -535,7 +540,7 @@ async def bench_talk(run_id: int, file: UploadFile = File(...), c=Depends(conn))
 
 
 @app.post('/api/benchmark/{run_id}/finish', dependencies=[Depends(user)])
-def bench_finish(run_id: int, c=Depends(conn)):
+def bench_finish(run_id: int, c=Depends(conn, scope='function')):
     r = c.execute('select * from bench_runs where id=?', (run_id,)).fetchone()
     if not r or r['finished']:
         raise HTTPException(400, 'That sitting is closed')

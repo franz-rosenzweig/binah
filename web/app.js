@@ -301,10 +301,20 @@ async function settings() {
     <section class="sec"><h2>Password</h2>
     <form class="form card" id="pf"><label>Current password<input class="inp" id="cp" type="password" autocomplete="current-password"></label>
       <label>New password (10+ characters)<input class="inp" id="np" type="password" autocomplete="new-password"></label><button class="btn ghost" type="submit">Change password</button><p class="err" id="perr" hidden></p></form></section>
+    <section class="sec"><h2>Connected devices</h2><div class="list" id="devs"><p class="small" style="padding:12px 14px">Loading…</p></div>
+      <p class="small">The Mac and Android apps connect themselves once you sign in, so the widget, the menu bar and Train on This work. Disconnecting one signs it out of those until it connects again.</p></section>
     <button class="btn link" id="out" type="button" style="margin:0 auto">Sign out</button></div>`;
   $('#sf').onsubmit = async e => { e.preventDefault(); await api('/api/settings', { body: { weekly_goal_days: +$('#wg').value, rest_weekday: $('#rd').value === '' ? null : +$('#rd').value, grading_tone: $('#tone').value } }); toast('Saved'); refreshNav('settings'); };
   $('#pf').onsubmit = async e => { e.preventDefault(); try { await api('/api/account', { body: { current: $('#cp').value, password: $('#np').value } }); toast('Password changed. Other browsers are signed out.'); $('#pf').reset(); } catch (err) { const el = $('#perr'); el.hidden = false; el.textContent = err.message; } };
   $('#out').onclick = async () => { await api('/api/logout', { body: {} }); state.me = null; signin(); };
+  const devs = async () => {
+    const list = await api('/api/devices').catch(() => []);
+    const when = t => t ? new Date(typeof t === 'number' ? t * 1000 : String(t).replace(' ', 'T') + 'Z').toLocaleDateString(undefined, { day: 'numeric', month: 'short' }) : 'never';
+    $('#devs').innerHTML = list.length ? list.map(d => `<div class="li" style="cursor:default"><span class="li-t"><b>${esc(d.name)}</b><small>connected ${when(d.created)} · last seen ${when(d.last_seen)}</small></span><span class="li-r"><button class="btn ghost" type="button" data-drop="${esc(d.name)}" style="margin:0;min-width:0">Disconnect</button></span></div>`).join('')
+      : '<p class="small" style="padding:12px 14px">No apps connected yet.</p>';
+    $('#devs').querySelectorAll('[data-drop]').forEach(b => b.onclick = async () => { await api('/api/devices/' + encodeURIComponent(b.dataset.drop), { method: 'DELETE' }); toast(`${b.dataset.drop} disconnected`); devs(); });
+  };
+  devs();
 }
 
 // ── what native shells call (docs/SHELL.md) ──
