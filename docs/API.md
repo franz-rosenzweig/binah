@@ -1,13 +1,13 @@
 # The API
 
-Everything the web app does goes through this JSON API, so a native client can do all of it too. This is the shape of each request and answer as of October 2026. Field names are stable: new fields can appear at any time (ignore what you don't know), but a field that changes shape or goes away gets announced first.
+Everything the web app does goes through this JSON API, and the Mac and Android apps are native clients of it. This is the shape of each request and answer as of October 2026. Field names are stable: new fields can appear at any time (ignore what you don't know), but a field that changes shape or goes away gets announced first.
 
 ## Signing in
 
 - `POST /api/login` `{"user": "...", "password": "..."}` sets the `binah` cookie. Wrong passwords are throttled (5 per address per 15 minutes, 20 an hour in all) and send me an alert.
 - `GET /api/me` → `{"signed_in": true, "has_password": true, "user": "..."}`
 - `POST /api/logout` `{}`, `POST /api/account` `{"current", "password"}` (10+ characters; signs out every other browser).
-- A native client connects once with the cookie and then uses a bearer token: `POST /api/devices` `{"name": "mac"}` → `{"name", "token"}` (shown once). Every `/api/` route takes `Authorization: Bearer <token>` instead of the cookie. See [SHELL.md](SHELL.md) §5.
+- An app signs in once with the cookie and then uses a bearer token of its own; see [Devices](#devices). Every `/api/` route takes `Authorization: Bearer <token>` instead of the cookie.
 
 Any `401` means "sign in again". Errors are `{"detail": "a sentence a person can read"}` with a 4xx status.
 
@@ -35,7 +35,7 @@ Any `401` means "sign in again". Errors are `{"detail": "a sentence a person can
 - `pillar` is `u` (Understand), `r` (Reason), `e` (Express) or `s` (Speak).
 - `recall` is yesterday's passage, or `null`. Once it has a `mark`, don't show it again. `POST /api/today/recall` `{"answer": "what I remembered", "mark": "yes" | "partly" | "no"}`.
 - `GET /api/nav` → `{"today": {"done", "total"}, "golden": {"n", "target"}, "bench_due": false, "week": {"active", "goal"}, "rest_weekday": 5}`, for a sidebar or menu bar.
-- `GET /api/widget` is the at-a-glance version ([SHELL.md](SHELL.md) §6).
+- `GET /api/widget` is the at-a-glance version, for a home-screen widget or a menu bar ([below](#the-widget)).
 
 ## Practice
 
@@ -129,4 +129,29 @@ Any `401` means "sign in again". Errors are `{"detail": "a sentence a person can
 ## Settings and the rest
 
 - `GET /api/settings` → `{"weekly_goal_days", "rest_weekday" (0 = Monday … 6, or null), "grading_tone" ("soft" | "balanced" | "strict")}`; `POST /api/settings` with any of those.
-- `POST /api/save` `{"url"}` or `{"text", "title"}`: Train on this ([SHELL.md](SHELL.md) §7).
+
+## Devices
+
+- `POST /api/devices` `{"name": "android-sm-s926u"}` with the cookie → `{"name", "token"}`. The token is shown only this once, so keep it in the Keychain (Mac) or encrypted storage (Android). Posting the same name again replaces that device's token. The apps name themselves `mac` and `android-<model>`, so two phones don't replace each other's token.
+- `GET /api/devices` → `[{"name", "created", "last_seen"}]` (seconds since 1970). Settings in the web app lists them.
+- `DELETE /api/devices/{name}` disconnects one. A changed password signs out every browser but leaves device tokens alone.
+
+## The widget
+
+`GET /api/widget` (bearer) →
+
+```json
+{"day": "2026-10-19", "done": 1, "total": 3, "finished": false, "minutes_left": 3,
+ "next": {"game": "weak", "name": "Find the Weak Step"}, "week": {"active": 2, "goal": 4},
+ "url": "https://binah.tiresia.xyz/#today", "deeplink": "binah://go/today"}
+```
+
+Poll it gently: once when the widget is shown, at most every 15 minutes in the background, and once after the app comes to the front.
+
+## Train on this
+
+`POST /api/save` with either `{"url": "https://…", "title": "…"}` or `{"text": "a paragraph or more", "title": "…"}` → `{"ok": true, "id": 12, "open": "today", "message": "Saved for later. Binah doesn't turn saved passages into practice yet."}`. Show the message. Text under 20 words without a URL is refused with a `400` and a plain message.
+
+## Deep links
+
+The apps open `binah://go/<room>`, where a room is `today`, `practice`, `skills`, `golden`, `bench` or `settings`, for example `binah://go/practice`. On the web the same rooms are the page's hash routes (`/#practice`).

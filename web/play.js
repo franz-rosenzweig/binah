@@ -1,6 +1,6 @@
 // The games. Every open answer runs in the same fixed order:
 // answer (plus a 0-4 self-rating) -> Claude's verdict -> one revision -> the reference.
-import { $, api, esc, words, toast, haptic, state, go, bar, icon, PILLAR_OF, PILLAR } from './app.js';
+import { $, api, esc, words, toast, state, go, bar, icon, PILLAR_OF, PILLAR } from './app.js';
 
 const main = document.getElementById('main');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -81,7 +81,7 @@ function selfRate(id) {
 }
 function bindRate(id, onPick) {
   const el = $('#' + id);
-  el.onclick = e => { const b = e.target.closest('button'); if (!b) return; [...el.children].forEach(x => x.classList.toggle('on', x === b)); haptic('tick'); onPick(+b.dataset.n); };
+  el.onclick = e => { const b = e.target.closest('button'); if (!b) return; [...el.children].forEach(x => x.classList.toggle('on', x === b)); onPick(+b.dataset.n); };
 }
 async function submit(item_id, answer, self_rating, started) {
   return api('/api/attempts', { body: { item_id, answer, self_rating, ms: Date.now() - started, day: ctx.day, slot: ctx.slot } });
@@ -106,8 +106,7 @@ async function openFlow({ a, out, field, onReference, reviseWith }) {
     $('#refBtn').onclick = async () => { const r = await api(`/api/attempts/${a.id}/reveal`, { body: {} }); onReference(r, out); };
     return;
   }
-  haptic(a.score >= 0.65 ? 'confirm' : 'reject');
-  out.innerHTML = verdictHTML(a, a.grade || {}, false) + delta(a)
+    out.innerHTML = verdictHTML(a, a.grade || {}, false) + delta(a)
     + `<div class="btns"><button class="btn" type="button" id="revBtn">Revise once</button><button class="btn ghost" type="button" id="refBtn">Keep it, show the reference</button></div>`;
   $('#refBtn').onclick = async () => { const r = await api(`/api/attempts/${a.id}/reveal`, { body: {} }); onReference(r, out); };
   $('#revBtn').onclick = () => {
@@ -199,7 +198,7 @@ function playWeak(it) {
     <button class="btn" id="send" type="button" disabled>Check Answer</button><div id="out"></div></aside></div>`;
   bindX();
   const upd = () => { const sb = $('#send'); if (sb) sb.disabled = flaw === null || (pick === null && flaw !== 'none (sound)'); };
-  main.querySelectorAll('.sent').forEach(s => { const f = () => { if ($('#wp').classList.contains('locked')) return; pick = +s.dataset.i; main.querySelectorAll('.sent').forEach(x => x.classList.toggle('picked', x === s)); haptic('tick'); upd(); }; s.onclick = f; s.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); f(); } }; });
+  main.querySelectorAll('.sent').forEach(s => { const f = () => { if ($('#wp').classList.contains('locked')) return; pick = +s.dataset.i; main.querySelectorAll('.sent').forEach(x => x.classList.toggle('picked', x === s)); upd(); }; s.onclick = f; s.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); f(); } }; });
   $('#wf').onclick = e => { const b = e.target.closest('button'); if (!b || b.disabled) return; flaw = b.dataset.f; [...$('#wf').children].forEach(x => x.classList.toggle('on', x === b)); upd(); };
   $('#send').onclick = async () => {
     $('#send').remove(); $('#wp').classList.add('locked'); [...$('#wf').children].forEach(x => x.disabled = true); $('#why').readOnly = true;
@@ -208,8 +207,7 @@ function playWeak(it) {
     if (ins.key_index != null) main.querySelector(`.sent[data-i="${ins.key_index}"]`)?.classList.add('key');
     if (pick != null && !ins.spot_ok) main.querySelector(`.sent[data-i="${pick}"]`)?.classList.add('miss');
     [...$('#wf').children].forEach(x => { if (x.dataset.f === k.flaw) x.classList.add('key'); else if (x.dataset.f === flaw) x.classList.add('miss'); });
-    haptic(a.score >= 1 ? 'confirm' : 'reject');
-    $('#out').innerHTML = `<div class="verdict"><div class="top2"><span class="band">${a.score >= 1 ? 'Clean' : a.score > 0 ? 'Half right' : 'Missed'}</span><span class="small">spot ${ins.spot_ok ? '✓' : '✗'} · flaw ${ins.flaw_ok ? '✓' : '✗'}</span></div>
+        $('#out').innerHTML = `<div class="verdict"><div class="top2"><span class="band">${a.score >= 1 ? 'Clean' : a.score > 0 ? 'Half right' : 'Missed'}</span><span class="small">spot ${ins.spot_ok ? '✓' : '✗'} · flaw ${ins.flaw_ok ? '✓' : '✗'}</span></div>
       <span><b>${esc(k.flaw)}.</b> ${esc(k.explain)}</span><span><b>It quietly assumes:</b> ${esc(k.assumption)}</span><div id="whyOut"></div></div>${delta(a)}${endBtns()}`;
     bindEnd($('#out'), a);
     if ($('#why').value.trim()) {
@@ -235,8 +233,7 @@ function playWord(it) {
     const a = await submit(it.id, { choice: b.dataset.w }, null, started);
     const k = a.key || {};
     [...$('#wo').children].forEach(x => { if (x.dataset.w === k.target) x.classList.add('key'); else if (x === b) x.classList.add('miss'); });
-    haptic(a.score ? 'confirm' : 'reject');
-    $('#out').innerHTML = `<div class="verdict"><span class="band">${a.score ? "The author's word" : `The author wrote "${esc(k.target)}"`}</span><span>${esc(k.why)}</span></div>${delta(a)}${endBtns()}`;
+        $('#out').innerHTML = `<div class="verdict"><span class="band">${a.score ? "The author's word" : `The author wrote "${esc(k.target)}"`}</span><span>${esc(k.why)}</span></div>${delta(a)}${endBtns()}`;
     bindEnd($('#out'), a);
   };
 }
@@ -274,7 +271,7 @@ function techOne(it, i, n, results) {
       <button class="btn" id="send" type="button" disabled>Call It</button><div id="out"></div></aside></div>`;
     bindX();
     const kinds = [...main.querySelectorAll('[data-k]')];
-    kinds.forEach(b => b.onclick = () => { if (b.disabled) return; kind = b.dataset.k; kinds.forEach(x => x.classList.toggle('on', x === b)); $('#techPick').hidden = kind !== 'technique'; $('#send').disabled = false; haptic('tick'); });
+    kinds.forEach(b => b.onclick = () => { if (b.disabled) return; kind = b.dataset.k; kinds.forEach(x => x.classList.toggle('on', x === b)); $('#techPick').hidden = kind !== 'technique'; $('#send').disabled = false; });
     $('#tp').onclick = e => { const b = e.target.closest('button'); if (!b || b.disabled) return; tech = tech === b.dataset.t ? null : b.dataset.t; [...$('#tp').children].forEach(x => x.classList.toggle('on', x.dataset.t === tech)); };
     $('#cr').oninput = () => { $('#cv').textContent = $('#cr').value + '%'; };
     $('#send').onclick = async () => {
@@ -283,8 +280,7 @@ function techOne(it, i, n, results) {
       const k = a.key || {}, ins = a.instant || {};
       kinds.forEach(x => { if (x.dataset.k === k.kind) x.classList.add('key'); else if (x.dataset.k === kind) x.classList.add('miss'); });
       if (k.tell) { const t = $('#tt'); const idx = t.textContent.indexOf(k.tell); if (idx >= 0) t.innerHTML = esc(t.textContent.slice(0, idx)) + `<mark>${esc(k.tell)}</mark>` + esc(t.textContent.slice(idx + k.tell.length)); }
-      haptic(ins.kind_ok ? 'confirm' : 'reject');
-      $('#out').innerHTML = `<div class="verdict"><span class="band">${ins.kind_ok ? 'Right' : 'Not quite'} · ${k.kind === 'fair' ? 'a fair move' : esc(k.technique)}</span>${k.kind === 'fair' ? `<span class="small">It resembles ${esc(k.technique)}, done fairly.</span>` : ins.label_ok ? '<span class="small">And you named the technique.</span>' : ''}<span>${esc(k.why)}</span></div>
+            $('#out').innerHTML = `<div class="verdict"><span class="band">${ins.kind_ok ? 'Right' : 'Not quite'} · ${k.kind === 'fair' ? 'a fair move' : esc(k.technique)}</span>${k.kind === 'fair' ? `<span class="small">It resembles ${esc(k.technique)}, done fairly.</span>` : ins.label_ok ? '<span class="small">And you named the technique.</span>' : ''}<span>${esc(k.why)}</span></div>
         <button class="btn" type="button" id="nx">${i + 1 < n ? 'Next' : 'See the round'}</button>`;
       $('#nx').onclick = () => resolve(a);
     };
@@ -299,7 +295,7 @@ function playJam(it) {
       <div class="rules"><span>No hesitation</span><span>No repetition</span><span>No deviation</span></div>
       <button class="recbtn" id="rb" type="button" aria-label="Start recording">${icon('mic', 'mic')}${icon('stop', 'stop')}</button><span class="small" id="rs">Tap to start. It stops by itself at sixty seconds.</span></div><div id="out"></div>`;
   const stopAll = () => { if (timer) clearInterval(timer); timer = null; if (stream) stream.getTracks().forEach(t => t.stop()); };
-  bindX(() => { if (rec && rec.state === 'recording') { rec.onstop = null; rec.stop(); window.binahShell?.mic?.(false); } stopAll(); leave(); });
+  bindX(() => { if (rec && rec.state === 'recording') { rec.onstop = null; rec.stop(); } stopAll(); leave(); });
   const finish = () => { if (rec && rec.state === 'recording') rec.stop(); };
   $('#rb').onclick = async () => {
     if (rec && rec.state === 'recording') return finish();
@@ -313,8 +309,7 @@ function playJam(it) {
       stopAll();
       $('#rb').classList.remove('on'); $('#rb').disabled = true; $('#rs').textContent = 'Got it.';
       const cap = $('#cap'); if (cap) cap.outerHTML = '<span class="capsule" id="cap">Sent</span>';
-      window.binahShell?.mic?.(false);
-      const blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
+            const blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
       const fd = new FormData();
       fd.append('item_id', it.id); fd.append('day', ctx.day || ''); fd.append('slot', ctx.slot ?? -1); fd.append('ms', Date.now() - t0);
       fd.append('file', blob, 'answer.' + ((rec.mimeType || '').includes('mp4') ? 'mp4' : 'webm'));
@@ -326,9 +321,7 @@ function playJam(it) {
       } catch (e) { $('#out').innerHTML = `<p class="err">${esc(e.message)}</p>`; }
     };
     rec.start(1000); t0 = Date.now();
-    window.binahShell?.mic?.(true);
-    $('#rb').classList.add('on'); $('#rb').setAttribute('aria-label', 'Stop and send'); $('#rs').textContent = 'Stop sends it. Your voice goes only to your Binah server.'; haptic('confirm');
-    const cap = $('#cap'); if (cap) cap.outerHTML = '<span class="recchip" id="cap"><i></i>Recording</span>';
+        $('#rb').classList.add('on'); $('#rb').setAttribute('aria-label', 'Stop and send'); $('#rs').textContent = 'Stop sends it. Your voice goes only to your Binah server.';     const cap = $('#cap'); if (cap) cap.outerHTML = '<span class="recchip" id="cap"><i></i>Recording</span>';
     timer = setInterval(() => {
       const left = Math.max(0, 60 - (Date.now() - t0) / 1000), s = Math.ceil(left);
       $('#tm').textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
@@ -342,8 +335,7 @@ function jamResult(a) {
   const m = (a.instant || {}).metrics || (a.answer || {}).metrics || {};
   const g = a.grade || {}, ins = a.instant || {};
   const fmt = (v, d = 0) => v == null ? '—' : Number(v).toFixed(d);
-  haptic(a.score >= 0.65 ? 'confirm' : 'reject');
-  $('#out').innerHTML = `<div class="metrics"><div><b>${fmt(m.speaking_time)}s</b><span>speaking</span></div><div><b>${fmt(m.wpm)}</b><span>words a minute</span></div><div><b>${fmt(m.fillers_per_min, 1)}</b><span>fillers a minute</span></div>
+    $('#out').innerHTML = `<div class="metrics"><div><b>${fmt(m.speaking_time)}s</b><span>speaking</span></div><div><b>${fmt(m.wpm)}</b><span>words a minute</span></div><div><b>${fmt(m.fillers_per_min, 1)}</b><span>fillers a minute</span></div>
       <div><b>${fmt(m.long_pauses)}</b><span>long pauses</span></div><div><b>${(m.repeats || []).length}</b><span>repeated words</span></div><div><b>${m.first_sentence_clean ? 'clean' : 'not yet'}</b><span>first sentence</span></div></div>
     <div class="verdict"><div class="top2"><span class="band">${a.status === 'later' ? 'Grading later' : bandOf(a.score)}</span><span class="small">hesitation ${ins.hesitation ?? '—'}/4 · repetition ${ins.repetition ?? '—'}/4 · deviation ${g.deviation ?? '—'}/4 · structure ${g.structure ?? '—'}/4</span></div>
       ${g.strength ? `<span class="plus"><b>+</b> ${esc(g.strength)}</span>` : ''}${g.work_on ? `<span class="minus"><b>→</b> ${esc(g.work_on)}</span>` : ''}

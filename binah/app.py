@@ -415,7 +415,7 @@ async def golden_add(request: Request, c=Depends(conn, scope='function')):
     return {'ok': True, 'id': gid, 'key': games.reveal(item)}
 
 
-# ── devices, widget, "train on this" (docs/SHELL.md) ──
+# ── devices, widget, "train on this" (docs/API.md) ──
 
 @app.post('/api/devices')
 async def add_device(request: Request, c=Depends(conn, scope='function')):

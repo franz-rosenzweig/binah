@@ -27,7 +27,7 @@
 
 ## Why I built it
 
-Binah (בינה) is the Hebrew word for understanding, which is basically the whole point. It's my daily training app for understanding what I read, weighing what I hear, and saying what I mean. It's a phone-first web app with Mac and Android apps around it, it runs on my own server behind a login, and the code is here in case it's useful to someone else.
+Binah (בינה) is the Hebrew word for understanding, which is basically the whole point. It's my daily training app for understanding what I read, weighing what I hear, and saying what I mean. It's a phone-first web app with native Mac and Android apps beside it, it runs on my own server behind a login, and the code is here in case it's useful to someone else.
 
 I started out wanting a Lumosity for language, and the research talked me out of it. Brain games make you better at brain games and not much else, so every game in Binah is a small, honest slice of the REAL skill, done on real text: I summarize an actual passage from memory, I find the actual weak step in an actual argument, I cut a padded sentence back to what a good writer actually wrote, and I talk for an actual minute without hesitating.
 
@@ -147,7 +147,7 @@ Binah is a web app, so on any phone or computer you open your copy's address and
 There are no downloads on GitHub Releases, so the Mac app is built from this repository: on macOS 26 or newer with Xcode installed (for `actool`, which compiles the icon), run `cd mac && ./build.sh` and copy `build/Binah.app` to Applications. It's a native SwiftUI app, with every game, Binah's menus, today's edition in the menu bar and Train on This. See [Install → Mac](docs/install.md#the-mac-app).
 
 ### Android
-The Android app is built from the repository too, with JDK 17 and the Android SDK: `cd android && ./gradlew assembleDebug` makes a test build, and `./release.sh` makes a signed one with your own key. It adds a home-screen widget, Train on this in the share sheet, and the microphone. See [Install → Android](docs/install.md#the-android-app).
+The Android app is native too (Kotlin and Jetpack Compose), built from the repository with JDK 17 and the Android SDK: `cd android && ./gradlew assembleDebug` makes a test build, and `./release.sh` makes a signed one with your own key. It has a home-screen widget, Train on this in the share sheet, and the microphone. See [Install → Android](docs/install.md#the-android-app).
 
 ### Your own server
 You'll need Python 3.12 and the Claude Code CLI logged in on the same machine, because grading runs on your own Claude subscription. A Calibre library is optional, and it's what the reading games are made from. See [Running your own copy](docs/server.md).
@@ -159,17 +159,17 @@ Everything past this page is in the [docs](docs/README.md):
 - **Getting started:** [What is Binah?](docs/what-is-binah.md), [Why I made it](docs/why-i-made-it.md), [Install and devices](docs/install.md)
 - **Using Binah:** [The daily edition](docs/daily-edition.md), [The games](docs/games.md), [Ratings and the golden set](docs/ratings-and-golden-set.md), [The monthly benchmark](docs/benchmark.md), [Speaking](docs/speaking.md)
 - **Running your own copy:** [Your own server](docs/server.md)
-- **Under the hood:** [Design](docs/DESIGN.md), [The passage engine](docs/ENGINE.md), [Operations](docs/OPERATIONS.md), [The shell contract](docs/SHELL.md), [Developing](docs/DEVELOPING.md)
+- **Under the hood:** [Design](docs/DESIGN.md), [The passage engine](docs/ENGINE.md), [Operations](docs/OPERATIONS.md), [The API](docs/API.md), [Developing](docs/DEVELOPING.md)
 
 Start with [What is Binah?](docs/what-is-binah.md)
 
 ## How it's built
 
 - **Server:** Python (FastAPI) with SQLite, in one process that also works the grading queue in the background. Everything personal lives in a state folder outside the repo: the database, the login, the settings, and anything mined from your own books.
-- **Web app:** vanilla JavaScript with no build step (`web/`), phone first, with a service worker so it opens without a connection. One stylesheet has two looks: Material 3 under 900px wide and in the Android app, and an Apple-like look with a sidebar everywhere else.
+- **Web app:** vanilla JavaScript with no build step (`web/`), phone first, with a service worker so it opens without a connection. One stylesheet has two looks: Material 3 under 900px wide, and an Apple-like look with a sidebar everywhere else.
 - **Grading:** the Claude Code CLI (`claude -p`) on the owner's own subscription, through one small wrapper (`binah/claude_cli.py`), with tools, settings and session history switched off and a daily cap on graded calls.
 - **Speech:** faster-whisper on the server's CPU, with voice detection for pauses, and fillers and repeats counted by code. Claude gets the transcript and the numbers, never the audio.
-- **Apps:** the Mac app is native SwiftUI and talks to the JSON API ([docs/API.md](docs/API.md)). The Android app is a Java WebView without AndroidX, with the page as its whole interface; [docs/SHELL.md](docs/SHELL.md) is the contract between them. A native Android app in Kotlin and Compose is being built beside it.
+- **Apps:** native on both. The Mac app is SwiftUI and the Android app is Kotlin with Jetpack Compose, and both talk to the JSON API ([docs/API.md](docs/API.md)).
 
 ## Credits
 

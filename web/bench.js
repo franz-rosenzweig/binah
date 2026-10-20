@@ -1,7 +1,7 @@
 // The monthly benchmark: one sitting on a sealed form, about thirty-five minutes. No feedback until
 // the end, every answer is saved as it's given (so a sitting can stop and pick up later), and the
 // results live on their own track, apart from practice ratings.
-import { $, api, esc, toast, haptic, state, go, bar, isM3 } from './app.js';
+import { $, api, esc, toast, state, go, bar, isM3 } from './app.js';
 
 const main = document.getElementById('main');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -65,7 +65,7 @@ async function overview() {
     ${done.length ? `<div class="sec"><span class="label">Sittings</span></div><div class="card" style="overflow-x:auto"><table class="tbl"><thead><tr><th>Date</th><th>Arg.</th><th>Read</th><th>Words</th><th>d′</th><th>Brier</th><th>Essay</th><th>Talk</th></tr></thead><tbody>${rows}</tbody></table>
       <p class="small" style="margin-top:8px">Essay and talk are out of 4. Brier: 0 is perfect calibration, 0.25 a coin flip. With eight items a section, one sitting is noisy; trust a change only once it holds for two sittings.</p></div>` : ''}`;
   bindX();
-  const g = $('#go'); if (g) g.onclick = () => { haptic('tick'); go('bench/run'); };
+  const g = $('#go'); if (g) g.onclick = () => { go('bench/run'); };
   main.querySelectorAll('[data-run]').forEach(r => r.onclick = () => go('bench/review/' + r.dataset.run));
 }
 
@@ -111,7 +111,7 @@ async function sitting() {
       <button class="btn" id="nx" type="button" disabled>${i + 1 < steps.length ? 'Next' : 'Done'}</button>`;
     bindX('bench');
     const btns = [...main.querySelectorAll('[data-v]')];
-    const choose = b => { pick = binary ? b.dataset.v : +b.dataset.v; btns.forEach(x => x.classList.toggle('on', x === b)); $('#nx').disabled = false; haptic('tick'); };
+    const choose = b => { pick = binary ? b.dataset.v : +b.dataset.v; btns.forEach(x => x.classList.toggle('on', x === b)); $('#nx').disabled = false; };
     btns.forEach(b => b.onclick = () => choose(b));
     $('#cr').oninput = () => { $('#cv').textContent = $('#cr').value + '%'; };
     $('#nx').onclick = async () => {
@@ -176,7 +176,7 @@ async function sitting() {
       <div id="out"></div><button class="btn link" id="skip" type="button">Skip the talk this time</button>`;
     const stopAll = () => { if (timer) clearInterval(timer); timer = null; if (stream) stream.getTracks().forEach(t => t.stop()); };
     bindX('bench');
-    state.back = () => { stopAll(); if (rec && rec.state === 'recording') { rec.onstop = null; rec.stop(); window.binahShell?.mic?.(false); } go('bench'); };
+    state.back = () => { stopAll(); if (rec && rec.state === 'recording') { rec.onstop = null; rec.stop(); } go('bench'); };
     $('#barBack').onclick = state.back;
     $('#skip').onclick = async () => { stopAll(); try { await save('talk', { skipped: true }); next(); } catch (e) { toast(e.message); } };
     const finish = () => { if (rec && rec.state === 'recording') rec.stop(); };
@@ -189,17 +189,14 @@ async function sitting() {
       chunks = [];
       rec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
       rec.onstop = async () => {
-        stopAll(); window.binahShell?.mic?.(false);
-        $('#rb').classList.remove('on'); $('#rb').disabled = true; $('#rs').textContent = 'Uploading…'; $('#skip').hidden = true;
+        stopAll();         $('#rb').classList.remove('on'); $('#rb').disabled = true; $('#rs').textContent = 'Uploading…'; $('#skip').hidden = true;
         const fd = new FormData();
         fd.append('file', new Blob(chunks, { type: rec.mimeType || 'audio/webm' }), 'talk.' + ((rec.mimeType || '').includes('mp4') ? 'mp4' : 'webm'));
         try { await api(`/api/benchmark/${r.run}/talk`, { body: fd }); ans.talk = { audio: true }; next(); }
         catch (e) { $('#rs').textContent = e.message; $('#rb').disabled = false; $('#skip').hidden = false; }
       };
       rec.start(1000); t0 = Date.now();
-      window.binahShell?.mic?.(true);
-      $('#rb').classList.add('on'); $('#rb').setAttribute('aria-label', 'Stop'); $('#rs').textContent = 'Tap to stop early.'; haptic('confirm');
-      timer = setInterval(() => {
+            $('#rb').classList.add('on'); $('#rb').setAttribute('aria-label', 'Stop'); $('#rs').textContent = 'Tap to stop early.';       timer = setInterval(() => {
         const left = Math.max(0, secs - (Date.now() - t0) / 1000);
         $('#tm').textContent = Math.ceil(left);
         $('#arc').style.strokeDashoffset = String(276.5 * (left / secs));
@@ -216,7 +213,7 @@ async function sitting() {
     bindX('bench');
     $('#fin').onclick = async () => {
       $('#fin').disabled = true;
-      try { await api(`/api/benchmark/${r.run}/finish`, { body: {} }); haptic('confirm'); go('bench/review/' + r.run); }
+      try { await api(`/api/benchmark/${r.run}/finish`, { body: {} }); go('bench/review/' + r.run); }
       catch (e) { toast(e.message); $('#fin').disabled = false; }
     };
   }

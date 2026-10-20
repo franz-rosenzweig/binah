@@ -1,7 +1,7 @@
 // Binah's service worker: the app shell opens without a network. The API always goes to
 // the network (answers, grades and ratings live on the server).
-const CACHE = 'binah-shell-v2';
-const SHELL = ['/', '/app.js', '/play.js', '/shell.js', '/style.css', '/manifest.webmanifest', '/icon.svg', '/icon-192.png',
+const CACHE = 'binah-shell-v3';
+const SHELL = ['/', '/app.js', '/play.js', '/bench.js', '/style.css', '/manifest.webmanifest', '/icon.svg', '/icon-192.png',
   '/fonts/newsreader-latin-wght-normal.woff2', '/fonts/newsreader-latin-wght-italic.woff2', '/fonts/figtree-latin-wght-normal.woff2',
   '/fonts/frank-ruhl-libre-hebrew-wght-normal.woff2'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });

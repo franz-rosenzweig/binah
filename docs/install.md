@@ -2,7 +2,7 @@
 
 # Install and devices
 
-Binah is a web app first, so installing it mostly means opening your copy's address and signing in. This page walks you through that, then through building the Mac and Android apps. The Mac app is native, and the Android app adds a few things a web page can't do. You need a Binah server running first. If you don't have one yet, [Your own server](server.md) is the place to start.
+Binah is a web app first, so installing it mostly means opening your copy's address and signing in. This page walks you through that, then through building the Mac and Android apps, which are native and add a few things a web page can't do. You need a Binah server running first. If you don't have one yet, [Your own server](server.md) is the place to start.
 
 My own copy is at `https://binah.tiresia.xyz`, behind a login, so it's only useful to me. Everything below assumes your own address. If you only want a taste first, one game runs in your browser with no server at all: see [Try one game first](what-is-binah.md#try-one-game-first).
 
@@ -46,32 +46,33 @@ The details, and the self-test that checks all of this against a sandbox, are in
 
 ## The Android app
 
-The Android app is Binah in a full-screen WebView, with a home-screen widget, Train on this in the share sheet, and the microphone. It's built from the repository too. You need JDK 17 and the Android SDK (platform 36), and the scripts are written for a Mac's shell (zsh), though Gradle itself runs anywhere.
+The Android app is native too, written in Kotlin with Jetpack Compose (Material 3), with no web page inside. It talks to your server's JSON API with a device token, and adds a home-screen widget, Train on this in the share sheet, and the microphone for spoken answers. It's built from the repository. You need JDK 17 and the Android SDK (platform 36), and the scripts are written for a Mac's shell (zsh), though Gradle itself runs anywhere.
 
 ```sh
 cd android
 ./gradlew assembleDebug                       # a test build, "Binah dev", beside the real app
-./release.sh                                  # the signed release, android/Binah-0.1.0.apk
-adb install -r Binah-0.1.0.apk
+./release.sh                                  # the signed release, android/Binah-0.2.0.apk
+adb install -r Binah-0.2.0.apk
 ```
 
 `release.sh` needs a signing key of your own. Put a `keystore.properties` in `android/` with `storeFile`, `storePassword`, `keyAlias` and `keyPassword` (git ignores it, and any `*.keystore` and `*.apk`), or pass the path to one: `./release.sh /path/to/keystore.properties`.
 
-It opens my copy by default too, so long-press the icon, open **App settings**, put your address under **Binah's address** and press **Use**, then sign in. A few seconds after you sign in, the app connects itself with a device token, kept encrypted on the phone. **Connect this phone** does the same by hand, and **Forget the token** drops it.
+It opens my copy by default, so on the sign-in screen press **Another address…**, put your own address in and press **Use**, then sign in with your username and password. The app swaps that sign-in for a device token of its own, kept encrypted on the phone, and **Settings → Connected devices** lists it as `android-<model>`.
 
 What you get:
 
+- **The app.** Today, Practice, Skills and the Golden set in a bottom bar. Games, the benchmark and Settings open on top, with Back. Passages are set in the phone's serif.
 - **The widget**, 2×2 or 4×2: a ring of today's games with the count, and on the wide one the next game, the minutes left and the week. Tap it for Today. If Binah can't be reached, it keeps the last numbers, dimmed.
 - **Train on this** in any app's share sheet: a link, or a passage of 20 words or more. A card at the bottom says what Binah answered.
-- **Long-press the icon** for Today, Practice, Skills and App settings.
-- **Back** goes out of a game first, then back a page, and only leaves the app when there's nowhere left to go.
-- **The microphone** for Just a Minute and the benchmark talk. Android asks once, and **Allow the microphone** in App settings asks again if you said no.
+- **Long-press the icon** for Today, Practice, Skills and Settings.
+- **The microphone** for Just a Minute and the benchmark talk. Android asks the first time, and **Settings → Microphone** asks again if you said no.
+- **`binah://go/<room>`** links open a room, for Shortcuts and the like: `binah://go/practice`.
 
-More in [android/README.md](../android/README.md), including the check that runs on a plugged-in phone.
+More in [android/README.md](../android/README.md), including the self-test that runs on a plugged-in phone against a sandbox.
 
 ## Devices and their tokens
 
-The widget, the menu bar and Train on this don't use your browser's sign-in. Each device gets its own token instead, which the server stores only as a hash, and posting the same device name again replaces its old token. Changing your password signs out every browser but leaves device tokens alone, so if you lose a phone, disconnect it under **Settings → Connected devices**, which lists every app with when it connected and when it was last seen (or use `DELETE /api/devices/<name>`, see [SHELL.md](SHELL.md)).
+The widget, the menu bar and Train on this don't use your browser's sign-in. Each device gets its own token instead, which the server stores only as a hash, and posting the same device name again replaces its old token. Changing your password signs out every browser but leaves device tokens alone, so if you lose a phone, disconnect it under **Settings → Connected devices**, which lists every app with when it connected and when it was last seen (or use `DELETE /api/devices/<name>`, see [API.md](API.md)).
 
 If you get stuck on any of this, feel free to open an issue with what you tried and what happened.
 

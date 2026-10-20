@@ -1,10 +1,9 @@
 // Binah's web client: routing, Today, Practice, Skills, the golden set, Settings, sign-in.
-// The games are in play.js and the monthly benchmark in bench.js. Native shells talk to the page
-// through shell.js. One page, two looks (style.css): Apple-like on desktop and in the Mac app,
-// Material 3 on phones and in the Android app, where <html> gets `m3`.
+// The games are in play.js and the monthly benchmark in bench.js. One page, two looks
+// (style.css): Apple-like on a desktop, Material 3 on a phone, where <html> gets `m3`.
+// The Mac and Android apps are native and use the same JSON API (docs/API.md).
 import { play, goldenPlay } from './play.js';
 import { bench } from './bench.js';
-import './shell.js';
 
 export const $ = (s, el = document) => el.querySelector(s);
 export const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -13,7 +12,7 @@ const main = $('#main');
 
 // ── the look ──
 const narrow = matchMedia('(max-width: 899px)');
-function setLook() { const h = document.documentElement; h.classList.toggle('m3', narrow.matches || h.classList.contains('shell-android')); }
+function setLook() { document.documentElement.classList.toggle('m3', narrow.matches); }
 setLook();
 narrow.addEventListener('change', () => { setLook(); if (state.me && state.me.signed_in) render(); });
 export const isM3 = () => document.documentElement.classList.contains('m3');
@@ -31,7 +30,6 @@ export async function api(path, opts = {}) {
 }
 
 export function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('show'), 2600); }
-export const haptic = kind => window.binahShell?.haptic?.(kind);
 
 // ── icons (24px grid, stroked in currentColor) ──
 const P = {
@@ -92,7 +90,7 @@ function chrome(on, current) {
   $('#nav').innerHTML = sec('Train', TRAIN) + sec('Measure', MEASURE)
     + (n ? `<div class="wk">${weekRing(n.week)}<div><b>${n.week.active} of ${n.week.goal} days this week</b><span>${n.rest_weekday != null ? `${DAYS[n.rest_weekday]} is your rest day` : 'No rest day set'}</span></div></div>` : '');
   $('#tabbar').innerHTML = TABS.map(([k, name]) => `<button type="button" data-go="${k}" ${current === k ? 'aria-current="page"' : ''}><span class="pill">${icon(k)}</span>${name}</button>`).join('');
-  document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => { haptic('tick'); go(b.dataset.go); });
+  document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => { go(b.dataset.go); });
 }
 async function refreshNav(current) {
   try { state.nav = await api('/api/nav'); } catch { return; }
@@ -176,7 +174,7 @@ async function today() {
   const mins = ed.slots.reduce((a, s) => a + (s.done ? 0 : s.minutes), 0);
   const nextSlot = ed.slots.find(s => !s.done);
   const nextName = nextSlot ? t.games[nextSlot.game].name : null;
-  const open = s => { haptic('tick'); location.hash = `play/${s.game}/${s.items.join(',')}/${ed.day}/${s.slot}`; };
+  const open = s => { location.hash = `play/${s.game}/${s.items.join(',')}/${ed.day}/${s.slot}`; };
 
   const rows = ed.slots.map(s => {
     const g = t.games[s.game], p = s.pillar || PILLAR_OF[s.game];
@@ -233,7 +231,7 @@ async function practice() {
       + `<div class="body wide"><div class="headrow"><p class="lede">Anything beyond today's edition. The daily edition is the one that counts for the week.</p>
         <div class="seg" role="group" aria-label="Filter by skill">${[['all', 'All'], ['u', 'Understand'], ['r', 'Reason'], ['e', 'Express'], ['s', 'Speak']].map(([k, n]) => `<button type="button" data-f="${k}" aria-pressed="${practiceFilter === k}">${n}</button>`).join('')}</div></div>
         <div class="cards">${shown.map(g => { const p = PILLAR_OF[g.game]; return `<button class="gc" type="button" data-g="${g.game}" ${g.live ? '' : 'disabled'}>${sq(p)}<span class="mn">${g.minutes} min</span><b>${esc(g.name)}</b><span class="bl">${esc(g.blurb)}</span><span class="ct">${PILLAR[p]} · ${g.live ? `${g.live} ready` : 'none yet'}</span></button>`; }).join('')}</div></div>`;
-    main.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { practiceFilter = b.dataset.f; haptic('tick'); draw(); });
+    main.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { practiceFilter = b.dataset.f; draw(); });
     main.querySelectorAll('[data-g]').forEach(b => b.onclick = async () => {
       try { const r = await api('/api/practice/' + b.dataset.g); location.hash = `play/${b.dataset.g}/${r.items.join(',')}`; }
       catch (e) { toast(e.message); }
@@ -316,23 +314,6 @@ async function settings() {
   };
   devs();
 }
-
-// ── what native shells call (docs/SHELL.md) ──
-window.binahCommand = name => {
-  const [verb, arg] = String(name).split(':');
-  if (verb === 'go' && arg) { go(arg); return true; }
-  if (verb === 'back') return window.binahBack();
-  if (verb === 'reload') { location.reload(); return true; }
-  return false;
-};
-window.binahState = () => ({ route: state.route, signedIn: !!(state.me && state.me.signed_in),
-  done: state.today ? state.today.edition.slots.filter(s => s.done).length : null,
-  total: state.today ? state.today.edition.slots.length : null, canBack: !!state.back || state.route !== 'today' });
-window.binahBack = () => {
-  if (state.back) { const f = state.back; state.back = null; f(); return true; }
-  if (state.route && state.route !== 'today' && state.route !== 'signin') { history.length > 1 ? history.back() : go('today'); return true; }
-  return false;
-};
 
 if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('/sw.js').catch(() => {});
 boot();
