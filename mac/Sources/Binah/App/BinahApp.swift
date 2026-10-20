@@ -1,7 +1,7 @@
 import SwiftUI
 import AppKit
 
-/// Binah for Mac, native: the system's own window, sidebar, toolbar, inspector, tables and Settings
+/// Binah for Mac: the system's own window, sidebar, toolbar, inspector, tables and Settings
 /// window over Binah's JSON API (docs/API.md). Everything is SwiftUI and AppKit; nothing is a web view.
 @main
 struct BinahApp: App {
@@ -15,6 +15,7 @@ struct BinahApp: App {
                 .task { await model.start() }
                 .onAppear { delegate.model = model }
                 .frame(minWidth: 960, minHeight: 640)
+                .handlesExternalEvents(preferring: ["*"], allowing: ["*"])   // a binah:// link comes to the open window
         }
         .defaultSize(width: 1240, height: 820)
         .commands { BinahCommands(model: model) }

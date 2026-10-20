@@ -31,11 +31,11 @@ enum Server {
     static func url(_ path: String) -> URL { URL(string: base.absoluteString + path)! }
 }
 
-/// This Mac's device token (docs/API.md, Signing in), kept in the login keychain. While this app runs
-/// beside the web-view app it connects as "mac-native", so the other's "mac" token keeps working.
+/// This Mac's device token (docs/API.md, Signing in), kept in the login keychain where the web-view
+/// app before it kept its own, so a token it made still signs this one in.
 enum Token {
-    static let deviceName = "mac-native"
-    private static let service = "xyz.tiresia.binah.native"
+    static let deviceName = "mac"
+    private static let service = "xyz.tiresia.binah"
     private static let account = "device token"
     nonisolated(unsafe) private static var cached: String??
 
@@ -88,7 +88,7 @@ enum APIError: LocalizedError {
 enum API {
     static var userAgent: String {
         let v = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0"
-        return "Binah/\(v) (macOS native)"
+        return "Binah/\(v) (macOS)"
     }
     /// Told when the server says 401, so the app can ask for a sign-in.
     nonisolated(unsafe) static var onSignedOut: (@MainActor () -> Void)?

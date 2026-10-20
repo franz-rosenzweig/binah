@@ -411,7 +411,7 @@ struct ThisMacSettings: View {
     @Environment(AppModel.self) private var model
     @State private var address = Server.base.absoluteString
     @State private var note: String?
-    @AppStorage(MenuBarPrefs.key) private var menuBar = false
+    @AppStorage(MenuBarPrefs.key) private var menuBar = true
 
     var body: some View {
         Form {
@@ -430,7 +430,7 @@ struct ThisMacSettings: View {
             } header: { Text("Binah's address") } footer: { Text(note ?? "https://binah.tiresia.xyz, or a sandbox for testing.") }
             Section {
                 Toggle("Show today's edition in the menu bar", isOn: $menuBar)
-            } footer: { Text("Off while the web-view Binah app shows its own; on once this one replaces it.") }
+            } footer: { Text("1/3, or 3/3 ✓ once the edition is done. Click it for the edition, Practice and Train on This.") }
         }
         .formStyle(.grouped)
         .frame(minHeight: 300)

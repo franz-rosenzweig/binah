@@ -64,7 +64,9 @@ android/check.sh http://localhost:8471 COOKIE TOKEN        # the phone plugged i
 ```
 
 BASE must be a sandbox, never the real Binah: the check makes this phone's token and saves a
-passage to train on. COOKIE and TOKEN are as for `mac/selftest.sh` (see `mac/README.md`).
+passage to train on. COOKIE is the sandbox's `binah` sign-in cookie, which
+`curl -s -c /tmp/binah.cookies -o /dev/null -H 'content-type: application/json' -d '{"user":"…","password":"…"}' http://localhost:8471/api/login`
+leaves in `/tmp/binah.cookies`, and TOKEN a device token there (docs/API.md).
 `check.sh` installs the test build, and `check.py` forwards the phone's `localhost:8472` through
 this Mac to BASE (`adb reverse`), so the page is on localhost and can record. It checks, in the page
 over DevTools and on the phone:

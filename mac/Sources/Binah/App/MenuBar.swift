@@ -1,12 +1,11 @@
 import SwiftUI
 import AppKit
 
-/// Whether today's edition shows in the menu bar. Off while the web-view Binah app shows its own;
-/// on once this app replaces it.
+/// Whether today's edition shows in the menu bar: on unless it's been turned off in Settings.
 enum MenuBarPrefs {
     static let key = "menuBarShown"
     static var shown: Bool {
-        get { UserDefaults.standard.bool(forKey: key) }
+        get { UserDefaults.standard.object(forKey: key) == nil || UserDefaults.standard.bool(forKey: key) }
         set { UserDefaults.standard.set(newValue, forKey: key) }
     }
 }

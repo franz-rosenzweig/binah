@@ -4,6 +4,7 @@ import SwiftUI
 /// and the benchmark pushed on top of their room.
 struct RootView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.openSettings) private var openSettings
 
     var body: some View {
         @Bindable var model = model
@@ -22,6 +23,12 @@ struct RootView: View {
             }
         }
         .tint(Color.binah)
+        .onOpenURL { url in
+            // binah://go/<route>: today, practice, skills, golden, bench, settings
+            guard url.scheme?.lowercased() == "binah", url.host?.lowercased() == "go" else { return }
+            let route = url.pathComponents.dropFirst().first ?? "today"
+            if route == "settings" { openSettings() } else { model.go(Room(rawValue: route) ?? .today) }
+        }
         .sheet(isPresented: $model.showTrain) { TrainOnThisSheet().tint(Color.binah) }
         .overlay(alignment: .bottom) {
             if let t = model.toast {
