@@ -47,6 +47,8 @@ h1,h2,h3{margin:0;text-wrap:balance}
   .rail{display:flex!important}
   .tabbar{display:none!important}
   #main{padding-bottom:48px;max-width:700px}
+  #main .top .mark{display:none}            /* the rail already shows it */
+  #main .top .mark + .date{margin-top:0!important}
 }
 .rail{display:none;position:sticky;top:0;height:100vh;flex-direction:column;gap:18px;padding:22px 14px;border-right:1px solid var(--rule);background:var(--surface)}
 .shell-mac:not(.shell-fullscreen) .rail{padding-top:52px}   /* room for the traffic lights under the Mac shell's transparent title bar */
