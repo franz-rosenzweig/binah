@@ -1,111 +1,74 @@
-# Binah for macOS
+# Binah for Mac
 
-A native shell around the live site (`https://binah.tiresia.xyz` by default). The page stays the
-whole interface; the shell adds a proper Mac window, Binah's menus, today's edition in the menu
-bar, Train on This from any app, and the microphone for voice answers. The contract between the
-two is `docs/SHELL.md`.
+Binah's Mac app, in SwiftUI and AppKit, with no web view. It talks to Binah's JSON API (`docs/API.md`) with a device token, the way the Android app does. It is Binah, `xyz.tiresia.binah`, and connects as the device `mac`. It replaced the web-view Mac app on 20 October 2026, and it keeps its device token where that app kept its own, so a Mac connected before opens signed in.
 
-- **The window**, in Moshe's look: the page runs to the top edge under a transparent title bar,
-  and the traffic lights float over the top of the page's rail, which leaves room for them
-  (`.shell-mac .rail`). Pressing the page's empty ground (around the column, the rail below its
-  buttons) or its top 28 px strip moves the window, and a double-click zooms it, unless the
-  press lands on a control. Full screen puts `shell-fullscreen` on the page so the rail takes its
-  room back. Behind the page the window draws macOS's sidebar material (`NSVisualEffectView`,
-  `.sidebar`, behind-window), and the web view draws no background of its own; the shell marks
-  the page `shell-vibrant`, and where the page leaves itself transparent (its rail) the desktop
-  shows through, blurred, as in Finder's sidebar. The frame is remembered; at least 900 × 600, so the page always has its two-column
-  layout. Only Binah loads in the window: any other address opens in the browser.
-- **The menus**: Binah (Settings… ⌘, is the page's own settings; Mac App Settings… ⌥⌘, is this
-  app's), File (New Window ⌘N, Train on This… ⇧⌘T), Edit (with Spelling and Grammar for your
-  written answers), View (Reload ⌘R, Actual Size ⌘0, Zoom In ⌘+, Zoom Out ⌘-, full screen ⌃⌘F),
-  Go (Today ⌘1, Practice ⌘2, Skills ⌘3, Golden Set ⌘4, Benchmark ⌘5, Back ⌘[). Each Go item calls
-  the page's own command (`window.binahCommand`). What's ticked and greyed comes from
-  `window.binahState()`: the section you're in is ticked, and Back is greyed with nowhere to go.
-- **`window.binahShell`** (docs/SHELL.md §2): `haptic` (felt on a Force Touch trackpad),
-  `bars` (the window's ground follows the page's), `share` (the share picker), `openExternal`, and
-  `mic` (while a voice answer records, the Mac doesn't sleep or dim the display, and closing,
-  reloading or quitting asks first).
-- **The microphone**: Binah's own origin gets it when the page asks (Just a Minute, the benchmark
-  talk), never another origin and never the camera. macOS asks once whether Binah may use the
-  microphone. The page can only record on https or localhost, so a sandbox on a tailnet address
-  shows the games but can't take a voice answer.
-- **Today in the menu bar**: `1/3`, or `3/3 ✓` once the edition is done, and ב until Binah has
-  answered. Click it for the edition as dots, what's next, the week, and Play Today's Edition,
-  Practice, Train on This…, Mac App Settings…. It asks `/api/widget` when the menu opens, every 15
-  minutes, on wake, and when Binah comes to the front, and keeps the last answer, so offline it
-  shows what it last knew (greyed after 20 minutes).
-- **Train on This**: File → Train on This… (⇧⌘T) takes a link or a passage, offering what's on the
-  clipboard. With text or a link selected in any app, Services → **Train on This in Binah** sends
-  it straight away. Either way it goes to `/api/save`, and Binah's answer is shown, with Open Binah.
-- **`binah://go/<route>`** opens that page, for Shortcuts and links: `binah://go/practice`.
-- **Open at login** (Mac App Settings), where Binah starts in the menu bar without a window.
+## What's in it
 
-## The token
-
-The menu bar and Train on This use a device token, never the window's cookie. Mac App Settings →
-**Connect This Mac** makes one: it calls `POST /api/devices {"name": "mac"}` with the window's own
-sign-in and keeps the answer in the login keychain. Binah's `GET /api/devices` lists it as "mac".
-A token can be pasted there instead. Until the Mac is connected, Train on This sends with the
-window's sign-in.
+- **The window.** The system's own window, sidebar and toolbar in macOS 26's glass look, with an inspector beside the games that have a reading pane:
+  - the sidebar has Train (Today, Practice, Skills) and Measure (Golden Set, Benchmark), with counts from `/api/nav` and the week at its foot;
+  - a game opens on top of its room, with the system's back button.
+- **Today.** The edition and Continue, yesterday's recall card, the games as an inset list, the week and the totals.
+- **Practice, Skills and the Golden Set.**
+  - Practice is the games as cards, filtered by a segmented control in the toolbar.
+  - Skills has the ratings, each with a Swift Charts sparkline, plus discernment, the self-rating gap and a way to the benchmark.
+  - The Golden Set shows progress, the items to score, and Claude's agreement as a native table.
+- **All seven games.**
+  - Open answers follow the API's fixed order: answer with a 0–4 self-rating, Claude's verdict, one revision, then the reference. A grade that has to wait for tomorrow (`later`, `grading_later`) says so and offers the reference.
+  - **Gist & Infer:** read, hide, then write the point in 20 words or fewer.
+  - **Subtext:** the passage, with the question in the inspector.
+  - **Cut the Bloat:** golf against par.
+  - **Find the Weak Step:** pick a sentence, a flaw from a radio group, and an optional reason.
+  - **The Author's Word:** the sentence with its gap, and the choices in the inspector.
+  - **Technique or Fair Move?:** six calls, each with a confidence, then the round's Brier score and d′.
+  - **Just a Minute:** recorded natively as AAC in an .m4a, with a countdown ring and live level bars. It stops at sixty seconds, keeps the Mac awake while recording, and shows the server's measurements and Claude's verdict.
+- **The Golden Set's own flow.** Answer, see the key, then score yourself on the rubric's anchors.
+- **The Benchmark.**
+  - **The overview:** your sittings as a table.
+  - **A sitting:** every answer is saved as you give it, and you can pick a choice with the keys 1–5 or A–E. The essay has a 15-minute timer and saves itself. The two-minute talk is recorded the same way as Just a Minute.
+  - **The review:** the scores, the essay and the talk as their grades arrive, then every miss with its explanation.
+- **Settings (⌘,).** Your rhythm and Claude's tone (kept on the server), your password and Sign Out, and this Mac's address and menu bar.
+- **Train on This.** File → Train on This… (⇧⌘T), with whatever's on the clipboard offered, and Services → Train on This in Binah.
+- **The menu bar.** Today's edition, `1/3` or `3/3 ✓`, with the edition, Practice and Train on This a click away. It can be turned off in Settings.
+- **Links.** `binah://go/<route>` opens a room (`today`, `practice`, `skills`, `golden`, `bench`) or Settings (`settings`), for Shortcuts and the like.
+- **The look.** New York, the system's serif, for passages. Binah's teal is the accent, lighter in dark mode, and the pillars have their colours and SF Symbols. The icon is layered as Icon Composer makes them (`Resources/AppIcon.icon`, from `web/icon.svg`).
 
 ## Build it
 
-macOS 14 or newer, the Command Line Tools (`xcode-select --install`), `brew install xcodegen`, and
-`brew install librsvg` for the icon (it's drawn from `web/icon.svg`).
+macOS 26 or later and Xcode (for `actool`, which compiles the icon).
 
 ```sh
 cd mac
-./build.sh                                   # build/Binah.app, in about ten seconds
-cp -R build/Binah.app /Applications/ && open /Applications/Binah.app
+./build.sh                                    # build/Binah.app
+ditto build/Binah.app /Applications/Binah.app
 ```
 
-The build signs with an Apple Development identity if the keychain has one (Xcode → Settings →
-Accounts, a free personal team is enough), ad hoc otherwise. With an ad hoc signature the Keychain
-and the microphone ask again after each new build, because the signature changed. No team or
-identity is written into this repository; `BINAH_SIGN=<identity>` picks another.
-
-Services → Train on This in Binah appears once Binah has run from `/Applications`. If it doesn't,
-turn it on in System Settings → Keyboard → Keyboard Shortcuts → Services → Text.
-
-`xcodegen generate` in `mac/` makes `Binah.xcodeproj` from `project.yml` for anyone who would rather
-use Xcode; both builds read the same settings. The project file and the Info.plist it writes are
-not in git.
+It signs with an Apple Development identity if the keychain has one, ad hoc otherwise. No team or identity is written into this repository. On first launch it asks you to sign in once, unless the Mac was connected before. After that it keeps a device token in the Keychain, and Binah's Settings lists it as `mac`.
 
 ## Test it
 
 ```sh
-# on the Mac: the sandbox on localhost, so the microphone works too
-ssh -fN -L 8471:127.0.0.1:8471 <your-server>
-curl -s -c /tmp/binah.cookies -o /dev/null -H 'content-type: application/json' \
-     -d '{"user":"…","password":"…"}' http://localhost:8471/api/login
-mac/selftest.sh http://localhost:8471 "$(awk '$6=="binah"{print $7}' /tmp/binah.cookies)" TOKEN
-mac/selftest.sh http://localhost:8471 COOKIE TOKEN mic     # once, to answer macOS's microphone prompt
+ssh -fN -L 8471:127.0.0.1:8471 <your-server>        # the sandbox, never the real Binah
+./selftest.sh http://localhost:8471 TOKEN            # a sandbox device token
 ```
 
-BASE must be a sandbox, never the real Binah: the test makes a device token named "mac" and saves a
-passage to train on. It builds the app with `SelfTest/` linked in, as its own app
-(`xyz.tiresia.binah.selftest`, so Binah can stay open), and checks:
-- the user agent and `binahShell`;
-- the traffic lights, over the rail and clear of the brand, and back when AppKit moves them;
-- that a click in the top strip reaches the page;
-- the window moving from empty ground, and full screen;
-- every Go item and key running once, with the ticks and Back greyed;
-- the five shell calls;
-- links out;
-- the microphone granted to Binah's origin and the camera refused;
-- `binah://go/skills`, the menu bar, Connect This Mac, Train on This, and the address setting.
+The test:
+- decodes every endpoint the app reads;
+- checks that one item from every game has the fields its game shows;
+- opens every room and every game and pictures the window, in light and dark;
+- plays The Author's Word once, end to end, which writes one answer to the sandbox.
 
-It takes the keyboard for about half a minute. Pictures land in `mac/build/selftest/out`.
+It builds the app as "Binah Selftest" (`xyz.tiresia.binah.selftest`), so the real app's settings are never touched. The pictures and the log land in `build/selftest`.
 
 ## The pieces
 
 | file | |
 | --- | --- |
-| `BinahApp.swift` | the app: launching, login items, `binah://` links, reopening, quitting while recording |
-| `Window.swift` | the window, the traffic lights, moving it from the page, the microphone, links out, alerts |
-| `Menus.swift` | the menu bar and what its items call |
-| `ShellServices.swift` | `window.binahShell` |
-| `Server.swift` | where Binah is, the device token in the Keychain, `/api/widget` and `/api/save` |
-| `MenuBar.swift` | today's edition in the menu bar |
-| `SettingsWindow.swift` | Mac App Settings: the address, Connect This Mac, the menu bar, open at login |
-| `TrainOnThis.swift` | File → Train on This… and the Services item |
+| `App/BinahApp.swift` | the app, its scenes (window, Settings, menu bar) and commands, Services |
+| `Core/API.swift` | where Binah is, the device token, requests, uploads, sign-in, polling |
+| `Core/Models.swift`, `Core/JSON.swift` | the API's answers as the app reads them |
+| `Core/AppModel.swift` | the rooms, what's open, today and the sidebar's counts |
+| `Core/Recorder.swift` | voice answers |
+| `Views/` | the window and sidebar, Today, Practice, Skills, the Golden Set, Settings, shared pieces |
+| `Games/` | the shared answer flow and the seven games, and the Golden Set's own flow |
+| `Bench/Bench.swift` | the benchmark |
+| `App/SelfTest.swift` | the self-test |
