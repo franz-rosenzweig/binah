@@ -24,6 +24,7 @@ These pages explain how Binah works, from the daily edition and the seven games 
 - [ENGINE.md](ENGINE.md): the passage engine that mines your own books, and its first run
 - [OPERATIONS.md](OPERATIONS.md): how my own copy runs, deploys and gets a sandbox
 - [SHELL.md](SHELL.md): the contract between the page and the Mac and Android apps
+- [API.md](API.md): every request and answer the app uses, for a native client or your own scripts
 - [DEVELOPING.md](DEVELOPING.md): the code layout, the two looks, working from source, the tools and the public taste page, and testing the shells
 - [mac/README.md](../mac/README.md) and [android/README.md](../android/README.md): the two apps in detail
 - [Image credits](images/CREDITS.md): where the text in the screenshots comes from
