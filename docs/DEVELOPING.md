@@ -7,7 +7,7 @@ This is the page for working on Binah's code: how it's laid out, how the pieces 
 ## How it works
 
 - **Server:** Python (FastAPI) with SQLite. Everything personal lives in a state folder outside the repo (`/srv/docker/binah` by default, or `BINAH_STATE`): the database, the login, the settings, and anything mined from your own books.
-- **Web app:** vanilla JavaScript with no build step (`web/`), with a service worker so it opens offline. One stylesheet has two looks: the page puts `m3` on `<html>` when the window is under 900px wide, and always in the Android shell, and gets Material 3 (a large title, a tonal Continue card, a bottom bar); otherwise it looks like Apple's own apps, with a sidebar (`/api/nav` gives its counts), a 52px toolbar row, and games split into a reading pane and an answer panel at 1100px and up. In the Mac shell, `shell-vibrant` leaves the sidebar transparent for the window's sidebar material (see [SHELL.md](SHELL.md)).
+- **Web app:** vanilla JavaScript with no build step (`web/`), with a service worker so it opens offline. One stylesheet has two looks: the page puts `m3` on `<html>` when the window is under 900px wide, and always in the Android shell, and gets Material 3 (a large title, a tonal Continue card, a bottom bar); otherwise it looks like Apple's own apps, with a sidebar (`/api/nav` gives its counts), a 52px toolbar row, and games split into a reading pane and an answer panel at 1100px and up.
 - **Grading:** done by the Claude Code CLI (`claude -p`) on the owner's own subscription, through one small wrapper (`binah/claude_cli.py`). Tools, settings and session history are switched off, the output is structured JSON, and a missing result gets a retry and then "grading later", never a made-up score. There's a daily cap on graded calls.
 - **Speech:** faster-whisper on the server's CPU, with voice detection for pauses, and filler and repetition counts done by code.
 - **Two pools of material, kept strictly apart.** Items from your own books are the private pool and stay in your own copy. The public pool is the original content written for Binah (`content/`), and the benchmark draws on public-domain essays. Every item carries its pool and licence from the moment it's made.
@@ -29,7 +29,8 @@ This is the page for working on Binah's code: how it's laid out, how the pieces 
 | `engine/` | the passage engine: `epub.py`, `mine.py`, `features.py`, `rate.py`, `export.py`, `purge.py` |
 | `web/` | `style.css` (both looks), `app.js` (routing, the sidebar and bottom bar, Today, Practice, Skills, the golden set, Settings), `play.js` (the games), `bench.js` (the benchmark), `shell.js` (the page's half of the shell contract) |
 | `content/` | `technique.json`, `jam_topics.json`, and `table_topics.json` for Table Topics, which isn't built yet |
-| `mac/`, `android/` | the two native shells, each with its own README |
+| `mac/` | the native Mac app (SwiftUI over [API.md](API.md)), with its own README |
+| `android/` | the Android app, a WebView shell around the page, with its own README |
 | `deploy/` | systemd user units for the server and the nightly run |
 | `demo/` | the public taste: Technique or Fair Move? played entirely in the browser (`index.html`, `demo.js`, `demo.css`, `shots/`) |
 | `tools/` | content and icon tools, the demo builder, a speech smoke test, and a race check |
@@ -84,6 +85,6 @@ A fresh folder starts empty: set a password in it with `BINAH_STATE=... python -
 
 ## The shells
 
-The page is the whole interface, and the Mac and Android apps are windows around it plus the few things a page can't do. [SHELL.md](SHELL.md) is the contract: the user agent, `window.binahShell`, `window.binahCommand`, device tokens, the widget endpoint, Train on this, and deep links. Building and testing each one is in [mac/README.md](../mac/README.md) (`mac/build.sh`, `mac/selftest.sh`) and [android/README.md](../android/README.md) (`android/release.sh`, `android/check.sh`).
+The page is the whole interface on the web and on Android, where the app is a window around it plus the few things a page can't do. The Mac app is native and talks to the JSON API directly ([API.md](API.md)). [SHELL.md](SHELL.md) is the Android contract: the user agent, `window.binahShell`, `window.binahCommand`, device tokens, the widget endpoint, Train on this, and deep links. Building and testing each one is in [mac/README.md](../mac/README.md) (`mac/build.sh`, `mac/selftest.sh`) and [android/README.md](../android/README.md) (`android/release.sh`, `android/check.sh`).
 
 Keep signing identities, team IDs, keystores and tokens out of the repo. It's public.

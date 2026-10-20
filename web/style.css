@@ -96,8 +96,6 @@ html:not(.m3) #app{grid-template-columns:232px minmax(0,1fr)}
 /* the sidebar (desktop) */
 .rail{display:none}
 html:not(.m3) .rail:not([hidden]){display:flex;flex-direction:column;gap:16px;position:sticky;top:0;height:100vh;padding:16px 10px 12px;background:var(--side);border-right:.5px solid var(--sep);overflow-y:auto}
-html.shell-mac:not(.shell-fullscreen):not(.m3) .rail:not([hidden]){padding-top:52px}   /* room for the traffic lights under the Mac shell's transparent title bar */
-.shell-mac .rail .brand{display:none}
 .brand{display:flex;align-items:baseline;gap:8px;padding:2px 8px 0}
 .brand b,.mark b{font:italic 600 22px/1 var(--serif)}
 .brand .he,.mark .he{font:700 18px/1 var(--he);color:var(--accent)}
@@ -125,9 +123,6 @@ html.shell-mac:not(.shell-fullscreen):not(.m3) .rail:not([hidden]){padding-top:5
 .tabbar button[aria-current="page"] .pill{background:var(--accent-tint);color:var(--on-tonal)}
 .tabbar button:focus-visible .pill{outline:2px solid var(--accent)}
 
-/* the Mac shell draws the sidebar material itself under a transparent page */
-.shell-vibrant,.shell-vibrant body,.shell-vibrant #app,.shell-vibrant .rail{background:transparent!important}
-.shell-vibrant #main{background:var(--ground)}
 
 /* ── the page header: a 52px toolbar on desktop, a large title (or a top app bar in a game) on Material ── */
 .bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;height:52px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--ground) 86%,transparent);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}

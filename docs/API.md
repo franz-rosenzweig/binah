@@ -7,7 +7,7 @@ Everything the web app does goes through this JSON API, so a native client can d
 - `POST /api/login` `{"user": "...", "password": "..."}` sets the `binah` cookie. Wrong passwords are throttled (5 per address per 15 minutes, 20 an hour in all) and send me an alert.
 - `GET /api/me` → `{"signed_in": true, "has_password": true, "user": "..."}`
 - `POST /api/logout` `{}`, `POST /api/account` `{"current", "password"}` (10+ characters; signs out every other browser).
-- A native client connects once with the cookie and then uses a bearer token: `POST /api/devices` `{"name": "mac-native"}` → `{"name", "token"}` (shown once). Every `/api/` route takes `Authorization: Bearer <token>` instead of the cookie. See [SHELL.md](SHELL.md) §5.
+- A native client connects once with the cookie and then uses a bearer token: `POST /api/devices` `{"name": "mac"}` → `{"name", "token"}` (shown once). Every `/api/` route takes `Authorization: Bearer <token>` instead of the cookie. See [SHELL.md](SHELL.md) §5.
 
 Any `401` means "sign in again". Errors are `{"detail": "a sentence a person can read"}` with a 4xx status.
 

@@ -1,11 +1,11 @@
-// The page's half of the native-shell contract (docs/SHELL.md). It does nothing in a
-// plain browser: only when the user agent carries "Binah/<version> (macOS shell)" or
-// "(Android shell)".
-const m = navigator.userAgent.match(/Binah\/([\d.]+) \((macOS|Android) shell\)/);
+// The page's half of the Android app's contract (docs/SHELL.md). It does nothing in a
+// plain browser: only when the user agent carries "Binah/<version> (Android shell)".
+// (The Mac app is native now and doesn't load the page.)
+const m = navigator.userAgent.match(/Binah\/([\d.]+) \((Android) shell\)/);
 if (m) {
   const root = document.documentElement;
-  root.classList.add('shell', m[2] === 'macOS' ? 'shell-mac' : 'shell-android');
-  if (m[2] === 'Android' && !window.binahShell) {
+  root.classList.add('shell', 'shell-android');
+  if (!window.binahShell) {
     // Android: calls go over a MessagePort the app posts to this page ("binah:port").
     let port = null, seq = 0;
     const waiting = new Map(), queue = [];
