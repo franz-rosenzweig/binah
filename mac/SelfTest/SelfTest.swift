@@ -132,6 +132,17 @@ enum SelfTest {
             check(hit.map { $0 === c.webView || $0.isDescendant(of: c.webView) } ?? false, "a click in the top strip reaches the page",
                   hit.map { "\(type(of: $0))" } ?? "nothing")
         }
+        // the sidebar's material behind a transparent web view, and the page told so
+        let material = w.contentView as? NSVisualEffectView
+        check(material?.material == .sidebar && material?.blendingMode == .behindWindow && c.webView.superview === material,
+              "the window draws the sidebar material behind the page")
+        check((c.webView.value(forKey: "drawsBackground") as? Bool) == false, "the web view draws no background of its own")
+        check(await js(c.webView, "document.documentElement.classList.contains('shell-vibrant')") == "1", "the page is marked shell-vibrant")
+        // what it looks like once the page leaves its rail transparent (the page's part, to come)
+        await js(c.webView, "(() => { const s = document.createElement('style'); s.id = '__vibrant'; s.textContent = 'html, body, #app, .rail { background: transparent !important } #main { background: #fff }'; document.head.append(s); return 1; })()")
+        await pause(0.6)
+        capture(w, "02-vibrant-rail")
+        await js(c.webView, "(document.getElementById('__vibrant').remove(), 1)")
         // AppKit lays the title bar out again on its own; the lights go back where they belong
         close.setFrameOrigin(NSPoint(x: 7, y: 7))
         _ = await until(2) { close.frame.origin.x == BinahWindowController.lightsInset }
@@ -153,7 +164,7 @@ enum SelfTest {
         w.toggleFullScreen(nil)
         let inFull = await until(6) { await js(c.webView, "document.documentElement.classList.contains('shell-fullscreen')") == "1" }
         await pause(1)
-        capture(w, "02-fullscreen")
+        capture(w, "03-fullscreen")
         check(inFull, "full screen puts shell-fullscreen on the page")
         let pad = await js(c.webView, "getComputedStyle(document.querySelector('.rail')).paddingTop")
         check(inFull && pad != "52px", "in full screen the rail takes its room back", pad)
@@ -177,7 +188,7 @@ enum SelfTest {
             check(practice.state == .on && find("Skills", in: NSApp.mainMenu!)?.state == .off, "Practice, and only Practice, is ticked in the Go menu")
         }
         await pause(0.5)
-        capture(c.window!, "03-practice")
+        capture(c.window!, "04-practice")
         await choose("Skills")
         check(await until(5) { await route(web) == "skills" }, "Go → Skills goes there")
         await choose("Back")
@@ -346,7 +357,7 @@ enum SelfTest {
         SettingsWindow.show()
         await pause(0.8)
         if let w = NSApp.windows.first(where: { $0.title == "Binah Mac App Settings" }) {
-            capture(w, "04-settings")
+            capture(w, "05-settings")
             w.close()
         }
     }
