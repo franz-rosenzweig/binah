@@ -4,7 +4,7 @@
 #   ./release.sh                     # signs with android/keystore.properties if there is one,
 #                                    # else with Dvarim's (../../dvarim/android/keystore.properties)
 #   ./release.sh /path/to/keystore.properties
-#   adb install -r Binah-0.1.0.apk
+#   adb install -r Binah-0.2.0.apk
 #
 # The properties file is read by Gradle alone; nothing here prints from it.
 set -euo pipefail
@@ -18,10 +18,10 @@ if [[ -z $SIGNING ]]; then
 fi
 [[ -f $SIGNING ]] || { echo "no signing properties at $SIGNING" >&2; exit 2; }
 
-./gradlew --quiet assembleRelease -PsigningProperties="$SIGNING"
+./gradlew --quiet assembleRelease -PsigningProperties="$SIGNING" --console=plain
 APK=app/build/outputs/apk/release/app-release.apk
 [[ -f $APK ]] || { echo "the release build is not signed: check $SIGNING" >&2; exit 1; }
-VERSION=$(sed -n "s/.*versionName '\(.*\)'.*/\1/p" app/build.gradle | head -1)
+VERSION=$(sed -n 's/.*versionName = "\(.*\)".*/\1/p' app/build.gradle.kts | head -1)
 OUT=Binah-$VERSION.apk
 cp $APK $OUT
 SIGNER=$(ls -d $ANDROID_HOME/build-tools/*/apksigner | tail -1)

@@ -1,1 +1,1 @@
-# Nothing the page calls by name: the shell talks to it over a message port (Shell.java).
+# kotlinx.serialization keeps what it needs through its own consumer rules.

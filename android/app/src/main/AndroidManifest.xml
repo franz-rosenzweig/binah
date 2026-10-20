@@ -2,13 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- voice answers: the page records with getUserMedia (docs/SHELL.md §2); WebView's
-         audio capture needs both -->
+    <!-- Just a Minute and the benchmark's talk: recorded here, sent to /api/audio -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
-        android:name=".Binah"
+        android:name=".BinahApplication"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
@@ -18,8 +16,7 @@
         android:supportsRtl="true"
         android:enableOnBackInvokedCallback="true">
 
-        <!-- The app: the live site in a WebView. The widget, the shortcuts and
-             binah://go/<route> open it on a page of Binah. -->
+        <!-- The app. The widget, the shortcuts and binah://go/<room> open it on a room. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -27,44 +24,50 @@
             android:windowSoftInputMode="adjustResize"
             android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|navigation|uiMode|density|fontScale">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="binah" android:host="go" />
             </intent-filter>
         </activity>
+        <!-- The launcher's entry under the WebView app's name for it, so Binah's icon on the home
+             screen survives the update that replaced that app with this one. -->
+        <activity-alias
+            android:name="xyz.tiresia.binah.MainActivity"
+            android:targetActivity=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
-        <!-- Train on this: a link or a passage from any app's share sheet, sent to
-             /api/save. A card says what happened; no window of its own. -->
+        <!-- Train on this: a link or a passage from any app's share sheet, sent to /api/save. A card
+             says what happened; no window of its own. The share sheet lists it under the WebView
+             app's name for it, so a pinned share target keeps working. -->
         <activity
-            android:name=".ShareActivity"
-            android:exported="true"
-            android:label="Train on this"
+            android:name=".platform.ShareActivity"
+            android:exported="false"
             android:theme="@style/Theme.Binah.Share"
             android:excludeFromRecents="true"
             android:taskAffinity=""
-            android:noHistory="true">
+            android:noHistory="true" />
+        <activity-alias
+            android:name="xyz.tiresia.binah.ShareActivity"
+            android:targetActivity=".platform.ShareActivity"
+            android:label="@string/share_label"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="true"
-            android:label="Binah app settings"
-            android:windowSoftInputMode="adjustResize" />
+        </activity-alias>
 
         <receiver
-            android:name=".Widget"
+            android:name="xyz.tiresia.binah.Widget"
             android:exported="true"
-            android:label="Binah: today's edition">
+            android:label="@string/widget_label">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

@@ -11,5 +11,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "BinahNative"
+rootProject.name = "Binah"
 include(":app")
