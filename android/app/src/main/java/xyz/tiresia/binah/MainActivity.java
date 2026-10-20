@@ -62,8 +62,11 @@ public class MainActivity extends Activity {
             // the test build is pointed at a sandbox by check.py, never the real app
             Intent in = getIntent();
             if (in.getStringExtra("binah.base") != null) Server.setBase(this, in.getStringExtra("binah.base"));
-            if (in.getStringExtra("binah.token") != null) {
-                Server.setToken(this, in.getStringExtra("binah.token"));
+            String token = in.getStringExtra("binah.token");
+            if ("-".equals(token)) {
+                Server.setToken(this, null);                    // the check signs in and sees the phone connect itself
+            } else if (token != null) {
+                Server.setToken(this, token);
                 Server.prefs(this).edit().putString("tokenName", Server.deviceName()).apply();   // the check's, kept as this device's
             }
         }
@@ -94,9 +97,9 @@ public class MainActivity extends Activity {
 
     /** Signed in, and no token of this phone's own yet: it makes one ("android-<model>") with
      *  the window's sign-in, so the widget and Train on this work without a trip to Settings. */
-    private boolean connecting;
+    private volatile boolean connecting;
     private void connectIfSignedIn() {
-        if (connecting || web == null || (Server.token(this) != null && Server.ownToken(this))) return;
+        if (connecting || web == null || connected()) return;
         web.evaluateJavascript("!!(window.binahState && binahState().signedIn)", yes -> {
             if (!"true".equals(yes) || connecting) return;
             connecting = true;
@@ -105,12 +108,29 @@ public class MainActivity extends Activity {
                     Server.setToken(this, Server.connect(this));
                     Widget.fetch(this);
                     runOnUiThread(() -> Toast.makeText(this, "This phone is connected to Binah", Toast.LENGTH_SHORT).show());
-                } catch (Exception e) {
+                } catch (Exception ignored) {
+                    // not this time: the next look tries again
+                } finally {
                     connecting = false;
                 }
             }).start();
         });
     }
+
+    private boolean connected() {
+        return Server.token(this) != null && Server.ownToken(this);
+    }
+
+    /** Until this phone has a token of its own, a look every few seconds while Binah is in front:
+     *  the page signs in without loading a new page, so nothing else would say when it has. */
+    private final Runnable watchSignIn = new Runnable() {
+        @Override
+        public void run() {
+            if (web == null || connected()) return;
+            connectIfSignedIn();
+            web.postDelayed(this, 4000);
+        }
+    };
 
     /** binah://go/practice → "#practice"; a Binah address as its route; null for Today. */
     private String route(Intent intent) {
@@ -153,12 +173,17 @@ public class MainActivity extends Activity {
             loadedBase = Server.base(this);
             web.loadUrl(Server.url(this, ""));
         }
+        if (web != null) {
+            web.removeCallbacks(watchSignIn);
+            web.postDelayed(watchSignIn, 3000);
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         CookieManager.getInstance().flush();
+        if (web != null) web.removeCallbacks(watchSignIn);
         connectIfSignedIn();
         // playing moves the edition along: the widget asks again
         Widget.refreshIfOlder(this, 60 * 1000L);
@@ -332,11 +357,10 @@ public class MainActivity extends Activity {
 
         /** A new document: it needs its own port (Shell). A route change in the page (#…) doesn't
          *  start one, but WebView still calls onPageFinished for it; the page keeps its port then. */
-        private boolean fresh = true, shown;
+        private boolean shown;
 
         @Override
         public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
-            fresh = true;
             shown = false;
             shell.close();
             recording(false);
@@ -354,9 +378,6 @@ public class MainActivity extends Activity {
         public void onPageFinished(WebView view, String url) {
             if (url == null || !Server.isOurs(MainActivity.this, Uri.parse(url))) return;
             if (!shell.heard()) shell.connect();           // shell.js wasn't listening for the first yet
-            if (!fresh) return;
-            fresh = false;
-            view.postDelayed(MainActivity.this::connectIfSignedIn, 3000);
         }
     }
 

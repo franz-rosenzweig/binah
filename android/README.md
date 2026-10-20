@@ -35,7 +35,7 @@ WebView. The contract between page and app is `docs/SHELL.md`.
 ## The token
 
 The widget and Train on this use a device token, never the window's cookie. Signing in is all it
-takes: once the page is signed in and the phone has no token of its own, the app makes one
+takes: within a few seconds of signing in, if the phone has no token of its own, the app makes one
 (`POST /api/devices {"name": "android-<model>"}` with the window's sign-in), and Binah's
 `GET /api/devices` lists it under the phone's model. App settings → Connect this phone does the
 same by hand. The token is kept encrypted with a key in the phone's keystore (`Server.java`),
@@ -75,7 +75,7 @@ over DevTools and on the phone:
 - Back through the page and out of the app;
 - `binah://go/skills`, and a link elsewhere staying out of the window;
 - Train on this, sent and refused;
-- the widget's numbers kept, and Settings → Connect this phone.
+- the widget's numbers kept, Settings → Connect this phone, and signing in connecting the phone by itself.
 
 Pictures land in `android/build/check`.
 
