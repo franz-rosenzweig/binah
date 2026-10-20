@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The widget, tinted to the wallpaper (Material You); the window's ground and the share card in
+     the app's own Material colours (ui/Theme.kt), so nothing flashes before Compose draws. -->
+<resources>
+    <color name="widgetBg">@android:color/system_accent2_50</color>
+    <color name="widgetText">@android:color/system_neutral1_900</color>
+    <color name="widgetText2">@android:color/system_neutral2_700</color>
+    <color name="widgetRing">@android:color/system_accent1_600</color>
+    <color name="widgetTrack">@android:color/system_accent1_100</color>
+    <color name="page">#F5FAFD</color>
+    <color name="card">#E3E9EC</color>
+    <color name="ink">#171C1F</color>
+    <color name="ink2">#3F484D</color>
+    <color name="accent">#12617F</color>
+    <color name="parchment">#ECE3D7</color>
+</resources>
