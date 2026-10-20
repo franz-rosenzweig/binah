@@ -2,7 +2,7 @@
 
 # Install and devices
 
-Binah is a web app first, so installing it mostly means opening your copy's address and signing in, and this page walks you through that and then through building the Mac and Android apps, which add a few things a web page can't do. You need a Binah server running first. If you don't have one yet, [Your own server](server.md) is the place to start.
+Binah is a web app first, so installing it mostly means opening your copy's address and signing in. This page walks you through that, then through building the Mac and Android apps. The Mac app is native, and the Android app adds a few things a web page can't do. You need a Binah server running first. If you don't have one yet, [Your own server](server.md) is the place to start.
 
 My own copy is at `https://binah.tiresia.xyz`, behind a login, so it's only useful to me. Everything below assumes your own address. If you only want a taste first, one game runs in your browser with no server at all: see [Try one game first](what-is-binah.md#try-one-game-first).
 
@@ -19,27 +19,28 @@ Two things need https (or `localhost`): recording your voice for Just a Minute a
 
 ## The Mac app
 
-The Mac app is Binah in a proper Mac window, with the Mac's own sidebar material behind the page's sidebar (the desktop shows through it, blurred, as in Finder), Binah's own menus, today's edition in the menu bar, Train on This from any app, and the microphone for spoken answers. There are no downloads on GitHub Releases, so you build it from this repository, which takes about ten seconds once the tools are in place.
+The Mac app is native, written in SwiftUI with no web page inside. It talks to your server's JSON API ([API.md](API.md)) with a device token. It has a sidebar, the games with an inspector beside the passage, today's edition in the menu bar, Train on This from any app, and the microphone for spoken answers. There are no downloads on GitHub Releases, so you build it from this repository.
 
-You need macOS 14 or newer, the Command Line Tools (`xcode-select --install`), and two Homebrew packages:
+You need macOS 26 or newer and Xcode (the build uses its `actool` to compile the icon):
 
 ```sh
-brew install xcodegen librsvg
 cd mac
 ./build.sh                                   # makes build/Binah.app
-cp -R build/Binah.app /Applications/ && open /Applications/Binah.app
+ditto build/Binah.app /Applications/Binah.app && open /Applications/Binah.app
 ```
 
 The build signs with your Apple Development identity if your keychain has one (a free personal team in Xcode is enough), and ad hoc otherwise. With an ad hoc signature, the Keychain and the microphone ask again after each new build, because the signature changed. No team or identity is written into the repository.
 
-The app opens my copy by default, so the first thing to do is open **Binah → Mac App Settings…** (⌥⌘,), put your own address under **Binah's address**, and sign in in the window. Then press **Connect This Mac**, which gives the menu bar and Train on This a device token of their own, kept in your Keychain.
+The app opens my copy by default, so first open **Binah → Settings…** (⌘,), go to **This Mac**, put your own address under **Binah's address**, and press **Use**. Then sign in once in the window with your username and password. The app swaps that sign-in for a device token of its own, kept in your Keychain, and **Settings → Connected devices** lists it as `mac`.
 
 What you get:
 
-- **The menus.** **Go** has **Today** ⌘1, **Practice** ⌘2, **Skills** ⌘3, **Golden Set** ⌘4, **Benchmark** ⌘5 and **Back** ⌘[. **Binah → Settings…** (⌘,) is Binah's own settings page, and **Edit** has Spelling and Grammar for your written answers.
-- **Today in the menu bar**: `1/3`, or `3/3 ✓` once the edition is done. Click it for the edition as dots, what's next, the week, and **Play Today's Edition**. **Open Binah at login** in Mac App Settings starts it in the menu bar without a window.
-- **Train on This.** **File → Train on This…** (⇧⌘T) takes a link or a passage, and with text selected in any app, **Services → Train on This in Binah** sends it straight away. The Services item appears once Binah has run from Applications. For now Binah only keeps what you send, and the nightly run doesn't turn it into items yet.
-- **`binah://go/<page>`** links open a page, for Shortcuts: `binah://go/practice`.
+- **The window.** A sidebar with Today, Practice and Skills, then the Golden Set and the Benchmark, with today's count and the week at its foot. A game opens on top of its room. Subtext, the Weak Step, the Author's Word and Technique put the passage on the left and your answer in an inspector on the right. Passages are set in New York.
+- **The menus.** **Go** has **Today** ⌘1, **Practice** ⌘2, **Skills** ⌘3, **Golden Set** ⌘4, **Benchmark** ⌘5, **Back** ⌘[ and **Reload** ⌘R. **Binah → Settings…** (⌘,) has your rhythm and Claude's tone, your password and **Sign Out**, and this Mac's address and menu bar.
+- **Today in the menu bar**: `1/3`, or `3/3 ✓` once the edition is done. Click it for the edition, Practice and Train on This. You can turn it off under **Settings → This Mac**.
+- **Train on This.** **File → Train on This…** (⇧⌘T) takes a link or a passage, and offers what's on the clipboard. With text selected in any app, **Services → Train on This in Binah** sends it. The Services item appears once Binah has run from Applications. For now Binah only keeps what you send, and the nightly run doesn't turn it into items yet.
+- **Just a Minute and the benchmark talk** are recorded by the app itself and sent to the server. macOS asks once for the microphone, and the Mac stays awake while you speak.
+- **`binah://go/<room>`** links open a room, for Shortcuts: `binah://go/practice`, or `binah://go/settings`.
 
 The details, and the self-test that checks all of this against a sandbox, are in [mac/README.md](../mac/README.md).
 
@@ -56,7 +57,7 @@ adb install -r Binah-0.1.0.apk
 
 `release.sh` needs a signing key of your own. Put a `keystore.properties` in `android/` with `storeFile`, `storePassword`, `keyAlias` and `keyPassword` (git ignores it, and any `*.keystore` and `*.apk`), or pass the path to one: `./release.sh /path/to/keystore.properties`.
 
-Like the Mac app, it opens my copy by default, so long-press the icon, open **App settings**, put your address under **Binah's address** and press **Use**, then sign in. A few seconds after you sign in, the app connects itself with a device token, kept encrypted on the phone. **Connect this phone** does the same by hand, and **Forget the token** drops it.
+It opens my copy by default too, so long-press the icon, open **App settings**, put your address under **Binah's address** and press **Use**, then sign in. A few seconds after you sign in, the app connects itself with a device token, kept encrypted on the phone. **Connect this phone** does the same by hand, and **Forget the token** drops it.
 
 What you get:
 
