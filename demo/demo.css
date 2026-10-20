@@ -10,7 +10,9 @@
 .what{margin:0;padding-left:18px;display:grid;gap:10px;font-size:15px;color:var(--ink-2)}
 .what b{color:var(--ink)}
 .small{font-size:13.5px;line-height:1.5}
-.game{padding:18px}
+.game{padding:18px} .game .tech-text{background:var(--card);box-shadow:0 0 0 .5px var(--sep)}
+.h2{padding:0!important}
+.intro .title{font:600 34px/1.15 var(--serif);letter-spacing:-.2px}
 .game #how{margin:2px 0 12px}
 .game .tech-text{font-size:18px}
 .game .btns .opt{text-align:center}
