@@ -141,7 +141,7 @@ final class Server {
     }
 
     /** POST /api/save {url?, text?, title?}, with the token or, before the phone is connected,
-     *  the window's sign-in. Answers what Binah said ("Saved. It becomes practice items…"). */
+     *  the window's sign-in. Answers what Binah said ("Saved for later…"). */
     static String save(Context c, String url, String text, String title, boolean withToken) throws IOException {
         try {
             JSONObject body = new JSONObject();

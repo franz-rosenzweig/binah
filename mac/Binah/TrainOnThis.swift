@@ -1,8 +1,8 @@
 import AppKit
 import WebKit
 
-/// Train on this (docs/SHELL.md §7): a link or a passage, sent to Binah, which turns it into
-/// practice items in the next nightly run. From File → Train on This… (⇧⌘T), the menu bar,
+/// Train on this (docs/SHELL.md §7): a link or a passage, sent to Binah, which keeps it for
+/// practice; the alert shows what it said. From File → Train on This… (⇧⌘T), the menu bar,
 /// or Services → Train on This in Binah with text or a link selected in any app.
 @MainActor
 enum TrainOnThis {
@@ -14,7 +14,7 @@ enum TrainOnThis {
         NSApp.bringForward()
         let alert = NSAlert()
         alert.messageText = "Train on This"
-        alert.informativeText = "Paste a link, or a paragraph or more of text. It becomes practice items in the next nightly run."
+        alert.informativeText = "Paste a link, or a paragraph or more of text. Binah keeps it for practice."
         let scroll = NSTextView.scrollableTextView()
         scroll.frame = NSRect(x: 0, y: 0, width: 380, height: 140)
         scroll.borderType = .bezelBorder

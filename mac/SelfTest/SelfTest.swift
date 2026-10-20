@@ -352,7 +352,7 @@ enum SelfTest {
     /// Train on This sends a passage, and Binah's refusal of a few words comes back as said.
     static func train() async {
         let passage = "The selftest of the Mac shell sends this passage to the sandbox. It has more than twenty words, " +
-            "so Binah takes it as a passage to train on, and the nightly run may make items from it."
+            "so Binah keeps it as a passage to train on later."
         await TrainOnThis.send(passage, title: nil)
         check(TrainOnThis.sent.last?.hasPrefix("ok ") == true, "a passage is saved", TrainOnThis.sent.last ?? "")
         await TrainOnThis.send("too short", title: nil)

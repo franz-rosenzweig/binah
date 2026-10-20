@@ -346,7 +346,7 @@ def main(base, cookie, token):
 
     # Train on this: a passage through the share sheet's intent, then a few words
     passage = ("The check of the Android shell sends this passage to the sandbox. It has more than twenty "
-               "words, so Binah takes it as a passage to train on in the next nightly run.")
+               "words, so Binah keeps it as a passage to train on later.")
     for text, want, what in ((passage, "Sent to Binah", "Train on this sends a passage"),
                              ("too short", "Not sent", "a few words are refused, with Binah's reason")):
         adb("shell", "am", "start", "-n", f"{PKG}/{ACT}.ShareActivity", "-a", "android.intent.action.SEND",
