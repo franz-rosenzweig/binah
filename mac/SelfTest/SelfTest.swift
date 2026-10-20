@@ -103,7 +103,7 @@ enum SelfTest {
         }
     }
 
-    /// Moshe's window: the lights in the strip over the rail, clear of the brand; the page's
+    /// Moshe's window: the lights in the strip over the rail, clear of its first item; the page's
     /// empty ground moves the window; full screen tells the page.
     static func window(_ c: BinahWindowController) async {
         guard let w = c.window, let close = w.standardWindowButton(.closeButton), let zoom = w.standardWindowButton(.zoomButton) else {
@@ -113,13 +113,13 @@ enum SelfTest {
         let topGap = w.frame.height - closeAt.maxY
         check(abs(closeAt.minX - 20) < 1.5 && abs(topGap - (BinahWindowController.stripHeight - closeAt.height) / 2) < 1.5,
               "the traffic lights sit 20 px in, in the middle of the 44 px strip", "x \(closeAt.minX), top gap \(topGap)")
-        // where the brand and the rail are, in window points (the page's CSS px times the zoom)
-        let geo = await js(c.webView, "JSON.stringify((() => { const r = document.querySelector('.rail').getBoundingClientRect(), b = document.querySelector('.brand').getBoundingClientRect(); return [r.width, b.top, getComputedStyle(document.querySelector('.rail')).paddingTop]; })())")
+        // where the rail and its first shown item are, in window points (the page's CSS px times the zoom)
+        let geo = await js(c.webView, "JSON.stringify((() => { const rail = document.querySelector('.rail'), r = rail.getBoundingClientRect(); const first = [...rail.children].find(e => e.getClientRects().length); return [r.width, first ? first.getBoundingClientRect().top : 0, getComputedStyle(rail).paddingTop]; })())")
         if let data = geo.data(using: .utf8), let a = try? JSONSerialization.jsonObject(with: data) as? [Any], a.count == 3,
            let railW = a[0] as? Double, let brandTop = a[1] as? Double {
             let z = Double(c.webView.pageZoom)
             check(railW * z > Double(zoomAt.maxX) + 8, "the lights are over the rail", "rail \(railW * z), lights end \(zoomAt.maxX)")
-            check(brandTop * z >= Double(topGap + closeAt.height) + 4, "the brand starts below the lights", "brand top \(brandTop * z), padding \(a[2])")
+            check(brandTop * z >= Double(topGap + closeAt.height) + 4, "the rail's first item starts below the lights", "top \(brandTop * z), padding \(a[2])")
         } else {
             check(false, "the page has its rail and brand", geo)
         }
@@ -138,11 +138,21 @@ enum SelfTest {
               "the window draws the sidebar material behind the page")
         check((c.webView.value(forKey: "drawsBackground") as? Bool) == false, "the web view draws no background of its own")
         check(await js(c.webView, "document.documentElement.classList.contains('shell-vibrant')") == "1", "the page is marked shell-vibrant")
-        // what it looks like once the page leaves its rail transparent (the page's part, to come)
-        await js(c.webView, "(() => { const s = document.createElement('style'); s.id = '__vibrant'; s.textContent = 'html, body, #app, .rail { background: transparent !important } #main { background: #fff }'; document.head.append(s); return 1; })()")
+        // the page's part (docs/SHELL.md §9): the rail transparent over the material, the content column opaque
+        let paint = await js(c.webView, "JSON.stringify(['html', 'body', '#app', '.rail', '#main'].map(q => getComputedStyle(document.querySelector(q)).backgroundColor))")
+        let colours = (try? JSONSerialization.jsonObject(with: Data(paint.utf8)) as? [String]) ?? []
+        let clear = { (c: String) in c == "transparent" || c.hasSuffix(", 0)") }
+        check(colours.count == 5 && colours.prefix(4).allSatisfy(clear) && !clear(colours[4]),
+              "the page leaves its rail clear over the material and paints the content column", paint)
+        let mainBox = await js(c.webView, "JSON.stringify((() => { const m = document.querySelector('#main').getBoundingClientRect(), r = document.querySelector('.rail').getBoundingClientRect(); return [Math.round(m.left - r.right), Math.round(innerWidth - m.right)]; })())")
+        check(mainBox == "[0,0]", "the content column runs from the rail to the window's edge", mainBox)
+        capture(w, "02-material-light")
+        // and in dark mode, as the Mac would be
+        w.appearance = NSAppearance(named: .darkAqua)
+        await pause(1.2)
+        capture(w, "02-material-dark")
+        w.appearance = nil
         await pause(0.6)
-        capture(w, "02-vibrant-rail")
-        await js(c.webView, "(document.getElementById('__vibrant').remove(), 1)")
         // AppKit lays the title bar out again on its own; the lights go back where they belong
         close.setFrameOrigin(NSPoint(x: 7, y: 7))
         _ = await until(2) { close.frame.origin.x == BinahWindowController.lightsInset }
@@ -290,6 +300,8 @@ enum SelfTest {
         default:
             return log("INFO  the microphone is turned off for the test app in System Settings → Privacy & Security → Microphone")
         }
+        // WebKit holds a capture request until the page's window is in front
+        guard await front(c.window!) else { return skip("microphone") }
         BinahWindowController.micAnswers.removeAll()
         let audio = await js(web, """
             Promise.race([
