@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 /**
  * Train on this (docs/SHELL.md §7), from any app's share sheet, with a card at the bottom saying
  * what happened. A link, or a passage of 20 words or more, goes to /api/save with this phone's
- * token, or with the window's sign-in if the phone isn't connected yet; the next nightly run
- * turns it into practice items. Tap the card for Today.
+ * token, or with the window's sign-in if the phone isn't connected yet; Binah keeps it for
+ * later practice, and the card shows what it said. Tap the card for Today.
  */
 public class ShareActivity extends Activity {
     private static final Pattern LINK = Pattern.compile("https?://\\S+");
