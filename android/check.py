@@ -393,6 +393,29 @@ def main(base, cookie, token):
                 break
         check(tapped and ok, "Settings → Connect this phone connects it")
         adb("shell", "input", "keyevent", "KEYCODE_BACK")
+
+    # signing in connects the phone by itself: no token, signed out, then the page's own sign-in
+    # (the cookie, then what its form does next), and within seconds a token of this phone's own
+    adb("shell", "am", "force-stop", PKG)
+    adb("shell", "am", "start", "-n", f"{PKG}/{ACT}.MainActivity", "--es", "binah.token", "-")
+    conn["ws"] = attach()
+    if not conn["ws"]:
+        check(False, "the test build opens again, without a token")
+        return finish()
+    conn["ws"].send("Network.enable")
+    conn["ws"].send("Network.clearBrowserCookies")
+    js("location.reload(), 1")
+    time.sleep(1)
+    until("window.binahState && binahState().route === 'signin'", 15)
+    time.sleep(5)
+    token_kept = lambda: 'name="token"' in adb("shell", "run-as", PKG, "cat", "shared_prefs/binah.xml", check_=False)
+    check(js("binahState().route") == "signin" and not token_kept(), "signed out, the phone has no token", str(js("binahState().route")))
+    conn["ws"].send("Network.setCookie", name="binah", value=cookie, url=f"http://localhost:{PORT}")
+    signed = js("import('/app.js').then(async m => { m.state.me = await (await fetch('/api/me')).json(); m.go('today'); return !!m.state.me.signed_in; })")
+    t0 = time.time()
+    while time.time() - t0 < 15 and not token_kept():
+        time.sleep(0.5)
+    check(signed is True and token_kept(), "signing in connects the phone within seconds", f"{signed}, {time.time() - t0:.1f} s")
     return finish()
 
 
