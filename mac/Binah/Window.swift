@@ -98,6 +98,8 @@ final class BinahWindowController: NSWindowController, NSWindowDelegate, WKNavig
                                            forMainFrameOnly: true, in: .page))
         content.addUserScript(WKUserScript(source: WindowMessages.script, injectionTime: .atDocumentStart,
                                            forMainFrameOnly: true, in: .page))
+        content.addUserScript(WKUserScript(source: Self.vibrantScript, injectionTime: .atDocumentStart,
+                                           forMainFrameOnly: true, in: .page))
         content.addScriptMessageHandler(services, contentWorld: .page, name: "binahShell")
         content.add(windowMessages, contentWorld: .page, name: "binahWindow")
 
@@ -112,9 +114,24 @@ final class BinahWindowController: NSWindowController, NSWindowDelegate, WKNavig
         view.underPageBackgroundColor = window?.backgroundColor
         services.webView = view
         webView = view
-        window?.contentView = view
+        // The sidebar's material behind a web view that draws no background of its own: where the
+        // page leaves itself transparent (its rail, under .shell-vibrant) the desktop shows through,
+        // blurred, as in Finder's or Mail's sidebar; everything it paints covers it.
+        let material = NSVisualEffectView(frame: window?.contentView?.bounds ?? .zero)
+        material.material = .sidebar
+        material.blendingMode = .behindWindow
+        material.state = .followsWindowActiveState
+        material.autoresizingMask = [.width, .height]
+        view.setValue(false, forKey: "drawsBackground")
+        view.frame = material.bounds
+        material.addSubview(view)
+        window?.contentView = material
         view.load(URLRequest(url: route.map(Server.url) ?? Server.base))
     }
+
+    /// Tells the page the sidebar material is behind it (docs/SHELL.md §9), before its styles apply,
+    /// so it can leave its rail transparent from the first frame.
+    static let vibrantScript = "document.documentElement.classList.add('shell-vibrant')"
 
     /// Binah moved (Settings → Address): the page again, from there.
     func loadFromBase() {

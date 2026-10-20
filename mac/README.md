@@ -10,7 +10,10 @@ two is `docs/SHELL.md`.
   (`.shell-mac .rail`). Pressing the page's empty ground (around the column, the rail below its
   buttons) or its top 28 px strip moves the window, and a double-click zooms it, unless the
   press lands on a control. Full screen puts `shell-fullscreen` on the page so the rail takes its
-  room back. The frame is remembered; at least 900 × 600, so the page always has its two-column
+  room back. Behind the page the window draws macOS's sidebar material (`NSVisualEffectView`,
+  `.sidebar`, behind-window), and the web view draws no background of its own; the shell marks
+  the page `shell-vibrant`, and where the page leaves itself transparent (its rail) the desktop
+  shows through, blurred, as in Finder's sidebar. The frame is remembered; at least 900 × 600, so the page always has its two-column
   layout. Only Binah loads in the window: any other address opens in the browser.
 - **The menus**: Binah (Settings… ⌘, is the page's own settings; Mac App Settings… ⌥⌘, is this
   app's), File (New Window ⌘N, Train on This… ⇧⌘T), Edit (with Spelling and Grammar for your
