@@ -1,0 +1,32 @@
+/* The public taste of Binah (stuffs.tiresia.xyz/binah/): the app's own style.css plus this layout. */
+.page{max-width:640px;margin:0 auto;padding:calc(var(--safe-t) + 28px) 16px calc(var(--safe-b) + 48px);display:grid;gap:30px}
+.page a{color:var(--accent)}
+.mark b{font-size:26px} .mark .he{font-size:22px}
+.intro .title{font-size:32px;margin-top:14px}
+.lede{font:400 18px/1.6 var(--serif);color:var(--ink-2);margin-top:8px}
+.links{margin-top:6px} .links .btn{display:inline-block;width:auto;padding:12px 18px;text-decoration:none}
+.links .btn.ghost{color:var(--ink)} .links .btn:not(.ghost){color:var(--card)}
+.h2{font:600 21px/1.25 var(--serif);margin:24px 0 8px}
+.what{margin:0;padding-left:18px;display:grid;gap:10px;font-size:15px;color:var(--ink-2)}
+.what b{color:var(--ink)}
+.small{font-size:13.5px;line-height:1.5}
+.game{padding:18px}
+.game #how{margin:2px 0 12px}
+.game .tech-text{font-size:18px}
+.game .btns .opt{text-align:center}
+.score{font:600 26px/1.15 var(--serif)}
+.shots .strip{display:grid;grid-auto-flow:column;grid-auto-columns:min(62%,240px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;margin:0 -16px;padding-inline:16px}
+.shots figure{margin:0;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots figcaption{font-size:13px;color:var(--ink-3);margin-top:8px;line-height:1.4}
+.own p{font-size:15px;color:var(--ink-2)}
+.own .links{margin-top:12px}
+.foot{margin-top:18px}
+@media (min-width:960px){
+  .page{max-width:1120px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:56px;padding-top:48px}
+  .intro{grid-column:1;grid-row:1} .what-sec{grid-column:1;grid-row:2}
+  .play{grid-column:2;grid-row:1 / span 2;align-self:start;position:sticky;top:24px}
+  .shots,.own{grid-column:1 / -1}
+  .shots .strip{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);overflow:visible;margin:0;padding:0}
+  .own{max-width:720px}
+}

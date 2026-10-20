@@ -20,6 +20,8 @@ I started out wanting a Lumosity for language, and the research talked me out of
 - **A golden set.** I write answers and score them myself with the same rubric Claude uses, and the app reports how well Claude agrees with me (exact, within one point, leniency, and quadratic weighted kappa). That's how I know whether to trust the grades.
 - **A passage engine** (`engine/`) that mines my own ebooks for good passages: it measures every passage with plain, checkable numbers, has Claude draft items from only the best candidates, and has a second model check them blind. See [docs/ENGINE.md](docs/ENGINE.md).
 
+You can try one of the games, Technique or Fair Move?, at **[stuffs.tiresia.xyz/binah](https://stuffs.tiresia.xyz/binah/)**. That page runs entirely in the browser; its source is `demo/`, and `tools/build_demo.py OUT_DIR` puts it together.
+
 The design and the reasons behind it are in [docs/DESIGN.md](docs/DESIGN.md).
 
 ## How it works

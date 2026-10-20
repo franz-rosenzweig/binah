@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Binah</title>
+<meta name="description" content="A daily training app for reading closely, reasoning carefully and saying what you mean. Try one of its games here.">
+<meta name="theme-color" content="#ece3d7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1d2b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<main class="page">
+  <section class="intro">
+    <div class="mark"><b>binah</b><span class="he" lang="he">בינה</span></div>
+    <h1 class="title">Understanding, trained on real text</h1>
+    <p class="lede">Binah (Hebrew for understanding) is my daily training app for understanding what I read, weighing what I hear, and saying what I mean. You can play one of its games right here. The full app runs on my own server and Claude grades the answers, so it isn't something I can open up to everyone, but all the code is on GitHub if you want your own.</p>
+    <p class="links"><a class="btn ghost" href="https://github.com/franz-rosenzweig/binah">The code on GitHub</a></p>
+  </section>
+
+  <section class="play" aria-labelledby="playTitle">
+    <div class="card game" id="game">
+      <span class="label">Try one</span>
+      <h2 class="h2" id="playTitle" style="margin-top:4px">Technique or Fair Move?</h2>
+      <p class="small muted" id="how">Six short snippets. Half of them use a manipulation trick, and the other half make the same kind of move FAIRLY. Call each one, and if it's a trick, name it for a bonus. Games that only show you fakes just teach you to call everything fake, so the fair ones are the point.</p>
+      <div id="round"><p class="small muted">Loading…</p></div>
+    </div>
+  </section>
+
+  <section class="what-sec">
+    <h2 class="h2" style="margin-top:0">What the full app does</h2>
+    <ul class="what">
+      <li><b>A daily edition.</b> Five to eight minutes, and then it's done: a recall card on yesterday's passage, one game for understanding, one for reasoning, and one for writing or speaking. There's no streak to break, only a weekly rhythm you set yourself.</li>
+      <li><b>Seven games, all on real text.</b> Write a passage's point from memory in 20 words. Say what's really going on in a scene. Tap where an argument breaks. Spot the trick. Pick the word the author actually chose. Cut a padded sentence back to what a good writer wrote. Talk for a minute without hesitating.</li>
+      <li><b>Answer, verdict, revise, reference.</b> You rate yourself first, Claude gives one strength and one thing to work on, you get ONE revision, and only then do you see the reference. The research says the learning lives in the revision.</li>
+      <li><b>Honest numbers.</b> Ratings for every skill and every item, a golden set where you grade yourself to check how far to trust Claude's grades, and a sealed test once a month to see if any of it carries over.</li>
+      <li><b>Your own books.</b> A passage engine reads your ebooks and finds good passages, so the reading games are made from books you actually own.</li>
+    </ul>
+  </section>
+
+
+  <section class="shots" aria-label="Screens from the full app">
+    <h2 class="h2">From the full app</h2>
+    <div class="strip">
+      <figure><img src="shots/technique.webp" width="540" height="1169" alt="Technique or Fair Move: a snippet from a nurse's post, with Manipulation and Fair move buttons, technique choices and a confidence slider" loading="lazy"><figcaption>Technique or Fair Move, with a confidence on every call</figcaption></figure>
+      <figure><img src="shots/just-a-minute.webp" width="540" height="1169" alt="Just a Minute: the topic Coffee, a sixty-second ring and a record button" loading="lazy"><figcaption>Just a Minute: sixty seconds, recorded and transcribed on the server</figcaption></figure>
+      <figure><img src="shots/benchmark.webp" width="540" height="1169" alt="A finished monthly benchmark: scores per section, discernment, calibration, and Claude's notes on the essay" loading="lazy"><figcaption>The monthly benchmark, on a test you never practise on</figcaption></figure>
+      <figure><img src="shots/golden-set.webp" width="540" height="1169" alt="The golden set: items to grade yourself and a table of how often Claude agrees with you" loading="lazy"><figcaption>The golden set: how often Claude agrees with you</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="own">
+    <h2 class="h2">Running your own</h2>
+    <p>You'll need a computer that stays on, Python, and the Claude Code CLI signed in with your own Claude subscription, because that's what does the grading. A Calibre library is optional; it's what the passage engine reads. The README on GitHub walks through the rest, and there are Mac and Android apps in the repo too.</p>
+    <p class="links"><a class="btn" href="https://github.com/franz-rosenzweig/binah">franz-rosenzweig/binah on GitHub</a></p>
+    <p class="small muted foot">Code and the snippets above are under the MIT license. Nothing you do on this page leaves your browser.</p>
+  </section>
+</main>
+<script src="demo.js" type="module"></script>
+</body>
+</html>
