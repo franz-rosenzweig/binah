@@ -144,7 +144,7 @@ The screenshots come from a sandbox with public-domain passages (Thoreau, Mill, 
 Binah is a web app, so on any phone or computer you open your copy's address and sign in with the username and password set on the server. On a phone, **Add to Home Screen** (Safari) or **Install app** (Chrome) puts it on the home screen, where it opens full screen like an app. Full steps in [Install and devices](docs/install.md).
 
 ### Mac
-There are no downloads on GitHub Releases, so the Mac app is built from this repository: on macOS 14 or newer with the Command Line Tools and `brew install xcodegen librsvg`, run `cd mac && ./build.sh` and copy `build/Binah.app` to Applications. It adds Binah's menus, today's edition in the menu bar and Train on This, and the sidebar shows the Mac's own sidebar material, like Finder's. See [Install → Mac](docs/install.md#the-mac-app).
+There are no downloads on GitHub Releases, so the Mac app is built from this repository: on macOS 26 or newer with Xcode installed (for `actool`, which compiles the icon), run `cd mac && ./build.sh` and copy `build/Binah.app` to Applications. It's a native SwiftUI app, with every game, Binah's menus, today's edition in the menu bar and Train on This. See [Install → Mac](docs/install.md#the-mac-app).
 
 ### Android
 The Android app is built from the repository too, with JDK 17 and the Android SDK: `cd android && ./gradlew assembleDebug` makes a test build, and `./release.sh` makes a signed one with your own key. It adds a home-screen widget, Train on this in the share sheet, and the microphone. See [Install → Android](docs/install.md#the-android-app).
@@ -169,7 +169,7 @@ Start with [What is Binah?](docs/what-is-binah.md)
 - **Web app:** vanilla JavaScript with no build step (`web/`), phone first, with a service worker so it opens without a connection. One stylesheet has two looks: Material 3 under 900px wide and in the Android app, and an Apple-like look with a sidebar everywhere else.
 - **Grading:** the Claude Code CLI (`claude -p`) on the owner's own subscription, through one small wrapper (`binah/claude_cli.py`), with tools, settings and session history switched off and a daily cap on graded calls.
 - **Speech:** faster-whisper on the server's CPU, with voice detection for pauses, and fillers and repeats counted by code. Claude gets the transcript and the numbers, never the audio.
-- **Shells:** the Mac app is Swift (AppKit and WKWebView) and the Android app is a Java WebView without AndroidX. The page is the whole interface; [docs/SHELL.md](docs/SHELL.md) is the contract between them.
+- **Apps:** the Mac app is native SwiftUI and talks to the JSON API ([docs/API.md](docs/API.md)). The Android app is a Java WebView without AndroidX, with the page as its whole interface; [docs/SHELL.md](docs/SHELL.md) is the contract between them. A native Android app in Kotlin and Compose is being built beside it.
 
 ## Credits
 
@@ -179,7 +179,7 @@ Binah stands on these, with thanks:
 - [faster-whisper](https://github.com/SYSTRAN/faster-whisper) (MIT), with [CTranslate2](https://github.com/OpenNMT/CTranslate2) (MIT), [PyAV](https://github.com/PyAV-Org/PyAV) (BSD-3-Clause), [ONNX Runtime](https://github.com/microsoft/onnxruntime) (MIT), Hugging Face's [tokenizers](https://github.com/huggingface/tokenizers) and [huggingface_hub](https://github.com/huggingface/huggingface_hub) (Apache-2.0) and the [Silero VAD](https://github.com/snakers4/silero-vad) model (MIT), running OpenAI's [Whisper](https://github.com/openai/whisper) small.en model (MIT) for speech.
 - [wordfreq](https://github.com/rspeer/wordfreq) (Apache-2.0 code, CC BY-SA 4.0 data) for how rare a word is, in the passage engine.
 - The fonts in `web/fonts`, all under the SIL Open Font License 1.1: [Newsreader](https://fonts.google.com/specimen/Newsreader) by Production Type, [Figtree](https://fonts.google.com/specimen/Figtree) by Erik Kennedy, and [Frank Ruhl Libre](https://fonts.google.com/specimen/Frank+Ruhl+Libre) by Yanek Iontef. The icon's ב is drawn from Frank Ruhl Libre.
-- The [Gradle Wrapper](https://github.com/gradle/gradle) (Apache-2.0) in `android/`, and, for building, [XcodeGen](https://github.com/yonaskolb/XcodeGen) (MIT) and [librsvg](https://gitlab.gnome.org/GNOME/librsvg) (LGPL-2.1+) on the Mac, and [fontTools](https://github.com/fonttools/fonttools) (MIT), [Brotli](https://github.com/google/brotli) (MIT) and [Pillow](https://github.com/python-pillow/Pillow) (MIT-CMU) for `tools/make_icons.py`.
+- The [Gradle Wrapper](https://github.com/gradle/gradle) (Apache-2.0) in `android/`, and [fontTools](https://github.com/fonttools/fonttools) (MIT), [Brotli](https://github.com/google/brotli) (MIT) and [Pillow](https://github.com/python-pillow/Pillow) (MIT-CMU) for `tools/make_icons.py`.
 - The monthly benchmark's reading passages come from public-domain essays, downloaded from [Project Gutenberg](https://www.gutenberg.org) on the server.
 - The practice content in `content/` (the Technique or Fair Move? items and the Just a Minute and Table Topics prompts) was written for Binah and is under the same MIT license as the code. Grading runs on [Claude](https://www.anthropic.com/claude), through the Claude Code CLI.
 
