@@ -1,6 +1,6 @@
 // The games. Every open answer runs in the same fixed order:
 // answer (plus a 0-4 self-rating) -> Claude's verdict -> one revision -> the reference.
-import { $, api, esc, words, toast, haptic, state, go } from './app.js';
+import { $, api, esc, words, toast, haptic, state, go, bar, icon, PILLAR_OF, PILLAR } from './app.js';
 
 const main = document.getElementById('main');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -9,10 +9,30 @@ const NAMES = { gist: 'Gist & Infer', subtext: 'Subtext', weak: 'Find the Weak S
 const SKILL = { gist: 'Gist', inference: 'Inference', weak: 'Weak steps', discern: 'Fair or trick', precision: 'Precision', concision: 'Concision', fluency: 'Fluency' };
 let ctx = {};
 
-function head(name, prog = '') {
-  return `<div class="g-head"><button class="x" type="button" id="xBtn" aria-label="Back">✕</button><span class="g-name">${esc(name)}</span><span class="g-prog">${esc(prog)}</span></div>`;
+// The game's header: back, the game and where it sits (a toolbar on desktop, a top app bar on Material),
+// with a small capsule on the right for progress (`prog` text, or `progHtml` markup).
+function head(name, prog = '', progHtml = '') {
+  const p = PILLAR_OF[ctx.game];
+  const n = state.today ? state.today.edition.slots.length : 3;
+  const where = ctx.day ? `game ${Number(ctx.slot) + 1} of ${n} in today's edition` : ctx.golden ? 'Golden set' : 'Practice';
+  const cap = progHtml || (prog ? esc(prog) : '');
+  return bar({ title: name, sub: `${p ? PILLAR[p] + ' · ' : ''}${where}`, back: true, kind: 'game', actions: cap ? `<span class="capsule" id="cap">${cap}</span>` : '' });
 }
-function bindX() { const x = $('#xBtn'); if (x) x.onclick = leave; state.back = leave; }
+// Called after every render of a game screen: wraps what follows the header in the game body, and
+// marks it split when it has a reading pane and an answer panel (side by side on a wide desktop window).
+function bindX(onBack = leave) {
+  const hd = main.querySelector(':scope > .bar');
+  if (hd && !main.querySelector(':scope > .body')) {
+    const body = document.createElement('div');
+    body.className = 'body game';
+    while (hd.nextSibling) body.appendChild(hd.nextSibling);
+    main.appendChild(body);
+  }
+  const body = main.querySelector(':scope > .body');
+  if (body) body.classList.toggle('split', !!body.querySelector('.gm'));
+  const x = $('#barBack'); if (x) x.onclick = onBack;
+  state.back = onBack;
+}
 function leave() { ctx.day ? go('today') : go('practice'); }
 function srcLine(it) {
   const s = it.source || {};
@@ -135,8 +155,8 @@ function playGist(it) {
 // ── Subtext ──
 function playSubtext(it) {
   const started = Date.now(); let self = null;
-  main.innerHTML = head(NAMES.subtext) + srcLine(it) + `<div class="passage">${paras(it.passage)}</div><p class="ask">${esc(it.question)}</p>
-    <textarea class="ta" id="sT" style="min-height:80px" aria-label="Your answer"></textarea>${selfRate('sR')}<button class="btn" id="send" type="button" disabled>Send to the grader</button><div id="out"></div>`;
+  main.innerHTML = head(NAMES.subtext) + `<div class="gm"><div class="pane">${srcLine(it)}<div class="passage">${paras(it.passage)}</div></div><aside class="insp" aria-label="Your answer"><p class="ask">${esc(it.question)}</p>
+    <textarea class="ta" id="sT" style="min-height:80px" aria-label="Your answer"></textarea>${selfRate('sR')}<button class="btn" id="send" type="button" disabled>Send to the grader</button><div id="out"></div></aside></div>`;
   bindX();
   const upd = () => { $('#send').disabled = !$('#sT').value.trim() || self === null; };
   $('#sT').oninput = upd; bindRate('sR', n => { self = n; upd(); });
@@ -171,11 +191,11 @@ function playBloat(it) {
 // ── Find the Weak Step ──
 function playWeak(it) {
   const started = Date.now(); let pick = null, flaw = null;
-  main.innerHTML = head(NAMES.weak) + srcLine(it) + `<p class="ask">Tap the sentence where the reasoning is weakest, or call it sound.</p>
-    <div class="passage" id="wp">${it.sentences.map((s, i) => s === '¶' ? '<br><br>' : `<span class="sent" role="button" tabindex="0" data-i="${i}">${esc(s)}</span> `).join('')}</div>
-    <p class="ask">What's wrong with it?</p><div class="pills" id="wf">${it.flaws.map(f => `<button class="opt" type="button" data-f="${esc(f)}">${esc(f)}</button>`).join('')}</div>
+  main.innerHTML = head(NAMES.weak) + `<div class="gm"><div class="pane">${srcLine(it)}<p class="ask">Tap the sentence where the reasoning is weakest, or call it sound.</p>
+    <div class="passage" id="wp">${it.sentences.map((s, i) => s === '¶' ? '<br><br>' : `<span class="sent" role="button" tabindex="0" data-i="${i}">${esc(s)}</span> `).join('')}</div></div>
+    <aside class="insp" aria-label="Your answer"><p class="ask">What's wrong with it?</p><div class="pills" id="wf">${it.flaws.map(f => `<button class="opt" type="button" data-f="${esc(f)}">${esc(f)}</button>`).join('')}</div>
     <p class="ask">Why, in one line? (optional; Claude reads it)</p><textarea class="ta" id="why" style="min-height:60px" aria-label="Why"></textarea>
-    <button class="btn" id="send" type="button" disabled>Check it</button><div id="out"></div>`;
+    <button class="btn" id="send" type="button" disabled>Check Answer</button><div id="out"></div></aside></div>`;
   bindX();
   const upd = () => { $('#send').disabled = flaw === null || (pick === null && flaw !== 'none (sound)'); };
   main.querySelectorAll('.sent').forEach(s => { const f = () => { if ($('#wp').classList.contains('locked')) return; pick = +s.dataset.i; main.querySelectorAll('.sent').forEach(x => x.classList.toggle('picked', x === s)); haptic('tick'); upd(); }; s.onclick = f; s.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); f(); } }; });
@@ -204,8 +224,8 @@ function playWeak(it) {
 function playWord(it) {
   const started = Date.now();
   const sentence = esc(it.sentence).replace('_____', '<span class="blank">&nbsp;</span>');
-  main.innerHTML = head(NAMES.word) + srcLine(it) + `<p class="passage" style="font-size:20px">${sentence}</p><p class="ask">Which word did the author choose?</p>
-    <div class="opts" id="wo">${it.options.map(w => `<button class="opt" type="button" data-w="${esc(w)}">${esc(w)}</button>`).join('')}</div><div id="out"></div>`;
+  main.innerHTML = head(NAMES.word) + `<div class="gm"><div class="pane">${srcLine(it)}<p class="passage" style="font-size:20px">${sentence}</p></div><aside class="insp" aria-label="Your answer"><p class="ask">Which word did the author choose?</p>
+    <div class="opts" id="wo">${it.options.map(w => `<button class="opt" type="button" data-w="${esc(w)}">${esc(w)}</button>`).join('')}</div><div id="out"></div></aside></div>`;
   bindX();
   $('#wo').onclick = async e => {
     const b = e.target.closest('button'); if (!b || b.disabled) return;
@@ -244,12 +264,12 @@ async function techRound(ids) {
 function techOne(it, i, n, results) {
   return new Promise(resolve => {
     const started = Date.now(); let kind = null, tech = null;
-    main.innerHTML = head(NAMES.tech, `${i + 1} of ${n}`) + `<div class="dots">${Array.from({ length: n }, (_, j) => `<i class="${j < results.length ? (results[j].instant.kind_ok ? 'ok' : 'no') : j === i ? 'now' : ''}"></i>`).join('')}</div>
-      <p class="small" style="margin-bottom:6px">${esc(it.context)}</p><div class="tech-text" id="tt">${esc(it.text)}</div>
-      <div class="btns"><button class="opt" type="button" data-k="technique" style="text-align:center">Manipulation</button><button class="opt" type="button" data-k="fair" style="text-align:center">Fair move</button></div>
+    const prog = `<span class="prog" aria-label="${i + 1} of ${n}">${Array.from({ length: n }, (_, j) => `<i class="${j < results.length ? (results[j].instant.kind_ok ? 'ok' : 'no') : j === i ? 'on' : ''}"></i>`).join('')}</span>`;
+    main.innerHTML = head(NAMES.tech, '', prog) + `<div class="gm"><div class="pane"><p class="small" style="margin:6px 0">${esc(it.context)}</p><div class="tech-text" id="tt">${esc(it.text)}</div></div>
+      <aside class="insp" aria-label="Your call"><div class="tk"><button class="opt" type="button" data-k="technique">Manipulation</button><button class="opt" type="button" data-k="fair">Fair move</button></div>
       <div id="techPick" hidden><p class="ask">Which technique? (optional, a bonus if right)</p><div class="pills" id="tp">${it.techniques.map(t => `<button class="opt" type="button" data-t="${esc(t)}">${esc(t)}</button>`).join('')}</div></div>
       <div class="conf"><span>How sure are you?</span><b id="cv">70%</b></div><input type="range" id="cr" min="50" max="100" step="5" value="70" aria-label="Confidence">
-      <button class="btn" id="send" type="button" disabled>Call it</button><div id="out"></div>`;
+      <button class="btn" id="send" type="button" disabled>Call It</button><div id="out"></div></aside></div>`;
     bindX();
     const kinds = [...main.querySelectorAll('[data-k]')];
     kinds.forEach(b => b.onclick = () => { if (b.disabled) return; kind = b.dataset.k; kinds.forEach(x => x.classList.toggle('on', x === b)); $('#techPick').hidden = kind !== 'technique'; $('#send').disabled = false; haptic('tick'); });
@@ -272,13 +292,12 @@ function techOne(it, i, n, results) {
 // ── Just a Minute ──
 function playJam(it) {
   let rec = null, chunks = [], t0 = 0, timer = null, stream = null;
-  main.innerHTML = head(NAMES.jam) + `<p class="small" style="text-align:center;margin-top:6px">Talk for sixty seconds without hesitation, repetition or deviation.</p>
-    <p class="topic" style="margin-top:18px">${esc(it.topic)}</p>
-    <div class="rec"><div class="ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" style="fill:none;stroke:var(--sunk);stroke-width:7"/><circle id="arc" cx="50" cy="50" r="44" style="fill:none;stroke:var(--accent);stroke-width:7;stroke-linecap:round;stroke-dasharray:276.5;stroke-dashoffset:276.5"/></svg><span class="t" id="tm">60</span></div>
-      <button class="recbtn" id="rb" type="button" aria-label="Start recording"><i></i></button><span class="small" id="rs">Tap to start. It stops by itself at sixty.</span></div><div id="out"></div>`;
-  bindX();
+  main.innerHTML = head(NAMES.jam, '60 s') + `<section class="topiccard"><span>Your topic</span><p class="topic">${esc(it.topic)}</p></section>
+    <div class="rec"><div class="ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" style="fill:none;stroke:var(--sunk);stroke-width:6"/><circle id="arc" cx="50" cy="50" r="44" style="fill:none;stroke:var(--accent);stroke-width:6;stroke-linecap:round;stroke-dasharray:276.5;stroke-dashoffset:276.5"/></svg><span class="t" id="tm">1:00</span></div>
+      <div class="rules"><span>No hesitation</span><span>No repetition</span><span>No deviation</span></div>
+      <button class="recbtn" id="rb" type="button" aria-label="Start recording">${icon('mic', 'mic')}${icon('stop', 'stop')}</button><span class="small" id="rs">Tap to start. It stops by itself at sixty seconds.</span></div><div id="out"></div>`;
   const stopAll = () => { if (timer) clearInterval(timer); timer = null; if (stream) stream.getTracks().forEach(t => t.stop()); };
-  state.back = () => { stopAll(); leave(); };
+  bindX(() => { if (rec && rec.state === 'recording') { rec.onstop = null; rec.stop(); window.binahShell?.mic?.(false); } stopAll(); leave(); });
   const finish = () => { if (rec && rec.state === 'recording') rec.stop(); };
   $('#rb').onclick = async () => {
     if (rec && rec.state === 'recording') return finish();
@@ -291,6 +310,7 @@ function playJam(it) {
     rec.onstop = async () => {
       stopAll();
       $('#rb').classList.remove('on'); $('#rb').disabled = true; $('#rs').textContent = 'Got it.';
+      const cap = $('#cap'); if (cap) cap.outerHTML = '<span class="capsule" id="cap">Sent</span>';
       window.binahShell?.mic?.(false);
       const blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
       const fd = new FormData();
@@ -305,10 +325,11 @@ function playJam(it) {
     };
     rec.start(1000); t0 = Date.now();
     window.binahShell?.mic?.(true);
-    $('#rb').classList.add('on'); $('#rb').setAttribute('aria-label', 'Stop'); $('#rs').textContent = 'Tap to stop early.'; haptic('confirm');
+    $('#rb').classList.add('on'); $('#rb').setAttribute('aria-label', 'Stop and send'); $('#rs').textContent = 'Stop sends it. Your voice goes only to your Binah server.'; haptic('confirm');
+    const cap = $('#cap'); if (cap) cap.outerHTML = '<span class="recchip" id="cap"><i></i>Recording</span>';
     timer = setInterval(() => {
-      const left = Math.max(0, 60 - (Date.now() - t0) / 1000);
-      $('#tm').textContent = Math.ceil(left);
+      const left = Math.max(0, 60 - (Date.now() - t0) / 1000), s = Math.ceil(left);
+      $('#tm').textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
       $('#arc').style.strokeDashoffset = String(276.5 * (left / 60));
       if (left <= 0) finish();
     }, 200);
@@ -334,11 +355,12 @@ function jamResult(a) {
 export async function goldenPlay(id) {
   const [it, g] = await Promise.all([api('/api/item/' + encodeURIComponent(id)), api('/api/golden')]);
   const rubric = g.rubrics[it.game].criteria;
+  ctx = { game: it.game, golden: true };
   state.back = () => go('golden');
   let field;
   if (it.game === 'gist') {
     main.innerHTML = head('Golden set · ' + NAMES.gist) + srcLine(it) + `<div class="passage">${paras(it.passage)}</div><button class="btn" id="hide" type="button">Hide it and write</button>`;
-    $('#xBtn').onclick = () => go('golden');
+    bindX(() => go('golden'));
     await new Promise(r => { $('#hide').onclick = r; });
     main.innerHTML = head('Golden set · ' + NAMES.gist) + `<p class="ask">The main point, 20 words or fewer.</p><textarea class="ta" id="aT"></textarea><p class="ask">${esc(it.inference_q)}</p><textarea class="ta" id="aI" style="min-height:64px"></textarea>`;
     field = () => ({ gist: $('#aT').value.trim(), inference: $('#aI').value.trim() });
@@ -349,8 +371,8 @@ export async function goldenPlay(id) {
     main.innerHTML = head('Golden set · ' + NAMES.bloat) + `<p class="ask">Cut it back to the author's line (par ${it.par}).</p><textarea class="ta" id="aT" style="min-height:130px">${esc(it.padded)}</textarea>`;
     field = () => ({ text: $('#aT').value.trim() });
   }
-  $('#xBtn').onclick = () => go('golden');
-  main.insertAdjacentHTML('beforeend', `<button class="btn" id="next" type="button">Now score it yourself</button><div id="sc"></div>`);
+  main.insertAdjacentHTML('beforeend', `<button class="btn" id="next" type="button">Now Score It Yourself</button><div id="sc"></div>`);
+  bindX(() => go('golden'));
   $('#next').onclick = async () => {
     const answer = field();
     if (!Object.values(answer).some(Boolean)) return toast('Write an answer first');

@@ -1,7 +1,7 @@
 // The monthly benchmark: one sitting on a sealed form, about thirty-five minutes. No feedback until
 // the end, every answer is saved as it's given (so a sitting can stop and pick up later), and the
 // results live on their own track, apart from practice ratings.
-import { $, api, esc, toast, haptic, state, go } from './app.js';
+import { $, api, esc, toast, haptic, state, go, bar, isM3 } from './app.js';
 
 const main = document.getElementById('main');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -24,10 +24,22 @@ export async function bench(rest = []) {
   } catch (e) { if (e.message !== 'signed out') main.innerHTML = head('Benchmark') + `<p class="err">${esc(e.message)}</p>`; bindX(); }
 }
 
-function head(name, prog = '') {
-  return `<div class="g-head"><button class="x" type="button" id="xBtn" aria-label="Back">✕</button><span class="g-name">${esc(name)}</span><span class="g-prog">${esc(prog)}</span></div>`;
+function head(name, prog = '', sub = 'Monthly benchmark') {
+  return bar({ title: name, sub, back: true, kind: 'game', actions: prog ? `<span class="capsule">${esc(prog)}</span>` : '' });
 }
-function bindX(to = 'skills') { const x = $('#xBtn'); const f = () => { onKeys(null); go(to); }; if (x) x.onclick = f; state.back = f; }
+// After each render: what follows the header goes into the screen's body; back goes to `to`.
+function bindX(to = 'skills') {
+  const hd = main.querySelector(':scope > .bar');
+  if (hd && !main.querySelector(':scope > .body')) {
+    const body = document.createElement('div');
+    body.className = 'body game';
+    while (hd.nextSibling) body.appendChild(hd.nextSibling);
+    main.appendChild(body);
+  }
+  const f = () => { onKeys(null); go(to); };
+  const x = $('#barBack'); if (x) x.onclick = f;
+  state.back = f;
+}
 
 // ── the overview: when the next sitting is due, and every sitting so far ──
 
@@ -42,8 +54,8 @@ async function overview() {
   const early = due && due > new Date();
   const rows = done.map(r => { const x = r.results || {};
     return `<tr data-run="${r.id}" style="cursor:pointer"><td style="white-space:nowrap">${esc(new Date(r.finished).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }))}</td><td class="n">${pct(x.argument)}</td><td class="n">${pct(x.inference)}</td><td class="n">${pct(x.vocab)}</td><td class="n">${x.discern ? x.discern.dprime : '—'}</td><td class="n">${x.brier ?? '—'}</td><td class="n">${essayAvg((x.essay || {}).grade) ?? '…'}</td><td class="n">${talkAvg((x.talk || {}).grade) ?? '…'}</td></tr>`; }).join('');
-  main.innerHTML = head('Benchmark') + `<h1 class="title" style="margin-top:6px">The monthly benchmark</h1>
-    <p class="sub">Once a month, a sealed test you never practise on: eight arguments, eight fair-or-trick calls, two passages with three questions each, a 15-minute essay, a 2-minute talk and six words. About 35 minutes. Answers save as you go, so you can stop and come back. You see what you missed at the end.</p>
+  main.innerHTML = bar({ title: 'Benchmark', sub: isM3() ? '' : 'A sealed test, once a month', back: isM3(), kind: isM3() ? 'game' : 'big' }) + `
+    <p class="lede">Once a month, a sealed test you never practise on: eight arguments, eight fair-or-trick calls, two passages with three questions each, a 15-minute essay, a 2-minute talk and six words. About 35 minutes. Answers save as you go, so you can stop and come back. You see what you missed at the end.</p>
     <div class="card" style="margin-top:14px">
       ${open ? `<p><b>You have a sitting in progress.</b></p><button class="btn" id="go" type="button">Continue it</button>`
         : unused ? `<p>${last ? (early ? `Next one is due around <b>${due.toLocaleDateString(undefined, { day: 'numeric', month: 'long' })}</b>. A month between sittings keeps the comparison fair.` : '<b>A sitting is due.</b>') : '<b>Take the first one to set your baseline.</b>'}</p>
@@ -94,7 +106,7 @@ async function sitting() {
       : st.sec === 'vocab' ? `<div class="tech-text">${esc(it.sentence).replace(new RegExp(`\\b(${it.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\b`, 'i'), '<mark>$1</mark>')}</div><p class="ask" style="color:var(--ink)"><b>What does “${esc(it.word)}” mean here?</b></p>`
       : st.sec === 'inference' ? `<details class="card" ${st.it.id === st.passage.questions[0].id ? 'open' : ''}><summary class="small" style="cursor:pointer">Passage ${st.pi + 1}${st.passage.source ? ' · ' + esc(st.passage.source) : ''}</summary><div class="passage" style="margin-top:10px">${paras(st.passage.text)}</div></details><p class="ask" style="color:var(--ink)"><b>${esc(it.stem)}</b></p>`
       : `<p class="small" style="margin-bottom:6px">${esc(it.context)}</p><div class="tech-text">${esc(it.text)}</div><p class="ask">Manipulative as written, or a fair move?</p>`;
-    main.innerHTML = head(SEC[st.sec], prog) + body + `<div class="${binary ? 'btns' : 'opts'}" id="op" style="${binary ? '' : 'display:grid;gap:8px'}">${opts.map(([v, t], k) => `<button class="opt" type="button" data-v="${v}" ${binary ? 'style="text-align:center"' : ''}>${binary ? '' : `<b style="margin-right:8px">${LET[k]}</b>`}${esc(t)}</button>`).join('')}</div>
+    main.innerHTML = head(SEC[st.sec], prog) + body + `<div class="${binary ? 'tk' : 'opts'}" id="op" style="${binary ? '' : 'display:grid;gap:8px'}">${opts.map(([v, t], k) => `<button class="opt" type="button" data-v="${v}" ${binary ? 'style="text-align:center"' : ''}>${binary ? '' : `<b style="margin-right:8px">${LET[k]}</b>`}${esc(t)}</button>`).join('')}</div>
       <div class="conf"><span>How sure are you?</span><b id="cv">${Math.max(floor, 70)}%</b></div><input type="range" id="cr" min="${floor}" max="100" step="5" value="${Math.max(floor, 70)}" aria-label="Confidence">
       <button class="btn" id="nx" type="button" disabled>${i + 1 < steps.length ? 'Next' : 'Done'}</button>`;
     bindX('bench');
@@ -149,7 +161,7 @@ async function sitting() {
     ta.oninput = wc; ta.onblur = () => { if (ta.value !== last && !closed) persist(false).catch(() => {}); };
     $('#dn').onclick = () => close();
     state.back = () => { clearInterval(timer); if (!closed) persist(false).catch(() => {}); go('bench'); };
-    $('#xBtn').onclick = state.back;
+    $('#barBack').onclick = state.back;
     ta.focus();
   }
 
@@ -165,7 +177,7 @@ async function sitting() {
     const stopAll = () => { if (timer) clearInterval(timer); timer = null; if (stream) stream.getTracks().forEach(t => t.stop()); };
     bindX('bench');
     state.back = () => { stopAll(); if (rec && rec.state === 'recording') { rec.onstop = null; rec.stop(); window.binahShell?.mic?.(false); } go('bench'); };
-    $('#xBtn').onclick = state.back;
+    $('#barBack').onclick = state.back;
     $('#skip').onclick = async () => { stopAll(); try { await save('talk', { skipped: true }); next(); } catch (e) { toast(e.message); } };
     const finish = () => { if (rec && rec.state === 'recording') rec.stop(); };
     $('#rb').onclick = async () => {
@@ -198,8 +210,8 @@ async function sitting() {
 
   function finishScreen() {
     onKeys(null);
-    main.innerHTML = head('Benchmark') + `<h1 class="title" style="margin-top:6px">That's everything.</h1>
-      <p class="sub">Hand it in to see your scores and what you missed. The essay and the talk are graded on the server and arrive a minute or two later.</p>
+    main.innerHTML = head("That's everything") + `
+      <p class="lede" style="margin-top:12px">Hand it in to see your scores and what you missed. The essay and the talk are graded on the server and arrive a minute or two later.</p>
       <button class="btn" id="fin" type="button">Hand it in</button>`;
     bindX('bench');
     $('#fin').onclick = async () => {
@@ -232,7 +244,7 @@ async function review(run) {
       : `<div class="card" style="margin-bottom:8px"><span class="label">${SEC[s]}</span>${s === 'vocab' ? `<p style="margin-top:6px">${esc(it.sentence)}</p>` : s === 'argument' ? `<details style="margin-top:6px"><summary class="small" style="cursor:pointer">The argument</summary><div class="passage" style="font-size:16px;margin-top:6px">${paras(it.stimulus)}</div></details>` : ''}
           <p style="margin-top:6px"><b>${esc(s === 'vocab' ? `“${it.word}”` : it.stem)}</b></p><p class="small" style="color:var(--bad)">You: ${opt(it, m.choice)}${m.confidence ? ` (${m.confidence}% sure)` : ''}</p><p class="small" style="color:var(--ok)">Answer: ${opt(it, it.answer)}</p>${it.explanation ? `<p class="small">${esc(it.explanation)}</p>` : ''}</div>`).join('');
     const dd = x.discern || {};
-    main.innerHTML = head('Benchmark', day(d.finished)) + `<h1 class="title" style="margin-top:6px">Your sitting</h1>
+    main.innerHTML = head('Your sitting', '', `Monthly benchmark · ${day(d.finished)}`) + `
       <div class="counts" style="margin-top:12px"><div><b>${pct(x.argument)}</b><span>arguments${x.argument ? ` · ${x.argument.right}/${x.argument.of}` : ''}</span></div><div><b>${pct(x.inference)}</b><span>reading${x.inference ? ` · ${x.inference.right}/${x.inference.of}` : ''}</span></div><div><b>${pct(x.vocab)}</b><span>words${x.vocab ? ` · ${x.vocab.right}/${x.vocab.of}` : ''}</span></div>
         <div><b>${dd.dprime ?? '—'}</b><span>discernment d′</span></div><div><b>${x.brier ?? '—'}</b><span>calibration (Brier)</span></div><div><b>${essayAvg(eg) ?? (wroteEssay ? '…' : '—')}</b><span>essay, out of 4</span></div></div>
       ${dd.of_tricks ? `<p class="small" style="margin-top:8px">Fair or trick: caught ${dd.hits} of ${dd.of_tricks} tricks, called ${dd.false_alarms} of ${dd.of_fair} fair moves tricks. Bias ${dd.bias > 0.15 ? 'toward calling things fair' : dd.bias < -0.15 ? 'toward calling things tricks' : 'balanced'} (${dd.bias}).</p>` : ''}

@@ -38,7 +38,7 @@ function one(it, i, n, results) {
     let kind = null, tech = null;
     box.innerHTML = `<div class="dots">${Array.from({ length: n }, (_, j) => `<i class="${j < results.length ? (results[j].kindOk ? 'ok' : 'no') : j === i ? 'now' : ''}"></i>`).join('')}</div>
       <p class="small muted" style="margin-bottom:6px">${esc(it.context)}</p><div class="tech-text" id="tt">${esc(it.text)}</div>
-      <div class="btns" style="margin-top:10px"><button class="opt" type="button" data-k="technique">Manipulation</button><button class="opt" type="button" data-k="fair">Fair move</button></div>
+      <div class="tk" style="margin-top:10px"><button class="opt" type="button" data-k="technique">Manipulation</button><button class="opt" type="button" data-k="fair">Fair move</button></div>
       <div id="techPick" hidden><p class="ask">Which technique? (optional, a bonus if right)</p><div class="pills" id="tp">${ORDER.map(t => `<button class="opt" type="button" data-t="${esc(t)}">${esc(t)}</button>`).join('')}</div></div>
       <div class="conf"><span>How sure are you?</span><b id="cv">70%</b></div><input type="range" id="cr" min="50" max="100" step="5" value="70" aria-label="How sure are you?" style="width:100%">
       <button class="btn" id="send" type="button" disabled>Call it</button><div id="out"></div>`;

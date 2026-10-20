@@ -86,6 +86,8 @@ Poll it gently: once when the widget is shown, at most every 15 minutes in the b
 
 ## 9. What the shell does on its own
 
+- The page picks its own look: Material 3 (it puts `m3` on `<html>`) when the window is under 900px wide, and always under `shell-android`; otherwise a look close to Apple's own apps, with a sidebar and a 52px toolbar row.
+- The Mac shell puts `shell-vibrant` on `<html>` at document start and draws the window's sidebar material (NSVisualEffectView, `.sidebar`, behind-window blending) under a web view that draws no background. Under that class the page leaves `html`, `body`, `#app` and `.rail` transparent and paints `#main`, the whole content column, itself. Without the class nothing changes.
 - The Mac shell runs the page under a transparent title bar, so the traffic lights sit over the top of the rail. It puts `shell-fullscreen` on `<html>` while the window is in full screen (no lights then), and the page pads the rail only when that class is absent: `.shell-mac:not(.shell-fullscreen) .rail{padding-top:52px}`. The window is never narrower than 900px, so the rail always shows. Pressing empty ground (`html`, `body`, `#app`, `#main`, `.rail`) or the top 28px strip drags the window, unless the press is on a control.
 - Devices name themselves `mac` and `android-<model>` (for example `android-sm-s926u`), so two phones don't replace each other's token.
 - Only Binah's origin opens in the window. Any other address, including `target=_blank`, goes to the browser.

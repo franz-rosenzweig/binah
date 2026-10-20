@@ -448,6 +448,17 @@ def widget(c=Depends(conn)):
             'url': f'{base}/#today' if base else '/#today', 'deeplink': 'binah://go/today'}
 
 
+@app.get('/api/nav', dependencies=[Depends(user)])
+def nav(c=Depends(conn)):
+    """The counts beside the sidebar's sections: today's edition, the golden set, the benchmark, the week."""
+    ed = edition.get_edition(c)
+    wk = edition.week(c)
+    g = c.execute('select count(*) from golden where mine is not null').fetchone()[0]
+    return {'today': {'done': sum(1 for s in ed['slots'] if s['done']), 'total': len(ed['slots'])},
+            'golden': {'n': g, 'target': golden.TARGET}, 'bench_due': _bench_due(c),
+            'week': {'active': wk['active'], 'goal': wk['goal']}, 'rest_weekday': config.settings().get('rest_weekday')}
+
+
 @app.post('/api/save', dependencies=[Depends(user)])
 async def save(request: Request, c=Depends(conn)):
     """Train on this: a link or a passage sent from the share sheet. It waits for the next
