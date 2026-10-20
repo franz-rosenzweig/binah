@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Today: the calendar, as the page's own icon (app.js ICONS), on Binah's teal. -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/accent" />
+    <foreground>
+        <vector android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+            <group android:scaleX="1.6" android:scaleY="1.6" android:translateX="34.8" android:translateY="34.8">
+                <path android:strokeColor="#FFFFFF" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round"
+                    android:pathData="M6.5,5h11a2.5,2.5 0,0 1,2.5 2.5v10a2.5,2.5 0,0 1,-2.5 2.5h-11a2.5,2.5 0,0 1,-2.5 -2.5v-10a2.5,2.5 0,0 1,2.5 -2.5zM4,9.5h16M9,3v4M15,3v4" />
+            </group>
+        </vector>
+    </foreground>
+</adaptive-icon>

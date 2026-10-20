@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The widget, tinted to the wallpaper (Material You), as Daf's and Dvarim's are. The app
+     itself is the page, and takes its colours from style.css; these are for the moments
+     before it paints, the share card and the icons: the vault palette. -->
+<resources>
+    <color name="widgetBg">@android:color/system_accent2_50</color>
+    <color name="widgetText">@android:color/system_neutral1_900</color>
+    <color name="widgetText2">@android:color/system_neutral2_700</color>
+    <color name="widgetRing">@android:color/system_accent1_600</color>
+    <color name="widgetTrack">@android:color/system_accent1_100</color>
+    <color name="page">#ECE3D7</color>
+    <color name="card">#FBF8F3</color>
+    <color name="ink">#2B2744</color>
+    <color name="ink2">#575279</color>
+    <color name="accent">#12617F</color>
+    <color name="parchment">#ECE3D7</color>
+</resources>
