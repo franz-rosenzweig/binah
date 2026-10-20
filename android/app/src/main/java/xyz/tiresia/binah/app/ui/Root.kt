@@ -25,6 +25,7 @@ import androidx.compose.material.icons.outlined.CalendarToday
 import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,6 +37,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -193,6 +195,8 @@ fun SignIn(model: AppModel) {
     var password by remember { mutableStateOf("") }
     var problem by remember { mutableStateOf<String?>(null) }
     var busy by remember { mutableStateOf(false) }
+    var where by remember { mutableStateOf(Server.base(c)) }
+    var other by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     fun go() {
         if (busy || user.isBlank() || password.isBlank()) return
@@ -219,8 +223,15 @@ fun SignIn(model: AppModel) {
             problem?.let { Text(it, color = MaterialTheme.colorScheme.error) }
             Button(onClick = { go() }, enabled = !busy && user.isNotBlank() && password.isNotBlank(),
                    modifier = Modifier.fillMaxWidth().height(56.dp)) { Text(if (busy) "Signing in…" else "Sign in") }
-            Text("Binah at ${Uri.parse(Server.base(c)).host}. Another address: in Settings once signed in.",
-                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (!other) TextButton(onClick = { other = true }) { Text("Binah at ${Uri.parse(where).host}. Another address…") }
+            else Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedTextField(where, { where = it }, Modifier.weight(1f), label = { Text("Binah's address") }, singleLine = true,
+                                  keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri))
+                FilledTonalButton(onClick = {
+                    if (Server.setBase(c, where)) { where = Server.base(c); other = false; problem = null }
+                    else problem = "That isn't an address Binah can use. It starts with https:// or http://."
+                }) { Text("Use") }
+            }
         }
     }
 }

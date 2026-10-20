@@ -14,19 +14,18 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        // its own id while it runs beside the WebView app
-        applicationId = "xyz.tiresia.binah.nativeapp"
+        // the WebView app's id, signed with the same key: this installs as an update over it
+        applicationId = "xyz.tiresia.binah"
         minSdk = 31
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0"
-        // the names it goes by beside the WebView app; plain "Binah" ones once it replaces it
-        resValue("string", "app_name", "Binah (native)")
-        resValue("string", "share_label", "Train on this (native)")
-        resValue("string", "widget_label", "Binah native: today\\'s edition")
+        versionCode = 2
+        versionName = "0.2.0"
+        resValue("string", "app_name", "Binah")
+        resValue("string", "share_label", "Train on this")
+        resValue("string", "widget_label", "Binah: today\\'s edition")
     }
 
-    // The signing key's properties: android-native/keystore.properties (never in git), or the file
+    // The signing key's properties: android/keystore.properties (never in git), or the file
     // -PsigningProperties names (release.sh). storeFile is found beside the properties file.
     val secrets = if (project.hasProperty("signingProperties")) file(project.property("signingProperties") as String)
                   else rootProject.file("keystore.properties")
@@ -51,7 +50,7 @@ android {
         }
         debug {
             applicationIdSuffix = ".debug"
-            resValue("string", "app_name", "Binah native dev")
+            resValue("string", "app_name", "Binah dev")
         }
     }
 

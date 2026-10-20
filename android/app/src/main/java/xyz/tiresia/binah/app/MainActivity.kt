@@ -89,11 +89,13 @@ class MainActivity : ComponentActivity() {
 
         fun open(c: Context, route: String): Intent =
             Intent(c, MainActivity::class.java).setAction(Intent.ACTION_VIEW)
-                .setData(Uri.parse("binah-native://go/$route"))     // distinct data, so PendingIntents for rooms stay apart
+                .setData(Uri.parse("binah://go/$route"))     // distinct data, so PendingIntents for rooms stay apart
                 .putExtra(EXTRA_ROUTE, route)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
-        fun route(i: Intent?): String? = i?.getStringExtra(EXTRA_ROUTE)
-            ?: i?.data?.takeIf { it.host == "go" }?.pathSegments?.firstOrNull()
+        /** "today", from the extra or binah://go/today; the WebView app's "#today" too, which a
+         *  shortcut pinned before the update may still send. */
+        fun route(i: Intent?): String? = (i?.getStringExtra(EXTRA_ROUTE)
+            ?: i?.data?.takeIf { it.host == "go" }?.pathSegments?.firstOrNull())?.removePrefix("#")?.takeIf { it.isNotEmpty() }
     }
 }

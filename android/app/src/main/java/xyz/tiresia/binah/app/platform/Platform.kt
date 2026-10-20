@@ -40,7 +40,7 @@ import kotlin.math.roundToInt
  * own update), on unlock at most every 15 minutes, and when the app goes to the background. If
  * Binah can't be reached it keeps the last numbers, dimmed.
  */
-class TodayWidget : AppWidgetProvider() {
+open class TodayWidget : AppWidgetProvider() {
     override fun onUpdate(context: Context, widgets: AppWidgetManager, ids: IntArray) {
         render(context)
         val done = goAsync()
@@ -63,7 +63,7 @@ class TodayWidget : AppWidgetProvider() {
             CoroutineScope(Dispatchers.IO).launch { fetch(app) }
         }
 
-        private fun placed(c: Context) = AppWidgetManager.getInstance(c).getAppWidgetIds(ComponentName(c, TodayWidget::class.java)).isNotEmpty()
+        private fun placed(c: Context) = AppWidgetManager.getInstance(c).getAppWidgetIds(ComponentName(c, xyz.tiresia.binah.Widget::class.java)).isNotEmpty()
 
         /** /api/widget, kept, then every placed widget drawn again. */
         suspend fun fetch(c: Context) {
@@ -88,7 +88,7 @@ class TodayWidget : AppWidgetProvider() {
         /** Every placed copy, in both sizes: the launcher shows whichever fits. */
         fun render(c: Context) {
             val widgets = AppWidgetManager.getInstance(c)
-            val ids = widgets.getAppWidgetIds(ComponentName(c, TodayWidget::class.java))
+            val ids = widgets.getAppWidgetIds(ComponentName(c, xyz.tiresia.binah.Widget::class.java))
             if (ids.isEmpty()) return
             val w = kept(c).takeIf { Token.get(c) != null }
             val dim = w == null || Server.prefs(c).getBoolean(FAILED, false) || w.day != LocalDate.now().toString()

@@ -53,16 +53,15 @@ object Server {
 }
 
 /** This phone's device token (docs/API.md, Signing in), encrypted with a key that never leaves the
- *  phone's keystore. While this app runs beside the WebView app it connects as "android-native-<model>",
- *  so the other's token keeps working. The token is kept as the WebView app keeps its own (prefs
- *  "binah", "token", 12 bytes of IV then AES-GCM), so at the switch-over (README) KEY becomes that
- *  app's "binah-token-key" and the name "android-<model>", and the update opens signed in. */
+ *  phone's keystore, as "android-<model>" (android-sm-s926u). It's kept exactly as the WebView app
+ *  this replaced kept its own (prefs "binah", "token", 12 bytes of IV then AES-GCM, the key
+ *  "binah-token-key"), so a phone connected before opens signed in after the update. */
 object Token {
-    private const val KEY = "binah-native-token-key"
+    private const val KEY = "binah-token-key"
 
     val deviceName: String get() {
         val model = Build.MODEL.lowercase(Locale.ROOT).replace(Regex("[^a-z0-9]+"), "-").trim('-')
-        return ("android-native-" + model.ifEmpty { "device" }).take(36).trimEnd('-')
+        return ("android-" + model.ifEmpty { "device" }).take(24).trimEnd('-')
     }
 
     fun get(c: Context): String? {
@@ -106,7 +105,7 @@ object Api {
     /** Told when the server says 401, so the app can ask for a sign-in. */
     var onSignedOut: (() -> Unit)? = null
 
-    fun userAgent(c: Context) = "Binah/" + runCatching { c.packageManager.getPackageInfo(c.packageName, 0).versionName }.getOrNull() + " (Android native)"
+    fun userAgent(c: Context) = "Binah/" + runCatching { c.packageManager.getPackageInfo(c.packageName, 0).versionName }.getOrNull() + " (Android)"
 
     suspend inline fun <reified T> get(path: String): T = json.decodeFromString(send(path, "GET", null, null))
     suspend inline fun <reified T> post(path: String, body: Map<String, Any?> = emptyMap()): T =
