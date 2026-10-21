@@ -1,7 +1,7 @@
 import SwiftUI
 import AppKit
 
-/// Train on this (docs/SHELL.md §7): a link or a passage, kept by Binah for later practice. From
+/// Train on this (docs/API.md, Train on this): a link or a passage, kept by Binah for later practice. From
 /// File → Train on This… (⇧⌘T), the menu bar, or Services → Train on This in Binah.
 enum TrainOnThis {
     /// The text as a link, if all it is is one.
