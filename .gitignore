@@ -10,6 +10,7 @@ research_notes/
 reports/
 explorer.json
 # Local
+tools/release.env
 .venv/
 __pycache__/
 *.pyc

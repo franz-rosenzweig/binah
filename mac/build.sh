@@ -12,8 +12,10 @@ cd "${0:A:h}"
 
 ID=${BINAH_ID:-xyz.tiresia.binah}
 NAME=${BINAH_NAME:-Binah}
-VERSION=0.1.0
-BUILD=$(git rev-list --count HEAD 2>/dev/null || echo 1)
+# one version for both apps: Android's versionName (tools/release.sh raises it); the build number
+# only ever goes up (the release passes its own, since a fresh shallow clone has one commit)
+VERSION=${BINAH_VERSION:-$(sed -n 's/.*versionName = "\(.*\)".*/\1/p' ../android/app/build.gradle.kts | head -1)}
+BUILD=${BINAH_BUILD:-$(git rev-list --count HEAD 2>/dev/null || echo 1)}
 OUT=${BINAH_OUT:-build}
 APP="$OUT/$NAME.app"
 
@@ -70,7 +72,8 @@ cat > "$OUT/Binah.entitlements" <<'ENT'
 ENT
 
 # an Apple Development identity if the keychain has one, ad hoc otherwise; none is written into
-# this public repository (BINAH_SIGN picks another)
+# this public repository. BINAH_SIGN picks another: releases sign with a name-free certificate by
+# its SHA-1 (tools/release.sh), never a personal identity anyone could read off a public download
 IDENTITY=${BINAH_SIGN:-$(security find-identity -v -p codesigning | sed -n 's/^ *[0-9]*) \([0-9A-F]*\) "Apple Development.*/\1/p' | head -1)}
 codesign --force --options runtime --entitlements "$OUT/Binah.entitlements" --sign "${IDENTITY:--}" "$APP"
 [[ -n $IDENTITY ]] || echo "note: signed ad hoc; the Keychain and the microphone ask again after each build"
