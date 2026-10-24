@@ -144,10 +144,16 @@ The screenshots come from a sandbox with public-domain passages (Thoreau, Mill, 
 Binah is a web app, so on any phone or computer you open your copy's address and sign in with the username and password set on the server. On a phone, **Add to Home Screen** (Safari) or **Install app** (Chrome) puts it on the home screen, where it opens full screen like an app. Full steps in [Install and devices](docs/install.md).
 
 ### Mac
-There are no downloads on GitHub Releases, so the Mac app is built from this repository: on macOS 26 or newer with Xcode installed (for `actool`, which compiles the icon), run `cd mac && ./build.sh` and copy `build/Binah.app` to Applications. It's a native SwiftUI app, with every game, Binah's menus, today's edition in the menu bar and Train on This. See [Install → Mac](docs/install.md#the-mac-app).
+On macOS 26 or newer, install it with Homebrew and `brew upgrade` keeps it up to date:
+
+```sh
+brew install --cask franz-rosenzweig/tap/binah
+```
+
+It's a native SwiftUI app, with every game, Binah's menus, today's edition in the menu bar and Train on This. Each version is also on the [Releases](https://github.com/franz-rosenzweig/binah/releases) page, and you can build it yourself from this repository (`cd mac && ./build.sh`, with Xcode). See [Install → Mac](docs/install.md#the-mac-app).
 
 ### Android
-The Android app is native too (Kotlin and Jetpack Compose), built from the repository with JDK 17 and the Android SDK: `cd android && ./gradlew assembleDebug` makes a test build, and `./release.sh` makes a signed one with your own key. It has a home-screen widget, Train on this in the share sheet, and the microphone. See [Install → Android](docs/install.md#the-android-app).
+The Android app is native too (Kotlin and Jetpack Compose), with a home-screen widget, Train on this in the share sheet, and the microphone. The signed APK is on the [Releases](https://github.com/franz-rosenzweig/binah/releases) page: add `https://github.com/franz-rosenzweig/binah` to [Obtainium](https://github.com/ImranR98/Obtainium) and it installs Binah and every new version. You can also build it from the repository with JDK 17 and the Android SDK (`cd android && ./release.sh`, with your own key). See [Install → Android](docs/install.md#the-android-app).
 
 ### Your own server
 You'll need Python 3.12 and the Claude Code CLI logged in on the same machine, because grading runs on your own Claude subscription. A Calibre library is optional, and it's what the reading games are made from. See [Running your own copy](docs/server.md).

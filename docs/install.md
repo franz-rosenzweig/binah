@@ -19,9 +19,16 @@ Two things need https (or `localhost`): recording your voice for Just a Minute a
 
 ## The Mac app
 
-The Mac app is native, written in SwiftUI with no web page inside. It talks to your server's JSON API ([API.md](API.md)) with a device token. It has a sidebar, the games with an inspector beside the passage, today's edition in the menu bar, Train on This from any app, and the microphone for spoken answers. There are no downloads on GitHub Releases, so you build it from this repository.
+The Mac app is native, written in SwiftUI with no web page inside. It talks to your server's JSON API ([API.md](API.md)) with a device token. It has a sidebar, the games with an inspector beside the passage, today's edition in the menu bar, Train on This from any app, and the microphone for spoken answers. You need macOS 26 or newer. The easy way is Homebrew, which installs it and keeps it up to date:
 
-You need macOS 26 or newer and Xcode (the build uses its `actool` to compile the icon):
+```sh
+brew install --cask franz-rosenzweig/tap/binah
+brew upgrade                                 # later: takes each new version
+```
+
+The app isn't notarized by Apple, so the cask clears the quarantine flag on install, the way right-clicking and choosing **Open** would. Release builds are signed with the same certificate every time, so macOS keeps Binah's Keychain and microphone permissions from one version to the next. Every version is also on the [Releases](https://github.com/franz-rosenzweig/binah/releases) page as a zip.
+
+To build it yourself instead, you need Xcode too (the build uses its `actool` to compile the icon):
 
 ```sh
 cd mac
@@ -46,7 +53,9 @@ The details, and the self-test that checks all of this against a sandbox, are in
 
 ## The Android app
 
-The Android app is native too, written in Kotlin with Jetpack Compose (Material 3), with no web page inside. It talks to your server's JSON API with a device token, and adds a home-screen widget, Train on this in the share sheet, and the microphone for spoken answers. It's built from the repository. You need JDK 17 and the Android SDK (platform 36), and the scripts are written for a Mac's shell (zsh), though Gradle itself runs anywhere.
+The Android app is native too, written in Kotlin with Jetpack Compose (Material 3), with no web page inside. It talks to your server's JSON API with a device token, and adds a home-screen widget, Train on this in the share sheet, and the microphone for spoken answers. The signed APK of every version is on the [Releases](https://github.com/franz-rosenzweig/binah/releases) page. The easy way to install it and stay up to date is [Obtainium](https://github.com/ImranR98/Obtainium): **Add app**, paste `https://github.com/franz-rosenzweig/binah`, and it installs Binah and offers each new version as it comes out. Every release is signed with the same key, so each one installs over the last.
+
+To build it from the repository instead, you need JDK 17 and the Android SDK (platform 36), and the scripts are written for a Mac's shell (zsh), though Gradle itself runs anywhere.
 
 ```sh
 cd android

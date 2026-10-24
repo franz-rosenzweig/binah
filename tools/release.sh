@@ -46,7 +46,7 @@ say "v$V tagged at $(git rev-parse --short HEAD) (Android $code, Mac build $buil
 
 # 2. built on the Mac, from a fresh clone of the tag
 W=/tmp/binah-release
-mac "export PATH=/opt/homebrew/bin:\$PATH; rm -rf $W && git clone -q --depth 1 -b v$V https://github.com/$REPO.git $W \
+mac "export PATH=/opt/homebrew/bin:\$PATH; rm -rf $W && git -c advice.detachedHead=false clone -q --depth 1 -b v$V https://github.com/$REPO.git $W \
   && cd $W/android && ./release.sh $BINAH_APK_SIGNING" >/dev/null
 say "APK built"
 mac "export PATH=/opt/homebrew/bin:\$PATH; security unlock-keychain -p \"\$(cat $BINAH_KEYCHAIN_PASS)\" $BINAH_KEYCHAIN \
