@@ -18,8 +18,8 @@ android {
         applicationId = "xyz.tiresia.binah"
         minSdk = 31
         targetSdk = 36
-        versionCode = 3
-        versionName = "0.2.1"
+        versionCode = 4
+        versionName = "0.2.2"
         resValue("string", "app_name", "Binah")
         resValue("string", "share_label", "Train on this")
         resValue("string", "widget_label", "Binah: today\\'s edition")
