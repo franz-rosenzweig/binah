@@ -24,11 +24,13 @@ rm -rf "$APP" && mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp .build/release/Binah "$APP/Contents/MacOS/Binah"
 
 # the icon, layered as Icon Composer makes them (Resources/AppIcon.icon: the ב and its teal rule over
-# parchment, from web/icon.svg), so macOS 26 draws it as it draws its own, light, dark and tinted;
+# parchment, from web/icon.svg; in the dark the ב turns parchment and the rule a lighter teal), so
+# macOS 26 draws it as it draws its own, light, dark, tinted and clear;
 # and the accent, Binah's teal, lighter in the dark
-xcrun actool Resources/AppIcon.icon Resources/Assets.xcassets --compile "$APP/Contents/Resources" \
+# full paths: actool hands the work to a helper that may still be running from another build's folder
+xcrun actool "$PWD/Resources/AppIcon.icon" "$PWD/Resources/Assets.xcassets" --compile "${APP:a}/Contents/Resources" \
     --app-icon AppIcon --platform macosx --minimum-deployment-target 26.0 \
-    --output-partial-info-plist "$OUT/assets-partial.plist" >/dev/null
+    --output-partial-info-plist "${OUT:a}/assets-partial.plist" >/dev/null
 
 # binah:// links belong to the real app only, so a test build never takes them
 URLTYPES=""
