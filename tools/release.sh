@@ -30,6 +30,9 @@ GRADLE=android/app/build.gradle.kts
 KEY=${BINAH_MAC_KEY/#\~/$HOME}
 mac() { ssh -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -i "$KEY" "$BINAH_MAC" "$@"; }
 say() { echo "== $*"; }
+# Commits and tags that go public carry GitHub's noreply address, whatever
+# this machine's own git identity is (it may be a personal one)
+NOREPLY=(-c user.name=franz-rosenzweig -c user.email=159979406+franz-rosenzweig@users.noreply.github.com)
 
 # 1. the version, on master and tagged
 git fetch -q origin
@@ -38,9 +41,9 @@ git fetch -q origin
 git rev-parse -q --verify "refs/tags/v$V" >/dev/null && { echo "v$V is taken" >&2; exit 1; }
 code=$(( $(sed -n 's/.*versionCode = \([0-9]*\).*/\1/p' $GRADLE | head -1) + 1 ))
 sed -i "s/versionCode = [0-9]*/versionCode = $code/; s/versionName = \"[^\"]*\"/versionName = \"$V\"/" $GRADLE
-git commit -q -m "Binah $V" $GRADLE
+git "${NOREPLY[@]}" commit -q -m "Binah $V" $GRADLE
 build=$(git rev-list --count HEAD)    # the Mac's build number: commits on master only ever go up
-git tag -a "v$V" -m "Binah $V"
+git "${NOREPLY[@]}" tag -a "v$V" -m "Binah $V"
 git push -q origin HEAD:master "v$V"
 say "v$V tagged at $(git rev-parse --short HEAD) (Android $code, Mac build $build)"
 
@@ -100,7 +103,7 @@ cd "$OUT/tap"
 ROW='| [binah](Casks/binah.rb) | [Binah](https://github.com/franz-rosenzweig/binah): daily training for reading, reasoning and speaking |'
 grep -qF '[binah](Casks/binah.rb)' README.md || printf '%s\n' "$ROW" >> README.md
 git add Casks/binah.rb README.md
-git commit -q -m "binah $V"
-git pull -q --rebase
+git "${NOREPLY[@]}" commit -q -m "binah $V"
+git "${NOREPLY[@]}" pull -q --rebase
 git push -q
 say "released: https://github.com/$REPO/releases/tag/v$V, and the cask is at $V"
